@@ -1,0 +1,5 @@
+# Site Apostilas Premium
+
+Este é um site de e-commerce para venda de apostilas com diversas opções de impressão e encadernação.
+
+## Estrutura de Arquivos

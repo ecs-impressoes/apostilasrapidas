@@ -1,0 +1,18 @@
+apostilas-premium/
+├── index.html
+├── css/
+│   ├── style.css
+│   └── responsive.css
+├── js/
+│   ├── main.js
+│   ├── cart.js
+│   ├── checkout.js
+│   └── utils.js
+├── assets/
+│   ├── images/
+│   │   ├── logo.png (opcional)
+│   │   ├── colorida-thumb.jpg
+│   │   └── preta-thumb.jpg
+│   └── icons/
+│       └── favicon.ico
+└── README.md

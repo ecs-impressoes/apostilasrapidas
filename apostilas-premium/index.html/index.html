@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Apostilas Premium - Compre Apostilas de Qualidade</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    <link rel="icon" href="assets/icons/favicon.ico">
+</head>
+<body>
+    <!-- Cabeçalho -->
+    <header>
+        <div class="container header-content">
+            <div class="logo">
+                <i class="fas fa-book"></i>
+                <h1>Apostilas Premium</h1>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="#apostilas">Apostilas</a></li>
+                    <li><a href="#calculadora">Calculadora</a></li>
+                    <li><a href="#contato">Contato</a></li>
+                    <li class="cart-icon" id="cart-icon">
+                        <i class="fas fa-shopping-cart"></i>
+                        <span class="cart-count" id="cart-count">0</span>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Seção Hero -->
+    <section class="hero">
+        <div class="container hero-content">
+            <h2>Apostilas de Alta Qualidade para Venda</h2>
+            <p>Mais de 40 modelos de apostilas disponíveis com diversas opções de impressão e encadernação. Encontre a opção perfeita para suas necessidades!</p>
+            <div class="encadernacao-badge">
+                <i class="fas fa-check-circle"></i> ENCADERNAÇÃO JÁ INCLUSA NO PREÇO
+            </div>
+            <p><strong>Encadernação padrão inclusa:</strong> Capa Preta no Final, Capa Transparente, Encadernação na Esquerda, Espiral Preto - Valor já incluído: R$ 7,00 por apostila</p>
+        </div>
+    </section>
+
+    <!-- Filtros -->
+    <div class="container">
+        <div class="filters">
+            <div class="filter-group">
+                <label for="tipo">Tipo de Impressão</label>
+                <select id="tipo">
+                    <option value="todos">Todos os Tipos</option>
+                    <option value="colorida-frente">Colorida - Só Frente</option>
+                    <option value="colorida-fv">Colorida - Frente e Verso</option>
+                    <option value="preta-frente">Preta - Só Frente</option>
+                    <option value="preta-fv">Preta - Frente e Verso</option>
+                </select>
+            </div>
+            <div class="filter-group">
+                <label for="folhas">Número de Folhas</label>
+                <select id="folhas">
+                    <option value="todos">Todas as Quantidades</option>
+                    <option value="0-50">Até 50 folhas</option>
+                    <option value="51-100">51 a 100 folhas</option>
+                    <option value="101-200">101 a 200 folhas</option>
+                    <option value="201-400">201 a 400 folhas</option>
+                </select>
+            </div>
+            <div class="filter-group">
+                <label for="encadernacao">Encadernação</label>
+                <select id="encadernacao">
+                    <option value="todos">Com ou Sem</option>
+                    <option value="com">Com Encadernação</option>
+                    <option value="sem">Sem Encadernação</option>
+                </select>
+            </div>
+        </div>
+    </div>
+
+    <!-- Lista de Apostilas -->
+    <section id="apostilas" class="container">
+        <h2 class="section-title">Nossas Apostilas</h2>
+        <div class="apostilas-grid" id="apostilas-container">
+            <!-- As apostilas serão geradas dinamicamente pelo JavaScript -->
+        </div>
+    </section>
+
+    <!-- Calculadora de Preços -->
+    <section id="calculadora" class="container">
+        <div class="calculator">
+            <h3 class="section-title">Calculadora de Preços Personalizada</h3>
+            <div class="calculator-form">
+                <div class="filter-group">
+                    <label for="calc-tipo">Tipo de Impressão</label>
+                    <select id="calc-tipo">
+                        <option value="colorida-frente">Colorida - Só Frente</option>
+                        <option value="colorida-fv">Colorida - Frente e Verso</option>
+                        <option value="preta-frente">Preta - Só Frente</option>
+                        <option value="preta-fv">Preta - Frente e Verso</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label for="calc-folhas">Número de Folhas</label>
+                    <input type="number" id="calc-folhas" min="1" max="400" value="50">
+                </div>
+                <div class="filter-group">
+                    <label for="calc-quantidade">Quantidade de Apostilas</label>
+                    <input type="number" id="calc-quantidade" min="1" max="100" value="1">
+                </div>
+                <div class="filter-group">
+                    <label for="calc-encadernacao">Encadernação</label>
+                    <select id="calc-encadernacao">
+                        <option value="sim">Com Encadernação (já inclusa)</option>
+                        <option value="nao">Sem Encadernação</option>
+                    </select>
+                </div>
+            </div>
+            <div class="result">
+                <h4>Preço Total Estimado</h4>
+                <div class="result-price" id="preco-calculado">R$ 25,00</div>
+                <p id="detalhes-calculadora">50 folhas × R$ 0,36 (colorida frente) + R$ 7,00 (encadernação inclusa) = R$ 25,00</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Carrinho de Compras com Formulário -->
+    <div class="cart-modal" id="cart-modal">
+        <div class="cart-content">
+            <div class="cart-header">
+                <h3>Seu Carrinho</h3>
+                <span class="close-cart" id="close-cart">&times;</span>
+            </div>
+            
+            <div class="cart-items" id="cart-items">
+                <!-- Itens do carrinho serão adicionados aqui -->
+            </div>
+            
+            <div class="cart-total">
+                <div class="cart-total-item">
+                    <span>Subtotal (impressão):</span>
+                    <span id="cart-subtotal">R$ 0,00</span>
+                </div>
+                <div class="cart-total-item">
+                    <span>Encadernação (já inclusa):</span>
+                    <span id="cart-encadernacao">R$ 0,00</span>
+                </div>
+                <div class="cart-total-item" id="frete-item" style="display: none;">
+                    <span>Frete:</span>
+                    <span id="cart-frete">R$ 0,00</span>
+                </div>
+                <div class="cart-total-item cart-total-final">
+                    <span>Total:</span>
+                    <span id="cart-total">R$ 0,00</span>
+                </div>
+            </div>
+            
+            <div class="checkout-options">
+                <div class="customer-form">
+                    <h4 class="form-title"><i class="fas fa-user"></i> Dados do Cliente</h4>
+                    
+                    <div class="form-group">
+                        <label for="customer-name">Nome Completo <span class="required">*</span></label>
+                        <input type="text" id="customer-name" placeholder="Digite seu nome completo" required>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="customer-phone">Telefone <span class="required">*</span></label>
+                            <input type="tel" id="customer-phone" placeholder="(11) 99999-9999" required>
+                            <small>Com DDD (ex: 11999999999)</small>
+                        </div>
+                        <div class="form-group">
+                            <label for="customer-email">E-mail <span class="required">*</span></label>
+                            <input type="email" id="customer-email" placeholder="seuemail@exemplo.com" required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="customer-cep">CEP <span class="required">*</span></label>
+                            <input type="text" id="customer-cep" placeholder="00000-000" required maxlength="9">
+                            <div class="cep-loading" id="cep-loading">
+                                <span class="loading-spinner"></span> Buscando endereço...
+                            </div>
+                            <div class="cep-success" id="cep-success">
+                                <i class="fas fa-check-circle"></i> Endereço encontrado!
+                            </div>
+                            <div class="cep-error" id="cep-error">
+                                <i class="fas fa-exclamation-circle"></i> CEP não encontrado. Preencha manualmente.
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="customer-number">Número <span class="required">*</span></label>
+                            <input type="text" id="customer-number" placeholder="Número" required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="customer-street">Rua <span class="required">*</span></label>
+                        <input type="text" id="customer-street" placeholder="Nome da rua" required>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="customer-neighborhood">Bairro <span class="required">*</span></label>
+                            <input type="text" id="customer-neighborhood" placeholder="Nome do bairro" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="customer-city">Cidade <span class="required">*</span></label>
+                            <input type="text" id="customer-city" placeholder="Nome da cidade" required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="customer-state">Estado <span class="required">*</span></label>
+                            <input type="text" id="customer-state" placeholder="UF" required maxlength="2">
+                        </div>
+                        <div class="form-group">
+                            <label for="customer-complement">Complemento (opcional)</label>
+                            <input type="text" id="customer-complement" placeholder="Apto, bloco, etc.">
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="delivery-method">Forma de Entrega <span class="required">*</span></label>
+                        <select id="delivery-method" required>
+                            <option value="">Selecione...</option>
+                            <option value="retirada">Retirada no Local (Sem custo)</option>
+                            <option value="entrega">Entrega em Domicílio (Frete calculado por cidade)</option>
+                        </select>
+                        <small>Retirada: Av. Brasil, 284 - Casqueiro, Cubatão - SP</small>
+                    </div>
+                    
+                    <div class="frete-calculo" id="frete-calculo">
+                        <div class="frete-info">
+                            <span>Cidade:</span>
+                            <span id="cidade-texto">-</span>
+                        </div>
+                        <div class="frete-info">
+                            <span>Valor do frete:</span>
+                            <span class="frete-valor" id="valor-frete">R$ 0,00</span>
+                        </div>
+                        <small><i class="fas fa-info-circle"></i> Frete fixo baseado na cidade.</small>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="customer-notes">Observações (opcional)</label>
+                        <textarea id="customer-notes" rows="3" placeholder="Alguma observação sobre o pedido..."></textarea>
+                    </div>
+                    
+                    <button class="whatsapp-checkout" id="whatsapp-checkout" disabled>
+                        <i class="fab fa-whatsapp"></i> Enviar Pedido por WhatsApp
+                    </button>
+                    
+                    <p class="form-note">
+                        <span class="required">*</span> Campos obrigatórios<br>
+                        Ao clicar no botão, você será redirecionado para o WhatsApp para finalizar o pedido.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Rodapé -->
+    <footer id="contato">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="footer-logo">
+                        <i class="fas fa-book"></i>
+                        <h3>Apostilas Premium</h3>
+                    </div>
+                    <p class="footer-description">
+                        Oferecemos apostilas de alta qualidade com impressão colorida ou preta, encadernação profissional inclusa e entrega rápida. Mais de 40 modelos disponíveis para atender suas necessidades.
+                    </p>
+                    <div class="social-links">
+                        <a href="https://www.facebook.com/pibbaweb1" target="_blank" class="social-link">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="https://www.instagram.com/pibbaweb1/" target="_blank" class="social-link">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="https://wa.me/5513988089754" target="_blank" class="social-link">
+                            <i class="fab fa-whatsapp"></i>
+                        </a>
+                        <a href="mailto:avenidabrail284@gmail.com" class="social-link">
+                            <i class="fas fa-envelope"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="footer-section">
+                    <h4 class="footer-title">Links Rápidos</h4>
+                    <div class="footer-links">
+                        <a href="#apostilas">
+                            <i class="fas fa-chevron-right"></i>
+                            Apostilas
+                        </a>
+                        <a href="#calculadora">
+                            <i class="fas fa-chevron-right"></i>
+                            Calculadora de Preços
+                        </a>
+                        <a href="#">
+                            <i class="fas fa-chevron-right"></i>
+                            Sobre Nós
+                        </a>
+                        <a href="#">
+                            <i class="fas fa-chevron-right"></i>
+                            Termos de Serviço
+                        </a>
+                        <a href="#">
+                            <i class="fas fa-chevron-right"></i>
+                            Política de Privacidade
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="footer-section">
+                    <h4 class="footer-title">Entre em Contato</h4>
+                    <div class="footer-contact">
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <i class="fas fa-envelope"></i>
+                            </div>
+                            <div class="contact-info">
+                                <h4>Email</h4>
+                                <p><a href="mailto:avenidabrail284@gmail.com" class="footer-link">avenidabrail284@gmail.com</a></p>
+                            </div>
+                        </div>
+                        
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <i class="fab fa-whatsapp"></i>
+                            </div>
+                            <div class="contact-info">
+                                <h4>WhatsApp</h4>
+                                <p><a href="https://wa.me/5513988089754" target="_blank" class="whatsapp-link">
+                                    <i class="fab fa-whatsapp"></i>
+                                    (13) 98808-9754
+                                </a></p>
+                            </div>
+                        </div>
+                        
+                        <div class="business-hours">
+                            <h5><i class="fas fa-clock"></i> Horário de Atendimento</h5>
+                            <p>Segunda a Sexta-feira</p>
+                            <p>09:00 às 16:00</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="footer-section">
+                    <h4 class="footer-title">Encadernação Padrão</h4>
+                    <div class="footer-description">
+                        <p><strong>Material utilizado (já incluso no preço):</strong></p>
+                        <ul>
+                            <li>Capa de cor Preta no Final</li>
+                            <li>Capa Transparente</li>
+                            <li>Encadernação na Esquerda</li>
+                            <li>Espiral Preto</li>
+                        </ul>
+                        <p class="encadernacao-info">
+                            <strong><i class="fas fa-check-circle"></i> Encadernação já inclusa:</strong> R$ 7,00 por apostila já está incluído no preço.
+                        </p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <div class="copyright">
+                    &copy; 2023 Apostilas Premium. Todos os direitos reservados.
+                </div>
+                
+                <div class="payment-methods-footer">
+                    <i class="fab fa-cc-visa payment-method-icon" title="Visa"></i>
+                    <i class="fab fa-cc-mastercard payment-method-icon" title="Mastercard"></i>
+                    <i class="fab fa-cc-amex payment-method-icon" title="American Express"></i>
+                    <i class="fab fa-cc-paypal payment-method-icon" title="PayPal"></i>
+                    <i class="fas fa-qrcode payment-method-icon" title="PIX"></i>
+                    <i class="fas fa-university payment-method-icon" title="Boleto"></i>
+                </div>
+                
+                <p class="developer">Desenvolvido com <i class="fas fa-heart"></i> para você</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="js/utils.js"></script>
+    <script src="js/cart.js"></script>
+    <script src="js/checkout.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>

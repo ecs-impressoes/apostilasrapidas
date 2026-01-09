@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -980,7 +979,8 @@
                     <option value="0-50">Até 50 folhas</option>
                     <option value="51-100">51 a 100 folhas</option>
                     <option value="101-200">101 a 200 folhas</option>
-                    <option value="201-400">201 a 400 folhas</option>
+                    <option value="201-300">201 a 300 folhas</option>
+                    <option value="301-400">301 a 400 folhas</option>
                 </select>
             </div>
             <div class="filter-group">
@@ -1034,8 +1034,8 @@
             </div>
             <div class="result">
                 <h4>Preço Total Estimado</h4>
-                <div class="result-price" id="preco-calculado">R$ 25,00</div>
-                <p id="detalhes-calculadora">50 folhas × R$ 0,36 (colorida frente) + R$ 7,00 (encadernação inclusa) = R$ 25,00</p>
+                <div class="result-price" id="preco-calculado">R$ 47,00</div>
+                <p id="detalhes-calculadora">50 folhas × R$ 0,80 (colorida frente) + R$ 7,00 (encadernação inclusa) = R$ 47,00</p>
             </div>
         </div>
     </section>
@@ -1304,18 +1304,48 @@
     </footer>
 
     <script>
-        // Preços por impressão
-        const PRECOS = {
-            'colorida-frente': 0.36,
-            'colorida-fv': 0.72,
-            'preta-frente': 0.25,
-            'preta-fv': 0.50
-        };
+        // Função para obter preço por folha baseado na quantidade
+        function obterPrecoPorFolha(tipo, folhas) {
+            // Para colorida-frente
+            if (tipo === 'colorida-frente') {
+                if (folhas <= 100) {
+                    return 0.80; // R$ 0,80 até 100 folhas
+                } else if (folhas <= 300) {
+                    return 0.70; // R$ 0,70 até 300 folhas
+                } else {
+                    return 0.60; // R$ 0,60 acima de 300 folhas (preço especial para grandes quantidades)
+                }
+            }
+            
+            // Para colorida-frente e verso
+            if (tipo === 'colorida-fv') {
+                if (folhas <= 100) {
+                    return 1.60; // Dobro de 0,80
+                } else if (folhas <= 300) {
+                    return 1.40; // Dobro de 0,70
+                } else {
+                    return 1.20; // Dobro de 0,60
+                }
+            }
+            
+            // Para preta-frente (mantendo preços anteriores)
+            if (tipo === 'preta-frente') {
+                return 0.55;
+            }
+            
+            // Para preta-frente e verso (mantendo preços anteriores)
+            if (tipo === 'preta-fv') {
+                return 0.80;
+            }
+            
+            // Valor padrão (não deve acontecer)
+            return 0.80;
+        }
         
         // Preço da encadernação
         const PRECO_ENCADERNAÇÃO = 7.00;
         
-        // Preço do frete por km - CORRIGIDO: de 2.90 para 1.90
+        // Preço do frete por km
         const PRECO_FRETE_POR_KM = 1.90;
         
         // Endereço da loja
@@ -1358,11 +1388,12 @@
             folhasVariadas.push(i);
         }
         
-        // Gerar todas as apostilas
+        // Gerar todas as apostilas com os novos preços diferenciados
         let apostilas = [];
         TIPOS.forEach(tipo => {
             folhasVariadas.forEach(folhas => {
-                const precoSemEncadernacao = (PRECOS[tipo.id] * folhas).toFixed(2);
+                const precoPorFolha = obterPrecoPorFolha(tipo.id, folhas);
+                const precoSemEncadernacao = (precoPorFolha * folhas).toFixed(2);
                 const precoComEncadernacao = (parseFloat(precoSemEncadernacao) + PRECO_ENCADERNAÇÃO).toFixed(2);
                 
                 apostilas.push({
@@ -1371,6 +1402,7 @@
                     tipoNome: tipo.nome,
                     classe: tipo.classe,
                     folhas: folhas,
+                    precoPorFolha: precoPorFolha,
                     precoSemEncadernacao: precoSemEncadernacao,
                     precoComEncadernacao: precoComEncadernacao,
                     imagemTipo: IMAGENS_TIPO[tipo.classe]
@@ -1395,6 +1427,16 @@
                 const card = document.createElement('div');
                 card.className = 'apostila-card';
                 card.dataset.id = apostila.id;
+                
+                // Adicionar badge para preços especiais
+                let precoEspecialBadge = '';
+                if (apostila.tipo === 'colorida-frente' || apostila.tipo === 'colorida-fv') {
+                    if (apostila.folhas <= 100) {
+                        precoEspecialBadge = '<div style="background-color: #ffcc00; color: #333; padding: 0.3rem 0.8rem; border-radius: 3px; font-size: 0.8rem; font-weight: bold; margin-top: 0.5rem;">PREÇO ESPECIAL ATÉ 100 FOLHAS</div>';
+                    } else if (apostila.folhas <= 300) {
+                        precoEspecialBadge = '<div style="background-color: #2ecc71; color: white; padding: 0.3rem 0.8rem; border-radius: 3px; font-size: 0.8rem; font-weight: bold; margin-top: 0.5rem;">PREÇO ESPECIAL ATÉ 300 FOLHAS</div>';
+                    }
+                }
                 
                 card.innerHTML = `
                     <div class="apostila-header ${apostila.classe}">
@@ -1422,7 +1464,9 @@
                                     <i class="fas fa-check"></i> ENCADERNAÇÃO INCLUSA
                                 </div>
                                 <p><strong>Valor da encadernação:</strong> R$ 7,00 (já incluso)</p>
+                                <p><strong>Preço por folha:</strong> R$ ${apostila.precoPorFolha.toLocaleString('pt-BR', {minimumFractionDigits: 2, maximumFractionDigits: 2})}</p>
                                 <p>Capa Preta no Final, Capa Transparente, Encadernação na Esquerda, Espiral Preto</p>
+                                ${precoEspecialBadge}
                             </div>
                         </div>
                         <div class="apostila-actions">
@@ -1481,8 +1525,12 @@
                         min = 101;
                         max = 200;
                         break;
-                    case '201-400':
+                    case '201-300':
                         min = 201;
+                        max = 300;
+                        break;
+                    case '301-400':
+                        min = 301;
                         max = 400;
                         break;
                 }
@@ -1505,6 +1553,7 @@
                     id: apostila.id,
                     tipoNome: apostila.tipoNome,
                     folhas: apostila.folhas,
+                    precoPorFolha: apostila.precoPorFolha,
                     precoUnitario: parseFloat(apostila.precoComEncadernacao),
                     quantidade: 1
                 });
@@ -1559,6 +1608,7 @@
                     <div class="cart-item-info">
                         <h4>${item.tipoNome}</h4>
                         <p>${item.folhas} folhas</p>
+                        <p><small>Preço por folha: R$ ${item.precoPorFolha.toLocaleString('pt-BR', {minimumFractionDigits: 2})}</small></p>
                         <p class="cart-item-price">R$ ${item.precoUnitario.toLocaleString('pt-BR', {minimumFractionDigits: 2, maximumFractionDigits: 2})} cada</p>
                     </div>
                     <div class="cart-item-actions">
@@ -1663,23 +1713,25 @@
                 return;
             }
             
-            const precoImpressao = PRECOS[tipo] * folhas * quantidade;
+            const precoPorFolha = obterPrecoPorFolha(tipo, folhas);
+            const precoImpressao = precoPorFolha * folhas * quantidade;
             const precoEncadernacao = encadernacao === 'sim' ? PRECO_ENCADERNAÇÃO * quantidade : 0;
             const precoTotal = precoImpressao + precoEncadernacao;
             
             // Formatar detalhes do cálculo
             let detalhes = '';
+            
             if (tipo.includes('colorida')) {
                 if (tipo.includes('fv')) {
-                    detalhes = `${folhas} folhas × R$ 0,72 (impressão colorida frente e verso)`;
+                    detalhes = `${folhas} folhas × R$ ${(precoPorFolha).toLocaleString('pt-BR', {minimumFractionDigits: 2})} (impressão colorida frente e verso)`;
                 } else {
-                    detalhes = `${folhas} folhas × R$ 0,36 (impressão colorida frente)`;
+                    detalhes = `${folhas} folhas × R$ ${precoPorFolha.toLocaleString('pt-BR', {minimumFractionDigits: 2})} (impressão colorida frente)`;
                 }
             } else {
                 if (tipo.includes('fv')) {
-                    detalhes = `${folhas} folhas × R$ 0,50 (impressão preta frente e verso)`;
+                    detalhes = `${folhas} folhas × R$ ${precoPorFolha.toLocaleString('pt-BR', {minimumFractionDigits: 2})} (impressão preta frente e verso)`;
                 } else {
-                    detalhes = `${folhas} folhas × R$ 0,25 (impressão preta frente)`;
+                    detalhes = `${folhas} folhas × R$ ${precoPorFolha.toLocaleString('pt-BR', {minimumFractionDigits: 2})} (impressão preta frente)`;
                 }
             }
             
@@ -1701,9 +1753,22 @@
             const precoSemEncadernacao = parseFloat(apostila.precoSemEncadernacao);
             const precoComEncadernacao = parseFloat(apostila.precoComEncadernacao);
             
+            let faixaPreco = '';
+            if (apostila.tipo === 'colorida-frente' || apostila.tipo === 'colorida-fv') {
+                if (apostila.folhas <= 100) {
+                    faixaPreco = 'Até 100 folhas: R$ 0,80 por folha (colorida frente)';
+                } else if (apostila.folhas <= 300) {
+                    faixaPreco = '101 a 300 folhas: R$ 0,70 por folha (colorida frente)';
+                } else {
+                    faixaPreco = 'Acima de 300 folhas: R$ 0,60 por folha (colorida frente)';
+                }
+            }
+            
             const detalhes = `
                 <strong>Tipo:</strong> ${apostila.tipoNome}<br>
                 <strong>Folhas:</strong> ${apostila.folhas}<br>
+                <strong>Faixa de preço:</strong> ${faixaPreco}<br>
+                <strong>Preço por folha:</strong> R$ ${apostila.precoPorFolha.toLocaleString('pt-BR', {minimumFractionDigits: 2})}<br>
                 <strong>Preço impressão:</strong> R$ ${precoSemEncadernacao.toLocaleString('pt-BR', {minimumFractionDigits: 2, maximumFractionDigits: 2})}<br>
                 <strong>Encadernação (já inclusa):</strong> R$ ${PRECO_ENCADERNAÇÃO.toLocaleString('pt-BR', {minimumFractionDigits: 2, maximumFractionDigits: 2})}<br>
                 <strong>Preço total (com encadernação):</strong> R$ ${precoComEncadernacao.toLocaleString('pt-BR', {minimumFractionDigits: 2, maximumFractionDigits: 2})}<br><br>
@@ -1884,6 +1949,7 @@
                 
                 mensagem += `${index + 1}. *${item.tipoNome}* - ${item.folhas} folhas\n`;
                 mensagem += `   Quantidade: ${item.quantidade}\n`;
+                mensagem += `   Preço por folha: R$ ${item.precoPorFolha.toLocaleString('pt-BR', {minimumFractionDigits: 2})}\n`;
                 mensagem += `   Preço unitário: R$ ${item.precoUnitario.toLocaleString('pt-BR', {minimumFractionDigits: 2})}\n`;
                 mensagem += `   Subtotal: R$ ${precoTotalItem.toLocaleString('pt-BR', {minimumFractionDigits: 2})}\n\n`;
             });
@@ -1911,7 +1977,6 @@
                 mensagem += `📍 Retirada: Av. Brasil, 284 - Casqueiro, Cubatão - SP\n`;
                 mensagem += `⏰ Horário: Segunda a Sexta, 09:00 às 16:00\n`;
             } else {
-                // CORREÇÃO AQUI: Atualizado de 2.90 para 1.90
                 mensagem += `🚚 Entrega calculada por distância: R$ ${PRECO_FRETE_POR_KM.toFixed(2)} por km\n`;
             }
             
@@ -2189,6 +2254,3 @@
 </body>
 
 </html>
-
-
-

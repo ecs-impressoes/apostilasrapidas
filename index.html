@@ -613,19 +613,12 @@
             display: none;
         }
         
-        .frete-calculo {
+        .frete-info {
             background-color: #e8f5e9;
             padding: 1rem;
             border-radius: 8px;
             margin-top: 1rem;
             border-left: 4px solid var(--success);
-            display: none;
-        }
-        
-        .frete-info {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 0.5rem;
         }
         
         .frete-valor {
@@ -1142,21 +1135,15 @@
                         <select id="delivery-method" required>
                             <option value="">Selecione...</option>
                             <option value="retirada">Retirada no Local (Sem custo)</option>
-                            <option value="entrega">Entrega em Domicílio (Frete calculado por distância)</option>
+                            <option value="entrega">Entrega em Domicílio (Valor fixo a combinar)</option>
                         </select>
                         <small>Retirada: Av. Brasil, 284 - Casqueiro, Cubatão - SP</small>
                     </div>
                     
-                    <div class="frete-calculo" id="frete-calculo">
-                        <div class="frete-info">
-                            <span>Distância até sua localização:</span>
-                            <span id="distancia-texto">0 km</span>
-                        </div>
-                        <div class="frete-info">
-                            <span>Valor do frete (R$ 1,90/km):</span>
-                            <span class="frete-valor" id="valor-frete">R$ 0,00</span>
-                        </div>
-                        <small><i class="fas fa-info-circle"></i> O frete será adicionado ao total final do pedido.</small>
+                    <div class="frete-info">
+                        <p><i class="fas fa-info-circle"></i> Para entrega em domicílio, o valor do frete será calculado após análise do endereço e combinado via WhatsApp.</p>
+                        <p><strong>Opções de entrega:</strong> Motoboy local ou serviço de entrega (Uber/99/etc.)</p>
+                        <p><small>O valor será informado antes da confirmação do pedido.</small></p>
                     </div>
                     
                     <div class="form-group">
@@ -1224,7 +1211,7 @@
                             <i class="fas fa-chevron-right"></i>
                             Termos de Serviço
                         </a>
-                        <a href="#">
+                        <a href="politica-privacidade.html">
                             <i class="fas fa-chevron-right"></i>
                             Política de Privacidade
                         </a>
@@ -1328,12 +1315,16 @@
             
             // Para preta-frente (mantendo preços anteriores)
             if (tipo === 'preta-frente') {
-                return 0.55;
+                return 0.55; // R$ 0,55 por folha (só frente)
             }
             
-            // Para preta-frente e verso (mantendo preços anteriores)
+            // Para preta-frente e verso - NOVO PREÇO ACIMA DE 160 FOLHAS
             if (tipo === 'preta-fv') {
-                return 0.80;
+                if (folhas > 160) {
+                    return 0.46; // R$ 0,23 por impressão × 2 = R$ 0,46 por folha
+                } else {
+                    return 0.80; // Preço normal para até 160 folhas
+                }
             }
             
             // Valor padrão (não deve acontecer)
@@ -1343,9 +1334,6 @@
         // Preço da encadernação
         const PRECO_ENCADERNAÇÃO = 7.00;
         
-        // Preço do frete por km
-        const PRECO_FRETE_POR_KM = 1.90;
-        
         // Endereço da loja
         const LOJA_ENDERECO = {
             cep: "11533000",
@@ -1353,11 +1341,7 @@
             numero: "284",
             bairro: "Casqueiro",
             cidade: "Cubatão",
-            estado: "SP",
-            coordenadas: {
-                lat: -23.8956,
-                lng: -46.4238
-            }
+            estado: "SP"
         };
         
         // Tipos de apostila
@@ -1436,6 +1420,11 @@
                     }
                 }
                 
+                // Badge para apostilas pretas frente e verso acima de 160 folhas
+                if (apostila.tipo === 'preta-fv' && apostila.folhas > 160) {
+                    precoEspecialBadge = '<div style="background-color: #ff6b6b; color: white; padding: 0.3rem 0.8rem; border-radius: 3px; font-size: 0.8rem; font-weight: bold; margin-top: 0.5rem;">PROMOÇÃO: R$ 0,23 POR IMPRESSÃO</div>';
+                }
+                
                 card.innerHTML = `
                     <div class="apostila-header ${apostila.classe}">
                         <h3>${apostila.tipoNome}</h3>
@@ -1463,6 +1452,7 @@
                                 </div>
                                 <p><strong>Valor da encadernação:</strong> R$ 7,00 (já incluso)</p>
                                 <p><strong>Preço por folha:</strong> R$ ${apostila.precoPorFolha.toLocaleString('pt-BR', {minimumFractionDigits: 2, maximumFractionDigits: 2})}</p>
+                                ${apostila.tipo === 'preta-fv' && apostila.folhas > 160 ? '<p><strong>Preço por impressão:</strong> R$ 0,23 (cada lado)</p>' : ''}
                                 <p>Capa Preta no Final, Capa Transparente, Encadernação na Esquerda, Espiral Preto</p>
                                 ${precoEspecialBadge}
                             </div>
@@ -1571,7 +1561,6 @@
             const cartEncadernacao = document.getElementById('cart-encadernacao');
             const cartTotal = document.getElementById('cart-total');
             const freteItem = document.getElementById('frete-item');
-            const cartFrete = document.getElementById('cart-frete');
             const whatsappButton = document.getElementById('whatsapp-checkout');
             
             if (carrinho.length === 0) {
@@ -1620,29 +1609,15 @@
                 cartItems.appendChild(itemElement);
             });
             
-            // Calcular frete se necessário
-            const deliveryMethod = document.getElementById('delivery-method').value;
-            let freteValor = 0;
-            
-            if (deliveryMethod === 'entrega') {
-                const freteCalculado = parseFloat(document.getElementById('valor-frete').textContent.replace('R$ ', '').replace(',', '.'));
-                if (!isNaN(freteCalculado)) {
-                    freteValor = freteCalculado;
-                }
-            }
+            // Não calculamos mais frete automaticamente
+            // O frete será combinado via WhatsApp
+            freteItem.style.display = 'none';
             
             // Atualizar totais
             cartSubtotal.textContent = `R$ ${subtotalImpressao.toLocaleString('pt-BR', {minimumFractionDigits: 2, maximumFractionDigits: 2})}`;
             cartEncadernacao.textContent = `R$ ${encadernacaoTotal.toLocaleString('pt-BR', {minimumFractionDigits: 2, maximumFractionDigits: 2})}`;
             
-            if (freteValor > 0) {
-                freteItem.style.display = 'flex';
-                cartFrete.textContent = `R$ ${freteValor.toLocaleString('pt-BR', {minimumFractionDigits: 2, maximumFractionDigits: 2})}`;
-            } else {
-                freteItem.style.display = 'none';
-            }
-            
-            const totalFinal = subtotal + freteValor;
+            const totalFinal = subtotal;
             cartTotal.textContent = `R$ ${totalFinal.toLocaleString('pt-BR', {minimumFractionDigits: 2, maximumFractionDigits: 2})}`;
             
             // Habilitar botão do WhatsApp se houver itens e formulário válido
@@ -1727,7 +1702,11 @@
                 }
             } else {
                 if (tipo.includes('fv')) {
-                    detalhes = `${folhas} folhas × R$ ${precoPorFolha.toLocaleString('pt-BR', {minimumFractionDigits: 2})} (impressão preta frente e verso)`;
+                    if (folhas > 160) {
+                        detalhes = `${folhas} folhas × R$ 0,46 (impressão preta frente e verso - promoção: R$ 0,23 por impressão)`;
+                    } else {
+                        detalhes = `${folhas} folhas × R$ ${precoPorFolha.toLocaleString('pt-BR', {minimumFractionDigits: 2})} (impressão preta frente e verso)`;
+                    }
                 } else {
                     detalhes = `${folhas} folhas × R$ ${precoPorFolha.toLocaleString('pt-BR', {minimumFractionDigits: 2})} (impressão preta frente)`;
                 }
@@ -1760,13 +1739,20 @@
                 } else {
                     faixaPreco = 'Acima de 300 folhas: R$ 0,60 por folha (colorida frente)';
                 }
+            } else if (apostila.tipo === 'preta-fv') {
+                if (apostila.folhas > 160) {
+                    faixaPreco = 'Acima de 160 folhas: R$ 0,23 por impressão (cada lado) = R$ 0,46 por folha';
+                } else {
+                    faixaPreco = 'Até 160 folhas: R$ 0,80 por folha (preta frente e verso)';
+                }
             }
             
             const detalhes = `
                 <strong>Tipo:</strong> ${apostila.tipoNome}<br>
                 <strong>Folhas:</strong> ${apostila.folhas}<br>
-                <strong>Faixa de preço:</strong> ${faixaPreco}<br>
+                ${faixaPreco ? `<strong>Faixa de preço:</strong> ${faixaPreco}<br>` : ''}
                 <strong>Preço por folha:</strong> R$ ${apostila.precoPorFolha.toLocaleString('pt-BR', {minimumFractionDigits: 2})}<br>
+                ${apostila.tipo === 'preta-fv' && apostila.folhas > 160 ? '<strong>Preço por impressão:</strong> R$ 0,23 (cada lado)<br>' : ''}
                 <strong>Preço impressão:</strong> R$ ${precoSemEncadernacao.toLocaleString('pt-BR', {minimumFractionDigits: 2, maximumFractionDigits: 2})}<br>
                 <strong>Encadernação (já inclusa):</strong> R$ ${PRECO_ENCADERNAÇÃO.toLocaleString('pt-BR', {minimumFractionDigits: 2, maximumFractionDigits: 2})}<br>
                 <strong>Preço total (com encadernação):</strong> R$ ${precoComEncadernacao.toLocaleString('pt-BR', {minimumFractionDigits: 2, maximumFractionDigits: 2})}<br><br>
@@ -1835,31 +1821,6 @@
             } catch (error) {
                 console.error('Erro ao buscar CEP:', error);
                 return null;
-            }
-        }
-        
-        // Função para calcular distância (simulação)
-        async function calcularFrete(cepCliente) {
-            if (!cepCliente || cepCliente.replace(/\D/g, '').length !== 8) {
-                return 0;
-            }
-            
-            try {
-                // Simulação de cálculo de distância
-                // Em produção, use uma API de geolocalização real
-                const distancia = 5 + Math.random() * 15; // 5 a 20 km
-                const valorFrete = distancia * PRECO_FRETE_POR_KM;
-                
-                return {
-                    distancia: distancia.toFixed(1),
-                    valor: Math.max(5, valorFrete) // Frete mínimo de R$ 5,00
-                };
-            } catch (error) {
-                console.error('Erro ao calcular frete:', error);
-                return {
-                    distancia: 5,
-                    valor: 5 * PRECO_FRETE_POR_KM
-                };
             }
         }
         
@@ -1948,34 +1909,37 @@
                 mensagem += `${index + 1}. *${item.tipoNome}* - ${item.folhas} folhas\n`;
                 mensagem += `   Quantidade: ${item.quantidade}\n`;
                 mensagem += `   Preço por folha: R$ ${item.precoPorFolha.toLocaleString('pt-BR', {minimumFractionDigits: 2})}\n`;
+                if (item.tipoNome.includes('Preta - Frente e Verso') && item.folhas > 160) {
+                    mensagem += `   (Promoção: R$ 0,23 por impressão)\n`;
+                }
                 mensagem += `   Preço unitário: R$ ${item.precoUnitario.toLocaleString('pt-BR', {minimumFractionDigits: 2})}\n`;
                 mensagem += `   Subtotal: R$ ${precoTotalItem.toLocaleString('pt-BR', {minimumFractionDigits: 2})}\n\n`;
             });
             
-            // Adicionar frete se for entrega
-            let freteValor = 0;
+            // Adicionar observação sobre frete se for entrega
             if (metodoEntrega === 'entrega') {
-                freteValor = parseFloat(document.getElementById('valor-frete').textContent.replace('R$ ', '').replace(',', '.'));
-                if (!isNaN(freteValor)) {
-                    totalGeral += freteValor;
-                }
+                mensagem += `*🚚 INFORMAÇÕES DE ENTREGA:*\n`;
+                mensagem += `• Entrega via motoboy local ou serviço de entrega (Uber/99/etc.)\n`;
+                mensagem += `• O valor do frete será calculado após análise do endereço\n`;
+                mensagem += `• Entraremos em contato para combinar o valor\n\n`;
             }
             
             mensagem += `*💰 RESUMO DO PEDIDO:*\n`;
             mensagem += `Subtotal (Impressão): R$ ${totalImpressao.toLocaleString('pt-BR', {minimumFractionDigits: 2})}\n`;
             mensagem += `Encadernação (já inclusa): R$ ${totalEncadernacao.toLocaleString('pt-BR', {minimumFractionDigits: 2})}\n`;
-            if (metodoEntrega === 'entrega' && freteValor > 0) {
-                const distancia = document.getElementById('distancia-texto').textContent;
-                mensagem += `Frete (${distancia} × R$ ${PRECO_FRETE_POR_KM.toFixed(2)}/km): R$ ${freteValor.toLocaleString('pt-BR', {minimumFractionDigits: 2})}\n`;
+            if (metodoEntrega === 'entrega') {
+                mensagem += `Frete: A combinar (motoboy/Uber)\n`;
             }
-            mensagem += `*TOTAL DO PEDIDO: R$ ${totalGeral.toLocaleString('pt-BR', {minimumFractionDigits: 2})}*\n\n`;
+            mensagem += `*TOTAL PARCIAL: R$ ${totalGeral.toLocaleString('pt-BR', {minimumFractionDigits: 2})}*\n`;
+            if (metodoEntrega === 'entrega') {
+                mensagem += `(Sem incluir o frete)\n`;
+            }
+            mensagem += `\n`;
             
-            mensagem += `*📦 INFORMAÇÕES DE ENTREGA:*\n`;
+            mensagem += `*📦 INFORMAÇÕES ADICIONAIS:*\n`;
             if (metodoEntrega === 'retirada') {
                 mensagem += `📍 Retirada: Av. Brasil, 284 - Casqueiro, Cubatão - SP\n`;
                 mensagem += `⏰ Horário: Segunda a Sexta, 09:00 às 16:00\n`;
-            } else {
-                mensagem += `🚚 Entrega calculada por distância: R$ ${PRECO_FRETE_POR_KM.toFixed(2)} por km\n`;
             }
             
             mensagem += `\n`;
@@ -2014,9 +1978,6 @@
             document.getElementById('customer-complement').value = '';
             document.getElementById('delivery-method').value = '';
             document.getElementById('customer-notes').value = '';
-            
-            // Resetar frete
-            document.getElementById('frete-calculo').style.display = 'none';
             
             // Fechar modal do carrinho
             document.getElementById('cart-modal').style.display = 'none';
@@ -2061,11 +2022,6 @@
                     
                     // Focar no campo número
                     document.getElementById('customer-number').focus();
-                    
-                    // Se já tiver selecionado entrega, calcular frete
-                    if (document.getElementById('delivery-method').value === 'entrega') {
-                        calcularFreteParaCEP(cep);
-                    }
                 } else {
                     document.getElementById('cep-error').style.display = 'block';
                 }
@@ -2074,29 +2030,6 @@
                 document.getElementById('cep-error').style.display = 'block';
             } finally {
                 document.getElementById('cep-loading').style.display = 'none';
-            }
-        }
-        
-        // Função para calcular frete para o CEP
-        async function calcularFreteParaCEP(cep) {
-            const freteCalculoDiv = document.getElementById('frete-calculo');
-            
-            try {
-                const freteInfo = await calcularFrete(cep);
-                
-                if (freteInfo) {
-                    document.getElementById('distancia-texto').textContent = `${freteInfo.distancia} km`;
-                    document.getElementById('valor-frete').textContent = 
-                        `R$ ${freteInfo.valor.toLocaleString('pt-BR', {minimumFractionDigits: 2, maximumFractionDigits: 2})}`;
-                    
-                    freteCalculoDiv.style.display = 'block';
-                    
-                    // Atualizar carrinho com o novo frete
-                    atualizarCarrinho();
-                }
-            } catch (error) {
-                console.error('Erro ao calcular frete:', error);
-                freteCalculoDiv.style.display = 'none';
             }
         }
         
@@ -2183,19 +2116,7 @@
             // Evento para buscar CEP quando o usuário sai do campo
             document.getElementById('customer-cep').addEventListener('blur', buscarCEP);
             
-            // Evento para mudança no método de entrega
-            document.getElementById('delivery-method').addEventListener('change', function() {
-                const freteCalculoDiv = document.getElementById('frete-calculo');
-                const cep = document.getElementById('customer-cep').value.replace(/\D/g, '');
-                
-                if (this.value === 'entrega' && cep.length === 8) {
-                    calcularFreteParaCEP(cep);
-                } else {
-                    freteCalculoDiv.style.display = 'none';
-                }
-                
-                atualizarCarrinho();
-            });
+            // Removido evento de cálculo de frete automático
             
             // Evento para validação em tempo real do formulário
             const camposFormulario = [
@@ -2250,33 +2171,4 @@
         document.head.appendChild(style);
     </script>
 </body>
-
-<div class="footer-links">
-    <a href="#apostilas">
-        <i class="fas fa-chevron-right"></i>
-        Apostilas
-    </a>
-    <a href="#calculadora">
-        <i class="fas fa-chevron-right"></i>
-        Calculadora de Preços
-    </a>
-    <a href="#Sobre Nós">
-        <i class="fas fa-chevron-right"></i>
-        Sobre Nós
-    </a>
-    <a href="#">
-        <i class="fas fa-chevron-right"></i>
-        Termos de Serviço
-    </a>
-
-    <a href="politica-privacidade.html">
-    <i class="fas fa-chevron-right"></i>
-    Política de Privacidade
-</a>
-    
-</div>
-    
 </html>
-
-
-

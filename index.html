@@ -1,34 +1,51 @@
+
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pibbaweb Impressões de Apostilas - Compre Apostilas de Qualidade</title>
+    <title>Pibbaweb Impressões de Apostilas - Apostilas de Qualidade com Encadernação</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --primary: #1e3c72;
-            --secondary: #2a5298;
-            --accent: #ff6b6b;
-            --success: #28a745;
-            --light: #f8f9fa;
-            --dark: #333;
-            --gray: #6c757d;
+            --primary: #1a237e;
+            --primary-dark: #0d1540;
+            --primary-light: #534bae;
+            --secondary: #ff6f00;
+            --secondary-light: #ff9e40;
+            --accent: #e53935;
+            --success: #4caf50;
+            --light: #f5f7ff;
+            --dark: #1a1a2e;
+            --gray: #6b7280;
+            --gray-light: #e5e7eb;
             --gold: #ffcc00;
             --green: #2ecc71;
+            --shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            --shadow-hover: 0 15px 40px rgba(0, 0, 0, 0.12);
+            --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+            --border-radius: 12px;
         }
         
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
         
         body {
-            background-color: #f8f9fa;
+            font-family: 'Roboto', sans-serif;
             color: var(--dark);
+            background-color: var(--light);
             line-height: 1.6;
+            overflow-x: hidden;
+        }
+        
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+            line-height: 1.3;
         }
         
         .container {
@@ -38,12 +55,37 @@
             padding: 0 20px;
         }
         
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+            position: relative;
+        }
+        
+        .section-title h2 {
+            font-size: 2.5rem;
+            color: var(--primary);
+            display: inline-block;
+            margin-bottom: 1rem;
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            border-radius: 2px;
+        }
+        
         /* Header */
         header {
-            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary) 100%);
             color: white;
-            padding: 0.8rem 0;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            padding: 1rem 0;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
             position: sticky;
             top: 0;
             z-index: 1000;
@@ -58,19 +100,39 @@
         .logo {
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 12px;
+            text-decoration: none;
         }
         
-        .logo img {
-            height: 70px; /* Aumentado de 50px para 70px */
+        .logo-img {
+            height: 70px;
             width: auto;
             object-fit: contain;
+            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2));
+        }
+        
+        .logo-text {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .logo-text h1 {
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: white;
+            line-height: 1.2;
+        }
+        
+        .logo-text span {
+            font-size: 0.85rem;
+            opacity: 0.9;
+            font-weight: 300;
         }
         
         nav ul {
             display: flex;
             list-style: none;
-            gap: 1.5rem;
+            gap: 1.8rem;
             align-items: center;
         }
         
@@ -78,159 +140,209 @@
             color: white;
             text-decoration: none;
             font-weight: 500;
-            transition: color 0.3s;
+            transition: var(--transition);
             padding: 0.5rem 0;
             position: relative;
+            font-size: 1rem;
         }
         
         nav a:hover {
             color: var(--gold);
         }
         
+        nav a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            background-color: var(--gold);
+            bottom: 0;
+            left: 0;
+            transition: var(--transition);
+        }
+        
+        nav a:hover::after {
+            width: 100%;
+        }
+        
         .cart-icon {
             position: relative;
             cursor: pointer;
+            padding: 0.5rem;
+            border-radius: 50%;
+            transition: var(--transition);
+        }
+        
+        .cart-icon:hover {
+            background-color: rgba(255, 255, 255, 0.1);
         }
         
         .cart-count {
             position: absolute;
-            top: -8px;
-            right: -8px;
+            top: -5px;
+            right: -5px;
             background-color: var(--accent);
             color: white;
             border-radius: 50%;
-            width: 20px;
-            height: 20px;
+            width: 22px;
+            height: 22px;
             display: flex;
             align-items: center;
             justify-content: center;
             font-size: 0.8rem;
             font-weight: bold;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
         }
         
         /* Hero */
         .hero {
-            background-color: #e9f2ff;
-            padding: 3rem 0;
-            text-align: center;
-            margin-bottom: 2rem;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .hero::before {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none"><path d="M0,0 L100,0 L100,100 Z" fill="rgba(255,255,255,0.2)"/></svg>');
+            background: linear-gradient(rgba(26, 35, 126, 0.9), rgba(13, 21, 64, 0.9)), url('https://images.unsplash.com/photo-1513475382585-d06e58bcb0e0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80');
             background-size: cover;
-        }
-        
-        .hero-content {
-            position: relative;
-            z-index: 1;
-        }
-        
-        .hero h2 {
-            color: var(--primary);
-            font-size: 2.2rem;
-            margin-bottom: 1rem;
-        }
-        
-        .hero p {
-            font-size: 1.1rem;
-            max-width: 700px;
-            margin: 0 auto 1.5rem;
-            color: var(--dark);
-        }
-        
-        .encadernacao-badge {
-            display: inline-block;
-            background: linear-gradient(135deg, var(--green) 0%, #27ae60 100%);
+            background-position: center;
             color: white;
-            padding: 0.5rem 1.5rem;
+            padding: 5rem 0;
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+        
+        .hero-content h2 {
+            font-size: 2.8rem;
+            margin-bottom: 1.5rem;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+        }
+        
+        .hero-content p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto 2rem;
+            opacity: 0.9;
+        }
+        
+        .hero-badges {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+        
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(10px);
+            color: white;
+            padding: 0.7rem 1.5rem;
             border-radius: 50px;
             font-weight: 600;
-            margin: 1rem 0;
-            box-shadow: 0 4px 10px rgba(46, 204, 113, 0.3);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .badge-primary {
+            background: linear-gradient(135deg, var(--secondary) 0%, var(--secondary-light) 100%);
         }
         
         /* Filters */
-        .filters {
+        .filters-section {
             background-color: white;
-            padding: 1.5rem;
-            border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-            margin-bottom: 2rem;
+            padding: 2rem;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            margin-bottom: 3rem;
+        }
+        
+        .filters {
             display: flex;
             flex-wrap: wrap;
-            gap: 1.5rem;
+            gap: 2rem;
             justify-content: center;
+            align-items: flex-end;
         }
         
         .filter-group {
             display: flex;
             flex-direction: column;
             gap: 0.5rem;
+            flex: 1;
+            min-width: 200px;
         }
         
         .filter-group label {
             font-weight: 600;
             color: var(--primary);
+            font-size: 0.95rem;
         }
         
         select, input[type="number"] {
-            padding: 0.6rem;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            min-width: 180px;
+            padding: 0.8rem 1rem;
+            border: 2px solid var(--gray-light);
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: var(--transition);
+            background-color: white;
+        }
+        
+        select:focus, input[type="number"]:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(26, 35, 126, 0.1);
         }
         
         /* Apostilas Grid */
         .apostilas-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 1.5rem;
-            margin-bottom: 3rem;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 4rem;
         }
         
         .apostila-card {
             background-color: white;
-            border-radius: 10px;
+            border-radius: var(--border-radius);
             overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
-            transition: transform 0.3s, box-shadow 0.3s;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
             display: flex;
             flex-direction: column;
             position: relative;
+            height: 100%;
         }
         
         .apostila-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.12);
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-hover);
         }
         
         .apostila-header {
-            padding: 1.2rem;
+            padding: 1.5rem;
             text-align: center;
             color: white;
             position: relative;
+            min-height: 120px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
         }
         
         .colorida {
-            background: linear-gradient(to right, #ff7e5f, #feb47b);
+            background: linear-gradient(135deg, #ff7e5f 0%, #feb47b 100%);
         }
         
         .preta {
-            background: linear-gradient(to right, #485563, #29323c);
+            background: linear-gradient(135deg, #2c3e50 0%, #4a6491 100%);
         }
         
         .apostila-header h3 {
-            font-size: 1.3rem;
-            margin-bottom: 0.3rem;
+            font-size: 1.4rem;
+            margin-bottom: 0.5rem;
+            text-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+        }
+        
+        .apostila-header p {
+            font-size: 1rem;
+            opacity: 0.9;
         }
         
         .apostila-body {
@@ -243,152 +355,252 @@
         .apostila-details {
             display: flex;
             justify-content: space-between;
-            margin-bottom: 1.2rem;
+            margin-bottom: 1.5rem;
             font-size: 0.95rem;
             color: var(--gray);
         }
         
-        .tipo-info {
+        .tipo-info, .folhas-info {
             display: flex;
             align-items: center;
             gap: 0.5rem;
         }
         
-        .tipo-imagem {
+        .tipo-icon {
             width: 24px;
             height: 24px;
-            object-fit: cover;
-            border-radius: 3px;
-            border: 1px solid rgba(0,0,0,0.1);
-        }
-        
-        .folhas-info {
             display: flex;
             align-items: center;
-            gap: 0.5rem;
+            justify-content: center;
+            border-radius: 50%;
+            background-color: rgba(0, 0, 0, 0.1);
         }
         
         .apostila-price {
             text-align: center;
-            margin-bottom: 1.2rem;
+            margin-bottom: 1.5rem;
             flex-grow: 1;
         }
         
         .price {
-            font-size: 1.8rem;
+            font-size: 2rem;
             font-weight: 700;
             color: var(--primary);
             margin-bottom: 0.5rem;
         }
         
         .price-details {
-            font-size: 0.85rem;
+            font-size: 0.9rem;
             color: var(--gray);
             margin-bottom: 1rem;
+            line-height: 1.5;
         }
         
         .encadernacao-info {
             background-color: #f0f7ff;
-            padding: 0.8rem;
-            border-radius: 5px;
+            padding: 1rem;
+            border-radius: 8px;
             margin-top: 1rem;
             font-size: 0.85rem;
-            border-left: 3px solid var(--green);
-            position: relative;
+            border-left: 4px solid var(--success);
         }
         
         .encadernacao-inclusa {
             display: inline-flex;
             align-items: center;
-            gap: 0.3rem;
-            background-color: var(--green);
+            gap: 0.5rem;
+            background-color: var(--success);
             color: white;
-            padding: 0.2rem 0.6rem;
-            border-radius: 3px;
-            font-size: 0.75rem;
+            padding: 0.3rem 0.8rem;
+            border-radius: 50px;
+            font-size: 0.8rem;
             font-weight: 600;
             margin-bottom: 0.5rem;
         }
         
         .apostila-actions {
             display: flex;
-            justify-content: space-between;
             gap: 0.8rem;
             margin-top: auto;
         }
         
         .btn {
-            padding: 0.7rem 1.2rem;
+            padding: 0.8rem 1.5rem;
             border: none;
-            border-radius: 5px;
+            border-radius: 8px;
             font-weight: 600;
             cursor: pointer;
-            transition: all 0.3s;
+            transition: var(--transition);
             flex: 1;
             text-align: center;
             text-decoration: none;
-            display: inline-block;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            font-size: 0.95rem;
         }
         
         .btn-buy {
-            background-color: var(--primary);
+            background: linear-gradient(to right, var(--primary), var(--primary-light));
             color: white;
         }
         
         .btn-buy:hover {
-            background-color: var(--secondary);
+            background: linear-gradient(to right, var(--primary-dark), var(--primary));
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(26, 35, 126, 0.3);
         }
         
         .btn-details {
-            background-color: #f0f0f0;
+            background-color: var(--gray-light);
             color: var(--dark);
         }
         
         .btn-details:hover {
-            background-color: #e0e0e0;
+            background-color: #d1d5db;
+            transform: translateY(-2px);
         }
         
-        /* Calculator */
-        .calculator {
+        /* Calculator - NOVO DESIGN */
+        .calculator-section {
             background-color: white;
-            padding: 2rem;
-            border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-            margin-bottom: 3rem;
+            padding: 3rem;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            margin-bottom: 4rem;
         }
         
-        .calculator h3 {
-            color: var(--primary);
-            margin-bottom: 1.5rem;
-            text-align: center;
-            font-size: 1.5rem;
+        .calculator-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: start;
+        }
+        
+        .calculator-side {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
         }
         
         .calculator-form {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            display: flex;
+            flex-direction: column;
             gap: 1.5rem;
-            margin-bottom: 1.5rem;
         }
         
-        .result {
-            background-color: #f0f7ff;
-            padding: 1.5rem;
-            border-radius: 8px;
-            text-align: center;
-            border-left: 4px solid var(--primary);
-            margin-top: 1rem;
+        .calculator-input-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
         }
         
-        .result h4 {
+        .calculator-input-group label {
+            font-weight: 600;
             color: var(--primary);
-            margin-bottom: 0.8rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .calculator-input-group input[type="range"] {
+            width: 100%;
+            height: 10px;
+            border-radius: 5px;
+            background: var(--gray-light);
+            outline: none;
+            -webkit-appearance: none;
+        }
+        
+        .calculator-input-group input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 22px;
+            height: 22px;
+            border-radius: 50%;
+            background: var(--primary);
+            cursor: pointer;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+        
+        .range-value {
+            font-weight: 600;
+            color: var(--primary);
+            font-size: 1.1rem;
+            margin-left: 0.5rem;
+        }
+        
+        .calculator-result {
+            background: linear-gradient(135deg, #f5f7ff 0%, #e3e8ff 100%);
+            padding: 2.5rem;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            text-align: center;
+            border: 1px solid rgba(26, 35, 126, 0.1);
+        }
+        
+        .calculator-result h3 {
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+            font-size: 1.5rem;
         }
         
         .result-price {
-            font-size: 2rem;
+            font-size: 3rem;
             font-weight: 700;
             color: var(--primary);
+            margin-bottom: 1rem;
+        }
+        
+        .result-details {
+            font-size: 1rem;
+            color: var(--gray);
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+        }
+        
+        .result-breakdown {
+            background-color: white;
+            padding: 1.5rem;
+            border-radius: 8px;
+            text-align: left;
+            margin-top: 1.5rem;
+        }
+        
+        .breakdown-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.5rem 0;
+            border-bottom: 1px dashed var(--gray-light);
+        }
+        
+        .breakdown-item:last-child {
+            border-bottom: none;
+            font-weight: 600;
+            color: var(--primary);
+            font-size: 1.1rem;
+            margin-top: 0.5rem;
+            padding-top: 1rem;
+            border-top: 2px solid var(--gray-light);
+        }
+        
+        .calculator-features {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+        
+        .feature {
+            display: flex;
+            align-items: center;
+            gap: 0.7rem;
+            background-color: rgba(46, 204, 113, 0.1);
+            padding: 0.7rem 1.2rem;
+            border-radius: 50px;
+            color: var(--success);
+            font-weight: 500;
+            font-size: 0.9rem;
         }
         
         /* Carrinho Modal */
@@ -433,258 +645,37 @@
             font-size: 1.8rem;
             cursor: pointer;
             color: var(--gray);
+            transition: var(--transition);
         }
         
-        .cart-items {
-            margin-bottom: 2rem;
-        }
-        
-        .cart-item {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 1rem 0;
-            border-bottom: 1px solid #eee;
-        }
-        
-        .cart-item-info h4 {
-            margin-bottom: 0.3rem;
-        }
-        
-        .cart-item-price {
-            font-weight: bold;
-            color: var(--primary);
-        }
-        
-        .cart-item-actions {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-        
-        .cart-item-actions button {
-            background-color: #f0f0f0;
-            border: none;
-            width: 30px;
-            height: 30px;
-            border-radius: 50%;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        
-        .cart-total {
-            background-color: #f8f9fa;
-            padding: 1.5rem;
-            border-radius: 8px;
-            margin-bottom: 1.5rem;
-        }
-        
-        .cart-total-item {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 0.5rem;
-        }
-        
-        .cart-total-final {
-            font-size: 1.5rem;
-            font-weight: bold;
-            color: var(--primary);
-            border-top: 2px solid #ddd;
-            padding-top: 1rem;
-            margin-top: 1rem;
-        }
-        
-        /* Formulário de Identificação - NOVO */
-        .checkout-options {
-            margin-top: 2rem;
-        }
-        
-        .customer-form {
-            margin-top: 1.5rem;
-        }
-        
-        .form-title {
-            color: var(--primary);
-            margin-bottom: 1rem;
-            font-size: 1.2rem;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-        
-        .form-group {
-            margin-bottom: 1rem;
-        }
-        
-        .form-group label {
-            display: block;
-            margin-bottom: 0.5rem;
-            font-weight: 600;
-            color: var(--dark);
-        }
-        
-        .form-group input, .form-group textarea, .form-group select {
-            width: 100%;
-            padding: 0.8rem;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            font-size: 1rem;
-            transition: border-color 0.3s;
-        }
-        
-        .form-group input:focus, .form-group textarea:focus, .form-group select:focus {
-            outline: none;
-            border-color: var(--primary);
-            box-shadow: 0 0 0 2px rgba(30, 60, 114, 0.1);
-        }
-        
-        .form-row {
-            display: flex;
-            gap: 1rem;
-            margin-bottom: 1rem;
-        }
-        
-        .form-row .form-group {
-            flex: 1;
-            margin-bottom: 0;
-        }
-        
-        .required {
+        .close-cart:hover {
             color: var(--accent);
-        }
-        
-        .whatsapp-checkout {
-            width: 100%;
-            padding: 1rem;
-            background-color: #25D366;
-            color: white;
-            border: none;
-            border-radius: 8px;
-            font-size: 1.1rem;
-            font-weight: bold;
-            cursor: pointer;
-            transition: background-color 0.3s;
-            margin-top: 1.5rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 0.5rem;
-        }
-        
-        .whatsapp-checkout:hover {
-            background-color: #128C7E;
-        }
-        
-        .whatsapp-checkout:disabled {
-            background-color: #cccccc;
-            cursor: not-allowed;
-        }
-        
-        .form-note {
-            font-size: 0.85rem;
-            color: var(--gray);
-            margin-top: 0.5rem;
-            text-align: center;
-        }
-        
-        /* Novos estilos para o formulário aprimorado */
-        .cep-loading {
-            display: none;
-            font-size: 0.9rem;
-            color: var(--primary);
-            margin-top: 5px;
-        }
-        
-        .cep-success {
-            color: var(--success);
-            font-size: 0.9rem;
-            margin-top: 5px;
-            display: none;
-        }
-        
-        .cep-error {
-            color: var(--accent);
-            font-size: 0.9rem;
-            margin-top: 5px;
-            display: none;
-        }
-        
-        .frete-info {
-            background-color: #e8f5e9;
-            padding: 1rem;
-            border-radius: 8px;
-            margin-top: 1rem;
-            border-left: 4px solid var(--success);
-        }
-        
-        .frete-valor {
-            font-size: 1.2rem;
-            font-weight: bold;
-            color: var(--success);
-        }
-        
-        .address-autofilled {
-            background-color: #f0f8ff;
-            border-color: var(--primary);
-        }
-        
-        .form-group small {
-            display: block;
-            color: var(--gray);
-            font-size: 0.85rem;
-            margin-top: 0.3rem;
-        }
-        
-        .required-field {
-            color: var(--accent);
-        }
-        
-        .loading-spinner {
-            display: inline-block;
-            width: 20px;
-            height: 20px;
-            border: 3px solid rgba(0,0,0,.1);
-            border-radius: 50%;
-            border-top-color: var(--primary);
-            animation: spin 1s ease-in-out infinite;
-        }
-        
-        @keyframes spin {
-            to { transform: rotate(360deg); }
         }
         
         /* Footer */
         footer {
-            background: linear-gradient(135deg, #0d1b3e 0%, var(--primary) 100%);
+            background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary) 100%);
             color: white;
-            padding: 3rem 0 1.5rem;
-            margin-top: 3rem;
+            padding: 4rem 0 2rem;
+            margin-top: 4rem;
         }
         
         .footer-content {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2.5rem;
-            margin-bottom: 2.5rem;
-        }
-        
-        .footer-section {
-            display: flex;
-            flex-direction: column;
-            gap: 1.2rem;
+            gap: 3rem;
+            margin-bottom: 3rem;
         }
         
         .footer-logo {
             display: flex;
             align-items: center;
-            gap: 10px;
-            margin-bottom: 1rem;
+            gap: 12px;
+            margin-bottom: 1.5rem;
         }
         
-        .footer-logo img {
-            height: 60px; /* Aumentado de 40px para 60px */
+        .footer-logo-img {
+            height: 60px;
             width: auto;
             object-fit: contain;
         }
@@ -692,14 +683,15 @@
         .footer-description {
             color: rgba(255, 255, 255, 0.8);
             line-height: 1.7;
+            margin-bottom: 1.5rem;
         }
         
         .footer-title {
             font-size: 1.3rem;
-            margin-bottom: 1rem;
+            margin-bottom: 1.5rem;
             color: white;
             position: relative;
-            padding-bottom: 0.5rem;
+            padding-bottom: 0.8rem;
         }
         
         .footer-title::after {
@@ -709,7 +701,7 @@
             bottom: 0;
             width: 50px;
             height: 3px;
-            background-color: var(--gold);
+            background-color: var(--secondary);
             border-radius: 2px;
         }
         
@@ -722,7 +714,7 @@
         .footer-links a {
             color: rgba(255, 255, 255, 0.8);
             text-decoration: none;
-            transition: all 0.3s;
+            transition: var(--transition);
             display: flex;
             align-items: center;
             gap: 0.8rem;
@@ -736,14 +728,13 @@
         .footer-contact {
             display: flex;
             flex-direction: column;
-            gap: 1rem;
+            gap: 1.5rem;
         }
         
         .contact-item {
             display: flex;
             align-items: flex-start;
             gap: 1rem;
-            margin-bottom: 0.5rem;
         }
         
         .contact-icon {
@@ -759,16 +750,6 @@
             flex-shrink: 0;
         }
         
-        .contact-info h4 {
-            margin-bottom: 0.3rem;
-            color: white;
-        }
-        
-        .contact-info p {
-            color: rgba(255, 255, 255, 0.8);
-            font-size: 0.95rem;
-        }
-        
         .whatsapp-link {
             display: inline-flex;
             align-items: center;
@@ -779,7 +760,7 @@
             border-radius: 50px;
             text-decoration: none;
             font-weight: 600;
-            transition: all 0.3s;
+            transition: var(--transition);
             margin-top: 0.5rem;
         }
         
@@ -792,7 +773,7 @@
         .social-links {
             display: flex;
             gap: 1rem;
-            margin-top: 1rem;
+            margin-top: 1.5rem;
         }
         
         .social-link {
@@ -805,30 +786,12 @@
             border-radius: 50%;
             color: white;
             text-decoration: none;
-            transition: all 0.3s;
+            transition: var(--transition);
         }
         
         .social-link:hover {
-            background-color: var(--gold);
+            background-color: var(--secondary);
             transform: translateY(-3px);
-        }
-        
-        .business-hours {
-            background-color: rgba(255, 255, 255, 0.05);
-            padding: 1.2rem;
-            border-radius: 8px;
-            margin-top: 0.5rem;
-            border-left: 3px solid var(--gold);
-        }
-        
-        .business-hours h5 {
-            color: var(--gold);
-            margin-bottom: 0.5rem;
-        }
-        
-        .business-hours p {
-            color: rgba(255, 255, 255, 0.8);
-            font-size: 0.95rem;
         }
         
         .footer-bottom {
@@ -839,95 +802,78 @@
             font-size: 0.9rem;
         }
         
-        .copyright {
-            margin-bottom: 0.5rem;
-        }
-        
-        .payment-methods-footer {
-            display: flex;
-            justify-content: center;
-            gap: 1rem;
-            margin-top: 1rem;
-            flex-wrap: wrap;
-        }
-        
-        .payment-method-icon {
-            font-size: 1.8rem;
-            color: rgba(255, 255, 255, 0.7);
-        }
-        
         /* Responsive */
+        @media (max-width: 992px) {
+            .calculator-container {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+            
+            .hero-content h2 {
+                font-size: 2.3rem;
+            }
+        }
+        
         @media (max-width: 768px) {
             .header-content {
                 flex-direction: column;
-                gap: 1rem;
-                padding: 0.5rem 0;
-            }
-            
-            .logo img {
-                height: 60px; /* Reduzido um pouco em mobile */
+                gap: 1.5rem;
             }
             
             nav ul {
-                gap: 1rem;
+                gap: 1.2rem;
+            }
+            
+            .hero {
+                padding: 3rem 0;
+            }
+            
+            .hero-content h2 {
+                font-size: 2rem;
             }
             
             .apostilas-grid {
-                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+                grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            }
+            
+            .calculator-section {
+                padding: 2rem;
+            }
+            
+            .footer-content {
+                grid-template-columns: 1fr;
+                gap: 2.5rem;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .apostilas-grid {
+                grid-template-columns: 1fr;
             }
             
             .filters {
                 flex-direction: column;
-                align-items: center;
+                align-items: stretch;
             }
             
             .apostila-actions {
                 flex-direction: column;
             }
             
+            .btn {
+                width: 100%;
+            }
+            
             .cart-content {
                 padding: 1.5rem;
             }
             
-            .form-row {
-                flex-direction: column;
-                gap: 0;
+            .hero-content h2 {
+                font-size: 1.8rem;
             }
             
-            .footer-content {
-                grid-template-columns: 1fr;
-                gap: 2rem;
-            }
-            
-            .footer-section {
-                text-align: center;
-            }
-            
-            .footer-logo img {
-                height: 50px; /* Reduzido um pouco em mobile */
-            }
-            
-            .footer-title::after {
-                left: 50%;
-                transform: translateX(-50%);
-            }
-            
-            .contact-item {
-                justify-content: center;
-            }
-            
-            .social-links {
-                justify-content: center;
-            }
-        }
-        
-        @media (max-width: 480px) {
-            .logo img {
-                height: 50px; /* Ainda menor para telas muito pequenas */
-            }
-            
-            .footer-logo img {
-                height: 45px;
+            .section-title h2 {
+                font-size: 2rem;
             }
         }
     </style>
@@ -936,9 +882,13 @@
     <!-- Cabeçalho -->
     <header>
         <div class="container header-content">
-            <div class="logo">
-                <img src="35c34b96-da82-475e-9600-8d8796ab04a9-Photoroom.png" alt="Pibbaweb Impressões de Apostilas">
-            </div>
+            <a href="#" class="logo">
+                <img src="35c34b96-da82-475e-9600-8d8796ab04a9-Photoroom.png" alt="Pibbaweb Impressões de Apostilas" class="logo-img">
+                <div class="logo-text">
+                    <h1>Pibbaweb Impressões</h1>
+                    <span>Apostilas de Alta Qualidade</span>
+                </div>
+            </a>
             <nav>
                 <ul>
                     <li><a href="#apostilas">Apostilas</a></li>
@@ -956,58 +906,31 @@
     <!-- Seção Hero -->
     <section class="hero">
         <div class="container hero-content">
-            <h2>Apostilas de Alta Qualidade para Venda</h2>
-            <p>Mais de 40 configurações de número de páginas. Encontre a opção perfeita para suas necessidades!</p>
-            <div class="encadernacao-badge">
-                <i class="fas fa-check-circle"></i> ENCADERNAÇÃO JÁ INCLUSA NO PREÇO
+            <h2></h2>
+            <p>Informe o número exato de páginas, click na calculadora.</p>
+            <div class="hero-badges">
+                <div class="badge badge-primary">
+                    <i class="fas fa-check-circle"></i> ENCADERNAÇÃO JÁ INCLUSA
+                </div>
+                <div class="badge">
+                    <i class="fas fa-shipping-fast"></i> ENTREGA RÁPIDA
+                </div>
+                <div class="badge">
+                    <i class="fas fa-award"></i> QUALIDADE PREMIUM
+                </div>
             </div>
-            </section>
-
-    <!-- Filtros -->
-    <div class="container">
-        <div class="filters">
-            <div class="filter-group">
-                <label for="tipo">Tipo de Impressão</label>
-                <select id="tipo">
-                    <option value="todos">Todos os Tipos</option>
-                    <option value="colorida-frente">Colorida - Só Frente</option>
-                    <option value="colorida-fv">Colorida - Frente e Verso</option>
-                    <option value="preta-frente">Preta - Só Frente</option>
-                    <option value="preta-fv">Preta - Frente e Verso</option>
-                </select>
-            </div>
-            <div class="filter-group">
-                <label for="folhas">Número de Folhas</label>
-                <select id="folhas">
-                    <option value="todos">Todas as Quantidades</option>
-                    <option value="30">30 folhas</option>
-                    <option value="50">50 folhas</option>
-                    <option value="100">100 folhas</option>
-                    <option value="150">150 folhas</option>
-                    <option value="200">200 folhas</option>
-                    <option value="300">300 folhas</option>
-                    <option value="400">400 folhas</option>
-                </select>
-            </div>
-        </div>
-    </div>
-
-    <!-- Lista de Apostilas -->
-    <section id="apostilas" class="container">
-        <h2 style="color: var(--primary); margin-bottom: 1.5rem;">Nossas Apostilas</h2>
-        <div class="apostilas-grid" id="apostilas-container">
-            <!-- As apostilas serão geradas dinamicamente pelo JavaScript -->
         </div>
     </section>
 
-    <!-- Calculadora de Preços -->
-    <section id="calculadora" class="container">
-        <div class="calculator">
-            <h3>Calculadora de Preços Personalizada</h3>
-            <div class="calculator-form">
+    <!-- Filtros -->
+    <div class="container">
+        <div class="filters-section">
+            <h3 style="color: var(--primary); margin-bottom: 1.5rem; text-align: center;">Filtrar Apostilas</h3>
+            <div class="filters">
                 <div class="filter-group">
-                    <label for="calc-tipo">Tipo de Impressão</label>
-                    <select id="calc-tipo">
+                    <label for="tipo"><i class="fas fa-print"></i> Tipo de Impressão</label>
+                    <select id="tipo">
+                        <option value="todos">Todos os Tipos</option>
                         <option value="colorida-frente">Colorida - Só Frente</option>
                         <option value="colorida-fv">Colorida - Frente e Verso</option>
                         <option value="preta-frente">Preta - Só Frente</option>
@@ -1015,8 +938,9 @@
                     </select>
                 </div>
                 <div class="filter-group">
-                    <label for="calc-folhas">Número de Folhas</label>
-                    <select id="calc-folhas">
+                    <label for="folhas"><i class="fas fa-file-alt"></i> Número de Folhas</label>
+                    <select id="folhas">
+                        <option value="todos">Todas as Quantidades</option>
                         <option value="30">30 folhas</option>
                         <option value="50">50 folhas</option>
                         <option value="100">100 folhas</option>
@@ -1026,20 +950,110 @@
                         <option value="400">400 folhas</option>
                     </select>
                 </div>
-                <div class="filter-group">
-                    <label for="calc-quantidade">Quantidade de Apostilas</label>
-                    <input type="number" id="calc-quantidade" min="1" max="100" value="1">
-                </div>
             </div>
-            <div class="result">
-                <h4>Preço Total Estimado</h4>
-                <div class="result-price" id="preco-calculado">R$ 30,00</div>
-                <p id="detalhes-calculadora">30 folhas coloridas só frente + encadernação já inclusa</p>
+        </div>
+    </div>
+
+    <!-- Lista de Apostilas -->
+    <section id="apostilas" class="container">
+        <div class="section-title">
+            <h2>Nossas Apostilas</h2>
+            <p>Escolha entre diversas opções de impressão e quantidade de folhas</p>
+        </div>
+        <div class="apostilas-grid" id="apostilas-container">
+            <!-- As apostilas serão geradas dinamicamente pelo JavaScript -->
+        </div>
+    </section>
+
+    <!-- Calculadora de Preços - NOVO DESIGN -->
+    <section id="calculadora" class="container">
+        <div class="calculator-section">
+            <div class="section-title">
+                <h2>Calculadora de Preços</h2>
+                <p>Calcule o valor exato da sua apostila personalizada</p>
+            </div>
+            
+            <div class="calculator-container">
+                <div class="calculator-side">
+                    <div class="calculator-form">
+                        <div class="calculator-input-group">
+                            <label for="calc-tipo"><i class="fas fa-palette"></i> Tipo de Impressão</label>
+                            <select id="calc-tipo">
+                                <option value="colorida-frente">Colorida - Só Frente</option>
+                                <option value="colorida-fv">Colorida - Frente e Verso</option>
+                                <option value="preta-frente">Preta - Só Frente</option>
+                                <option value="preta-fv">Preta - Frente e Verso</option>
+                            </select>
+                        </div>
+                        
+                        <div class="calculator-input-group">
+                            <label for="calc-folhas-range">
+                                <i class="fas fa-file-alt"></i> Número de Folhas
+                                <span class="range-value" id="folhas-value">30</span>
+                            </label>
+                            <input type="range" id="calc-folhas-range" min="10" max="400" value="30" step="1">
+                            <div style="display: flex; justify-content: space-between; font-size: 0.85rem; color: var(--gray); margin-top: 0.5rem;">
+                                <span>10</span>
+                                <span>400</span>
+                            </div>
+                        </div>
+                        
+                        <div class="calculator-input-group">
+                            <label for="calc-folhas-input"><i class="fas fa-keyboard"></i> Ou digite o número exato</label>
+                            <input type="number" id="calc-folhas-input" min="10" max="400" value="30" step="1">
+                        </div>
+                        
+                        <div class="calculator-input-group">
+                            <label for="calc-quantidade"><i class="fas fa-copy"></i> Quantidade de Apostilas</label>
+                            <input type="number" id="calc-quantidade" min="1" max="100" value="1">
+                        </div>
+                        
+                        <div class="calculator-features">
+                            <div class="feature">
+                                <i class="fas fa-check-circle"></i> Encadernação Inclusa
+                            </div>
+                            <div class="feature">
+                                <i class="fas fa-bolt"></i> Cálculo Instantâneo
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="calculator-side">
+                    <div class="calculator-result">
+                        <h3>Preço Total Estimado</h3>
+                        <div class="result-price" id="preco-calculado">R$ 30,00</div>
+                        <p class="result-details" id="detalhes-calculadora">30 folhas coloridas só frente + encadernação já inclusa</p>
+                        
+                        <div class="result-breakdown">
+                            <div class="breakdown-item">
+                                <span>Impressão (R$ <span id="preco-por-folha">0.95</span>/folha)</span>
+                                <span id="custo-impressao">R$ 28,50</span>
+                            </div>
+                            <div class="breakdown-item">
+                                <span>Encadernção (cada)</span>
+                                <span>R$ 7,00</span>
+                            </div>
+                            <div class="breakdown-item">
+                                <span>Quantidade</span>
+                                <span id="quantidade-apostilas">1</span>
+                            </div>
+                            <div class="breakdown-item">
+                                <span>TOTAL</span>
+                                <span id="custo-total">R$ 35,50</span>
+                            </div>
+                        </div>
+                        
+                        <button class="btn btn-buy" id="btn-adicionar-calculadora" style="margin-top: 2rem;">
+                            <i class="fas fa-cart-plus"></i> Adicionar ao Carrinho
+                        </button>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
 
-    <!-- Carrinho de Compras com Formulário APERFEIÇOADO -->
+    <!-- Carrinho de Compras (modal) -->
     <div class="cart-modal" id="cart-modal">
         <div class="cart-content">
             <div class="cart-header">
@@ -1051,119 +1065,21 @@
                 <!-- Itens do carrinho serão adicionados aqui -->
             </div>
             
-            <div class="cart-total">
-                <div class="cart-total-item">
-                    <span>Subtotal (impressão + encadernação):</span>
-                    <span id="cart-subtotal">R$ 0,00</span>
+            <div class="cart-total" style="margin-top: 2rem;">
+                <div class="result-breakdown">
+                    <div class="breakdown-item">
+                        <span>Subtotal</span>
+                        <span id="cart-subtotal">R$ 0,00</span>
+                    </div>
+                    <div class="breakdown-item">
+                        <span>TOTAL</span>
+                        <span id="cart-total">R$ 0,00</span>
+                    </div>
                 </div>
-                <div class="cart-total-item" id="frete-item" style="display: none;">
-                    <span>Frete:</span>
-                    <span id="cart-frete">R$ 0,00</span>
-                </div>
-                <div class="cart-total-item cart-total-final">
-                    <span>Total:</span>
-                    <span id="cart-total">R$ 0,00</span>
-                </div>
-            </div>
-            
-            <div class="checkout-options">
-                <div class="customer-form">
-                    <h4 class="form-title"><i class="fas fa-user"></i> Dados do Cliente</h4>
-                    
-                    <div class="form-group">
-                        <label for="customer-name">Nome Completo <span class="required">*</span></label>
-                        <input type="text" id="customer-name" placeholder="Digite seu nome completo" required>
-                    </div>
-                    
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label for="customer-phone">Telefone <span class="required">*</span></label>
-                            <input type="tel" id="customer-phone" placeholder="(11) 99999-9999" required>
-                            <small>Com DDD (ex: 11999999999)</small>
-                        </div>
-                        <div class="form-group">
-                            <label for="customer-email">E-mail <span class="required">*</span></label>
-                            <input type="email" id="customer-email" placeholder="seuemail@exemplo.com" required>
-                        </div>
-                    </div>
-                    
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label for="customer-cep">CEP <span class="required">*</span></label>
-                            <input type="text" id="customer-cep" placeholder="00000-000" required maxlength="9">
-                            <div class="cep-loading" id="cep-loading">
-                                <span class="loading-spinner"></span> Buscando endereço...
-                            </div>
-                            <div class="cep-success" id="cep-success">
-                                <i class="fas fa-check-circle"></i> Endereço encontrado!
-                            </div>
-                            <div class="cep-error" id="cep-error">
-                                <i class="fas fa-exclamation-circle"></i> CEP não encontrado. Preencha manualmente.
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="customer-number">Número <span class="required">*</span></label>
-                            <input type="text" id="customer-number" placeholder="Número" required>
-                        </div>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="customer-street">Rua <span class="required">*</span></label>
-                        <input type="text" id="customer-street" placeholder="Nome da rua" required>
-                    </div>
-                    
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label for="customer-neighborhood">Bairro <span class="required">*</span></label>
-                            <input type="text" id="customer-neighborhood" placeholder="Nome do bairro" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="customer-city">Cidade <span class="required">*</span></label>
-                            <input type="text" id="customer-city" placeholder="Nome da cidade" required>
-                        </div>
-                    </div>
-                    
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label for="customer-state">Estado <span class="required">*</span></label>
-                            <input type="text" id="customer-state" placeholder="UF" required maxlength="2">
-                        </div>
-                        <div class="form-group">
-                            <label for="customer-complement">Complemento (opcional)</label>
-                            <input type="text" id="customer-complement" placeholder="Apto, bloco, etc.">
-                        </div>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="delivery-method">Forma de Entrega <span class="required">*</span></label>
-                        <select id="delivery-method" required>
-                            <option value="">Selecione...</option>
-                            <option value="retirada">Retirada no Local (Sem custo)</option>
-                            <option value="entrega">Entrega em Domicílio (Valor fixo a combinar)</option>
-                        </select>
-                        <small>Retirada: Av. Brasil, 284 - Casqueiro, Cubatão - SP</small>
-                    </div>
-                    
-                    <div class="frete-info">
-                        <p><i class="fas fa-info-circle"></i> Para entrega em domicílio, o valor do frete será calculado após análise do endereço e combinado via WhatsApp.</p>
-                        <p><strong>Opções de entrega:</strong> Motoboy local ou serviço de entrega (Uber/99/etc.)</p>
-                        <p><small>O valor será informado antes da confirmação do pedido.</small></p>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="customer-notes">Observações (opcional)</label>
-                        <textarea id="customer-notes" rows="3" placeholder="Alguma observação sobre o pedido..."></textarea>
-                    </div>
-                    
-                    <button class="whatsapp-checkout" id="whatsapp-checkout" disabled>
-                        <i class="fab fa-whatsapp"></i> Enviar Pedido por WhatsApp
-                    </button>
-                    
-                    <p class="form-note">
-                        <span class="required">*</span> Campos obrigatórios<br>
-                        Ao clicar no botão, você será redirecionado para o WhatsApp para finalizar o pedido.
-                    </p>
-                </div>
+                
+                <button class="btn btn-buy" id="btn-finalizar-pedido" style="width: 100%; margin-top: 1.5rem;">
+                    <i class="fab fa-whatsapp"></i> Finalizar Pedido via WhatsApp
+                </button>
             </div>
         </div>
     </div>
@@ -1174,7 +1090,11 @@
             <div class="footer-content">
                 <div class="footer-section">
                     <div class="footer-logo">
-                        <img src="35c34b96-da82-475e-9600-8d8796ab04a9-Photoroom.png" alt="Pibbaweb Impressões de Apostilas">
+                        <img src="35c34b96-da82-475e-9600-8d8796ab04a9-Photoroom.png" alt="Pibbaweb Impressões de Apostilas" class="footer-logo-img">
+                        <div>
+                            <h3 style="color: white; font-size: 1.4rem;">Pibbaweb Impressões</h3>
+                            <span style="color: rgba(255, 255, 255, 0.7); font-size: 0.9rem;">Apostilas de Alta Qualidade</span>
+                        </div>
                     </div>
                     <p class="footer-description">
                         Oferecemos apostilas de alta qualidade com impressão colorida ou preta, encadernação profissional inclusa e entrega rápida. Mais de 40 modelos disponíveis para atender suas necessidades.
@@ -1214,10 +1134,6 @@
                             <i class="fas fa-chevron-right"></i>
                             Termos de Serviço
                         </a>
-                        <a href="politica-privacidade.html">
-                            <i class="fas fa-chevron-right"></i>
-                            Política de Privacidade
-                        </a>
                     </div>
                 </div>
                 
@@ -1226,11 +1142,11 @@
                     <div class="footer-contact">
                         <div class="contact-item">
                             <div class="contact-icon">
-                                <i class="fas fa-envelope"></i>
+                                <i class="fas fa-map-marker-alt"></i>
                             </div>
-                            <div class="contact-info">
-                                <h4>Email</h4>
-                                <p><a href="mailto:avenidabrail284@gmail.com" style="color: rgba(255, 255, 255, 0.8); text-decoration: none;">avenidabrail284@gmail.com</a></p>
+                            <div>
+                                <h4>Endereço</h4>
+                                <p>Av. Brasil, 284 - Casqueiro, Cubatão - SP</p>
                             </div>
                         </div>
                         
@@ -1238,55 +1154,58 @@
                             <div class="contact-icon">
                                 <i class="fab fa-whatsapp"></i>
                             </div>
-                            <div class="contact-info">
+                            <div>
                                 <h4>WhatsApp</h4>
-                                <p><a href="https://wa.me/5513988089754" target="_blank" class="whatsapp-link">
+                                <p>(13) 98808-9754</p>
+                                <a href="https://wa.me/5513988089754" target="_blank" class="whatsapp-link">
                                     <i class="fab fa-whatsapp"></i>
-                                    (13) 98808-9754
-                                </a></p>
+                                    Enviar Mensagem
+                                </a>
                             </div>
                         </div>
                         
-                        <div class="business-hours">
-                            <h5><i class="fas fa-clock"></i> Horário de Atendimento Online </h5>
-                            <p>Segunda a Sexta-feira</p>
-                            <p>08:00 às 20:00</p>
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <i class="fas fa-envelope"></i>
+                            </div>
+                            <div>
+                                <h4>Email</h4>
+                                <p>avenidabrail284@gmail.com</p>
+                            </div>
                         </div>
                     </div>
                 </div>
-                
-                <div class="footer-section">
-                    <h4 class="footer-title">Encadernação Padrão</h4>
-                    <div class="footer-description">
-                        <p><strong>Material utilizado (já incluso no preço):</strong></p>
-                        <ul style="padding-left: 1.2rem; margin-top: 0.5rem;">
-                            <li>Capa de cor Preta no Final</li>
-                            <li>Capa Transparente</li>
-                            <li>Encadernação na Esquerda</li>
-                            <li>Espiral Preto</li>
-                        </ul>
-                        <p style="margin-top: 1rem; background-color: rgba(46, 204, 113, 0.1); padding: 0.8rem; border-radius: 5px; border-left: 3px solid var(--green);">
-                            <strong><i class="fas fa-check-circle" style="color: var(--green);"></i> Encadernação já inclusa:</strong> R$ 7,00 por apostila já está incluído no preço.
-                        </p>
+            </div>
+            <div class="footer-section">
+                    <h4 class="footer-title">Acesso Rápido</h4>
+                    <div class="footer-links">
+                        <a href="https://github.com/ecs-impressoes/Tabela-de-Pre-os-2026" target="_blank">
+                            <i class="fab fa-github"></i>
+                            Tabela de Preços 2026
+                        </a>
+                        <a href="https://github.com/ecs-impressoes/frente" target="_blank">
+                            <i class="fab fa-github"></i>
+                            Impressão Frente
+                        </a>
+                        <a href="https://github.com/ecs-impressoes/PB-Croma" target="_blank">
+                            <i class="fab fa-github"></i>
+                            PB Croma
+                        </a>
+                        <a href="https://github.com/ecs-impressoes/polaroid" target="_blank">
+                            <i class="fab fa-github"></i>
+                            Polaroid
+                        </a>
+                        <a href="https://ecs-impressoes.github.io/-Gerador-de-Etiquetas-2026/" target="_blank">
+                            <i class="fas fa-tags"></i>
+                            Gerador de Etiquetas 2026
+                        </a>
                     </div>
                 </div>
             </div>
-            
             <div class="footer-bottom">
                 <div class="copyright">
-                    &copy; 2026 Pibbaweb Impressões de Apostilas.
+                    &copy; 2026 Pibbaweb Impressões de Apostilas. Todos os direitos reservados.
                 </div>
-                
-                <div class="payment-methods-footer">
-                    <i class="fab fa-cc-visa payment-method-icon" title="Visa"></i>
-                    <i class="fab fa-cc-mastercard payment-method-icon" title="Mastercard"></i>
-                    <i class="fab fa-cc-amex payment-method-icon" title="American Express"></i>
-                    <i class="fab fa-cc-paypal payment-method-icon" title="PayPal"></i>
-                    <i class="fas fa-qrcode payment-method-icon" title="PIX"></i>
-                    <i class="fas fa-university payment-method-icon" title="Boleto"></i>
-                </div>
-                
-                <p style="margin-top: 1rem;">Desenvolvido com <i class="fas fa-heart" style="color: #ff6b6b;"></i> para você</p>
             </div>
         </div>
     </footer>
@@ -1325,47 +1244,23 @@
         }
 
         // Função para calcular preço total da apostila
-        function calcularPrecoApostila(tipo, folhas) {
+        function calcularPrecoApostila(tipo, folhas, quantidade = 1) {
             const precoPorFolha = calcularPrecoPorFolha(tipo, folhas);
             const precoImpressao = precoPorFolha * folhas;
             const encadernacao = 7.00; // Encadernação fixa de R$ 7,00
-            const precoTotal = precoImpressao + encadernacao;
+            const precoUnitario = precoImpressao + encadernacao;
+            const precoTotal = precoUnitario * quantidade;
             
             return {
+                precoPorFolha: precoPorFolha,
                 precoImpressao: precoImpressao,
+                precoUnitario: precoUnitario,
                 precoTotal: precoTotal,
-                precoPorFolha: precoPorFolha
+                encadernacao: encadernacao,
+                quantidade: quantidade,
+                folhas: folhas,
+                tipo: tipo
             };
-        }
-
-        // Preços das apostilas calculados dinamicamente
-        function gerarPrecoApostilas() {
-            const precoApostilas = {
-                // Preto e Branco - Só Frente
-                'preta-frente': {},
-                // Preto e Branco - Frente e Verso
-                'preta-fv': {},
-                // Colorida - Só Frente
-                'colorida-frente': {},
-                // Colorida - Frente e Verso
-                'colorida-fv': {}
-            };
-            
-            // Quantidades de folhas disponíveis (em ordem crescente)
-            const quantidadesFolhas = [30, 50, 100, 150, 200, 300, 400];
-            
-            // Tipos de apostila
-            const tipos = ['preta-frente', 'preta-fv', 'colorida-frente', 'colorida-fv'];
-            
-            // Calcular preços para cada tipo e quantidade
-            tipos.forEach(tipo => {
-                quantidadesFolhas.forEach(folhas => {
-                    const preco = calcularPrecoApostila(tipo, folhas);
-                    precoApostilas[tipo][folhas] = preco.precoTotal;
-                });
-            });
-            
-            return precoApostilas;
         }
 
         // Tipos de apostila
@@ -1379,12 +1274,6 @@
         // Quantidades de folhas disponíveis (em ordem crescente)
         const quantidadesFolhas = [30, 50, 100, 150, 200, 300, 400];
         
-        // Imagens para os tipos de apostila
-        const IMAGENS_TIPO = {
-            'colorida': 'https://images.unsplash.com/photo-1589998059171-988d887df646?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&q=80',
-            'preta': 'https://images.unsplash.com/photo-1545231027-637d2f6210f8?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&q=80'
-        };
-        
         // Gerar todas as apostilas
         let apostilas = [];
         TIPOS.forEach(tipo => {
@@ -1397,10 +1286,10 @@
                     tipoNome: tipo.nome,
                     classe: tipo.classe,
                     folhas: folhas,
-                    precoComEncadernacao: precoInfo.precoTotal,
+                    precoComEncadernacao: precoInfo.precoUnitario,
                     precoImpressao: precoInfo.precoImpressao,
                     precoPorFolha: precoInfo.precoPorFolha,
-                    imagemTipo: IMAGENS_TIPO[tipo.classe]
+                    quantidade: 1
                 });
             });
         });
@@ -1421,7 +1310,7 @@
             container.innerHTML = '';
             
             if (apostilasParaRenderizar.length === 0) {
-                container.innerHTML = '<p style="grid-column: 1 / -1; text-align: center; padding: 2rem;">Nenhuma apostila encontrada com os filtros selecionados.</p>';
+                container.innerHTML = '<p style="grid-column: 1 / -1; text-align: center; padding: 2rem; font-size: 1.2rem; color: var(--gray);">Nenhuma apostila encontrada com os filtros selecionados.</p>';
                 return;
             }
             
@@ -1438,18 +1327,22 @@
                     <div class="apostila-body">
                         <div class="apostila-details">
                             <div class="tipo-info">
-                                <img src="${apostila.imagemTipo}" alt="${apostila.tipoNome.split(' - ')[0]}" class="tipo-imagem">
+                                <div class="tipo-icon">
+                                    <i class="fas ${apostila.classe === 'colorida' ? 'fa-palette' : 'fa-gem'}"></i>
+                                </div>
                                 <span>${apostila.tipoNome.split(' - ')[0]}</span>
                             </div>
                             <div class="folhas-info">
-                                <i class="fas fa-file-alt"></i>
+                                <div class="tipo-icon">
+                                    <i class="fas fa-file-alt"></i>
+                                </div>
                                 <span>${apostila.folhas} folhas</span>
                             </div>
                         </div>
                         <div class="apostila-price">
                             <div class="price">R$ ${apostila.precoComEncadernacao.toLocaleString('pt-BR', {minimumFractionDigits: 2, maximumFractionDigits: 2})}</div>
                             <div class="price-details">
-                                <span>Impressão: R$ ${apostila.precoImpressao.toLocaleString('pt-BR', {minimumFractionDigits: 2})} (R$ ${apostila.precoPorFolha.toLocaleString('pt-BR', {minimumFractionDigits: 2})}/folha)</span>
+                                <span>Impressão: R$ ${apostila.precoImpressao.toLocaleString('pt-BR', {minimumFractionDigits: 2})}</span>
                                 <br>
                                 <span>Encadernação: R$ 7,00</span>
                             </div>
@@ -1461,8 +1354,12 @@
                             </div>
                         </div>
                         <div class="apostila-actions">
-                            <button class="btn btn-buy btn-add-cart" data-id="${apostila.id}">Adicionar ao Carrinho</button>
-                            <button class="btn btn-details btn-view-details" data-id="${apostila.id}">Detalhes</button>
+                            <button class="btn btn-buy btn-add-cart" data-id="${apostila.id}">
+                                <i class="fas fa-cart-plus"></i> Adicionar
+                            </button>
+                            <button class="btn btn-details btn-view-details" data-id="${apostila.id}">
+                                <i class="fas fa-info-circle"></i> Detalhes
+                            </button>
                         </div>
                     </div>
                 `;
@@ -1539,13 +1436,11 @@
             const cartItems = document.getElementById('cart-items');
             const cartSubtotal = document.getElementById('cart-subtotal');
             const cartTotal = document.getElementById('cart-total');
-            const whatsappButton = document.getElementById('whatsapp-checkout');
             
             if (carrinho.length === 0) {
-                cartItems.innerHTML = '<p>Seu carrinho está vazio. Adicione apostilas para continuar.</p>';
+                cartItems.innerHTML = '<p style="text-align: center; padding: 2rem; color: var(--gray);">Seu carrinho está vazio. Adicione apostilas para continuar.</p>';
                 cartSubtotal.textContent = 'R$ 0,00';
                 cartTotal.textContent = 'R$ 0,00';
-                whatsappButton.disabled = true;
                 return;
             }
             
@@ -1559,21 +1454,33 @@
                 
                 const itemElement = document.createElement('div');
                 itemElement.className = 'cart-item';
+                itemElement.style.cssText = `
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                    padding: 1.2rem;
+                    background-color: #f9f9f9;
+                    border-radius: 8px;
+                    margin-bottom: 1rem;
+                `;
                 
                 itemElement.innerHTML = `
-                    <div class="cart-item-info">
-                        <h4>${item.tipoNome}</h4>
-                        <p>${item.folhas} folhas</p>
-                        <p style="font-size: 0.85rem; color: var(--gray);">
-                            R$ ${item.precoPorFolha.toLocaleString('pt-BR', {minimumFractionDigits: 2})}/folha
+                    <div style="flex: 1;">
+                        <h4 style="margin-bottom: 0.3rem; color: var(--primary);">${item.tipoNome}</h4>
+                        <p style="font-size: 0.9rem; color: var(--gray); margin-bottom: 0.5rem;">${item.folhas} folhas</p>
+                        <p style="font-size: 1.1rem; font-weight: bold; color: var(--primary);">
+                            R$ ${item.precoUnitario.toLocaleString('pt-BR', {minimumFractionDigits: 2})} cada
                         </p>
-                        <p class="cart-item-price">R$ ${item.precoUnitario.toLocaleString('pt-BR', {minimumFractionDigits: 2, maximumFractionDigits: 2})} cada</p>
                     </div>
-                    <div class="cart-item-actions">
-                        <button class="btn-decrease" data-id="${item.id}">-</button>
-                        <span>${item.quantidade}</span>
-                        <button class="btn-increase" data-id="${item.id}">+</button>
-                        <button class="btn-remove" data-id="${item.id}"><i class="fas fa-trash"></i></button>
+                    <div style="display: flex; align-items: center; gap: 1rem;">
+                        <div style="display: flex; align-items: center; gap: 0.5rem;">
+                            <button class="btn-decrease" data-id="${item.id}" style="width: 30px; height: 30px; border-radius: 50%; background-color: var(--gray-light); border: none; display: flex; align-items: center; justify-content: center; cursor: pointer;">-</button>
+                            <span style="font-weight: bold; font-size: 1.1rem;">${item.quantidade}</span>
+                            <button class="btn-increase" data-id="${item.id}" style="width: 30px; height: 30px; border-radius: 50%; background-color: var(--gray-light); border: none; display: flex; align-items: center; justify-content: center; cursor: pointer;">+</button>
+                        </div>
+                        <button class="btn-remove" data-id="${item.id}" style="background: none; border: none; color: var(--accent); cursor: pointer; font-size: 1.2rem;">
+                            <i class="fas fa-trash"></i>
+                        </button>
                     </div>
                 `;
                 
@@ -1582,13 +1489,7 @@
             
             // Atualizar totais
             cartSubtotal.textContent = `R$ ${subtotal.toLocaleString('pt-BR', {minimumFractionDigits: 2, maximumFractionDigits: 2})}`;
-            
-            const totalFinal = subtotal;
-            cartTotal.textContent = `R$ ${totalFinal.toLocaleString('pt-BR', {minimumFractionDigits: 2, maximumFractionDigits: 2})}`;
-            
-            // Habilitar botão do WhatsApp se houver itens e formulário válido
-            const formValido = validarFormularioCliente();
-            whatsappButton.disabled = !(carrinho.length > 0 && formValido);
+            cartTotal.textContent = `R$ ${subtotal.toLocaleString('pt-BR', {minimumFractionDigits: 2, maximumFractionDigits: 2})}`;
             
             // Adicionar eventos aos botões do carrinho
             document.querySelectorAll('.btn-decrease').forEach(btn => {
@@ -1640,15 +1541,17 @@
             }
         }
         
-        // Calcular preço personalizado
-        function calcularPreco() {
+        // Atualizar a calculadora
+        function atualizarCalculadora() {
             const tipo = document.getElementById('calc-tipo').value;
-            const folhas = parseInt(document.getElementById('calc-folhas').value);
+            const folhas = parseInt(document.getElementById('calc-folhas-range').value);
             const quantidade = parseInt(document.getElementById('calc-quantidade').value);
             
-            const precoInfo = calcularPrecoApostila(tipo, folhas);
-            const precoUnitario = precoInfo.precoTotal;
-            const precoTotal = precoUnitario * quantidade;
+            // Sincronizar o input de folhas com o range
+            document.getElementById('calc-folhas-input').value = folhas;
+            document.getElementById('folhas-value').textContent = folhas;
+            
+            const precoInfo = calcularPrecoApostila(tipo, folhas, quantidade);
             
             // Formatar detalhes do cálculo
             let tipoTexto = '';
@@ -1659,12 +1562,19 @@
                 case 'colorida-fv': tipoTexto = 'Colorida - Frente e Verso'; break;
             }
             
-            const precoPorFolha = calcularPrecoPorFolha(tipo, folhas);
-            const detalhes = `${quantidade} × ${folhas} folhas (${tipoTexto}) @ R$ ${precoPorFolha.toLocaleString('pt-BR', {minimumFractionDigits: 2})}/folha + R$ 7,00 encadernação = R$ ${precoTotal.toLocaleString('pt-BR', {minimumFractionDigits: 2, maximumFractionDigits: 2})}`;
+            const detalhes = `${quantidade} × ${folhas} folhas (${tipoTexto})`;
             
             // Atualizar a interface
-            document.getElementById('preco-calculado').textContent = `R$ ${precoTotal.toLocaleString('pt-BR', {minimumFractionDigits: 2, maximumFractionDigits: 2})}`;
+            document.getElementById('preco-calculado').textContent = `R$ ${precoInfo.precoTotal.toLocaleString('pt-BR', {minimumFractionDigits: 2, maximumFractionDigits: 2})}`;
             document.getElementById('detalhes-calculadora').textContent = detalhes;
+            document.getElementById('preco-por-folha').textContent = precoInfo.precoPorFolha.toLocaleString('pt-BR', {minimumFractionDigits: 2});
+            document.getElementById('custo-impressao').textContent = `R$ ${precoInfo.precoImpressao.toLocaleString('pt-BR', {minimumFractionDigits: 2})}`;
+            document.getElementById('quantidade-apostilas').textContent = quantidade;
+            document.getElementById('custo-total').textContent = `R$ ${precoInfo.precoTotal.toLocaleString('pt-BR', {minimumFractionDigits: 2})}`;
+            
+            // Armazenar os dados atuais da calculadora
+            window.calculadoraAtual = precoInfo;
+            window.calculadoraAtual.tipoTexto = tipoTexto;
         }
         
         // Mostrar detalhes da apostila
@@ -1684,7 +1594,53 @@
                 <strong><i class="fas fa-check-circle"></i> Encadernação já está incluída no preço total.</strong>
             `;
             
-            alert(detalhes);
+            // Criar modal de detalhes
+            const modal = document.createElement('div');
+            modal.style.cssText = `
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background-color: rgba(0,0,0,0.7);
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                z-index: 3000;
+                padding: 20px;
+            `;
+            
+            modal.innerHTML = `
+                <div style="background-color: white; max-width: 500px; width: 100%; border-radius: 12px; padding: 2rem; position: relative;">
+                    <button id="fechar-detalhes" style="position: absolute; top: 1rem; right: 1rem; background: none; border: none; font-size: 1.5rem; color: var(--gray); cursor: pointer;">&times;</button>
+                    <h3 style="color: var(--primary); margin-bottom: 1.5rem;">${apostila.tipoNome} - ${apostila.folhas} folhas</h3>
+                    <div style="line-height: 1.8; color: var(--dark);">
+                        ${detalhes.replace(/<br>/g, '</div><div style="margin-bottom: 0.5rem;">')}
+                    </div>
+                    <button class="btn btn-buy" id="adicionar-detalhes" data-id="${apostila.id}" style="margin-top: 1.5rem; width: 100%;">
+                        <i class="fas fa-cart-plus"></i> Adicionar ao Carrinho
+                    </button>
+                </div>
+            `;
+            
+            document.body.appendChild(modal);
+            
+            // Adicionar eventos
+            document.getElementById('fechar-detalhes').addEventListener('click', () => {
+                document.body.removeChild(modal);
+            });
+            
+            document.getElementById('adicionar-detalhes').addEventListener('click', () => {
+                adicionarAoCarrinho(apostila.id);
+                document.body.removeChild(modal);
+            });
+            
+            // Fechar ao clicar fora
+            modal.addEventListener('click', (e) => {
+                if (e.target === modal) {
+                    document.body.removeChild(modal);
+                }
+            });
         }
         
         // Mostrar feedback
@@ -1701,6 +1657,10 @@
                 box-shadow: 0 5px 15px rgba(0,0,0,0.2);
                 z-index: 3000;
                 animation: slideUp 0.3s ease;
+                display: flex;
+                align-items: center;
+                gap: 0.7rem;
+                max-width: 400px;
             `;
             
             feedback.innerHTML = `<i class="fas fa-check-circle"></i> ${mensagem}`;
@@ -1714,270 +1674,73 @@
             }, 3000);
         }
         
-        // Função para buscar endereço pelo CEP
-        async function buscarEnderecoPorCEP(cep) {
-            const cepNumerico = cep.replace(/\D/g, '');
+        // Adicionar item da calculadora ao carrinho
+        function adicionarCalculadoraAoCarrinho() {
+            if (!window.calculadoraAtual) return;
             
-            if (cepNumerico.length !== 8) {
-                return null;
+            const { folhas, tipo, tipoTexto, precoUnitario, quantidade, precoPorFolha, precoImpressao } = window.calculadoraAtual;
+            
+            const itemId = `custom-${tipo}-${folhas}`;
+            const itemExistente = carrinho.find(item => item.id === itemId);
+            
+            if (itemExistente) {
+                itemExistente.quantidade += quantidade;
+            } else {
+                carrinho.push({
+                    id: itemId,
+                    tipoNome: tipoTexto,
+                    folhas: folhas,
+                    precoUnitario: precoUnitario,
+                    quantidade: quantidade,
+                    precoPorFolha: precoPorFolha,
+                    precoImpressao: precoImpressao
+                });
             }
             
-            try {
-                const response = await fetch(`https://viacep.com.br/ws/${cepNumerico}/json/`);
-                const data = await response.json();
-                
-                if (data.erro) {
-                    return null;
-                }
-                
-                return {
-                    cep: data.cep,
-                    logradouro: data.logradouro,
-                    bairro: data.bairro,
-                    cidade: data.localidade,
-                    estado: data.uf,
-                    complemento: data.complemento || ''
-                };
-            } catch (error) {
-                console.error('Erro ao buscar CEP:', error);
-                return null;
-            }
+            atualizarCarrinho();
+            mostrarFeedback(`${quantidade} × ${tipoTexto} (${folhas} folhas) adicionada ao carrinho!`);
         }
         
-        // Validar formulário do cliente
-        function validarFormularioCliente() {
-            const nome = document.getElementById('customer-name').value.trim();
-            const telefone = document.getElementById('customer-phone').value.trim();
-            const email = document.getElementById('customer-email').value.trim();
-            const cep = document.getElementById('customer-cep').value.trim();
-            const numero = document.getElementById('customer-number').value.trim();
-            const rua = document.getElementById('customer-street').value.trim();
-            const bairro = document.getElementById('customer-neighborhood').value.trim();
-            const cidade = document.getElementById('customer-city').value.trim();
-            const estado = document.getElementById('customer-state').value.trim();
-            const deliveryMethod = document.getElementById('delivery-method').value;
-            
-            // Validações básicas
-            if (!nome || nome.length < 3) return false;
-            if (!telefone || telefone.replace(/\D/g, '').length < 10) return false;
-            if (!email || !email.includes('@') || !email.includes('.')) return false;
-            if (!cep || cep.replace(/\D/g, '').length !== 8) return false;
-            if (!numero) return false;
-            if (!rua) return false;
-            if (!bairro) return false;
-            if (!cidade) return false;
-            if (!estado || estado.length !== 2) return false;
-            if (!deliveryMethod) return false;
-            
-            return true;
-        }
-        
-        // Enviar pedido por WhatsApp
-        async function enviarPedidoWhatsApp() {
-            if (!validarFormularioCliente()) {
-                alert('Por favor, preencha todos os campos obrigatórios corretamente.');
-                return;
-            }
-            
+        // Finalizar pedido via WhatsApp
+        function finalizarPedidoWhatsApp() {
             if (carrinho.length === 0) {
-                alert('Seu carrinho está vazio. Adicione apostilas antes de enviar o pedido.');
+                mostrarFeedback('Seu carrinho está vazio. Adicione apostilas antes de finalizar o pedido.');
                 return;
             }
             
-            // Coletar dados do formulário
-            const nome = document.getElementById('customer-name').value.trim();
-            const telefone = document.getElementById('customer-phone').value.trim();
-            const email = document.getElementById('customer-email').value.trim();
-            const cep = document.getElementById('customer-cep').value.trim();
-            const numero = document.getElementById('customer-number').value.trim();
-            const rua = document.getElementById('customer-street').value.trim();
-            const bairro = document.getElementById('customer-neighborhood').value.trim();
-            const cidade = document.getElementById('customer-city').value.trim();
-            const estado = document.getElementById('customer-state').value.trim();
-            const complemento = document.getElementById('customer-complement').value.trim();
-            const metodoEntrega = document.getElementById('delivery-method').value;
-            const observacoes = document.getElementById('customer-notes').value.trim();
+            // Criar mensagem para WhatsApp
+            let mensagem = `*🛒 PEDIDO - PIBBAWEB IMPRESSÕES DE APOSTILAS*%0A%0A`;
+            mensagem += `*📋 RESUMO DO PEDIDO:*%0A`;
             
-            // Formatar mensagem para WhatsApp
-            let mensagem = `*🛒 NOVO PEDIDO - APOSTILAS PREMIUM*\n\n`;
-            mensagem += `*📋 DADOS DO CLIENTE:*\n`;
-            mensagem += `👤 Nome: ${nome}\n`;
-            mensagem += `📱 Telefone: ${telefone}\n`;
-            mensagem += `📧 E-mail: ${email}\n`;
-            mensagem += `📍 Endereço: ${rua}, ${numero}${complemento ? ', ' + complemento : ''}\n`;
-            mensagem += `🏘️ Bairro: ${bairro}\n`;
-            mensagem += `🏙️ Cidade: ${cidade} - ${estado}\n`;
-            mensagem += `📮 CEP: ${cep}\n`;
-            mensagem += `🚚 Entrega: ${metodoEntrega === 'retirada' ? 'Retirada no Local' : 'Entrega em Domicílio'}\n`;
-            if (observacoes) mensagem += `📝 Observações: ${observacoes}\n`;
-            mensagem += `\n`;
-            
-            mensagem += `*🛍️ ITENS DO PEDIDO:*\n`;
             let totalGeral = 0;
             
             carrinho.forEach((item, index) => {
                 const precoTotalItem = item.precoUnitario * item.quantidade;
                 totalGeral += precoTotalItem;
                 
-                mensagem += `${index + 1}. *${item.tipoNome}* - ${item.folhas} folhas\n`;
-                mensagem += `   Quantidade: ${item.quantidade}\n`;
-                mensagem += `   Preço por folha: R$ ${item.precoPorFolha.toLocaleString('pt-BR', {minimumFractionDigits: 2})}\n`;
-                mensagem += `   Impressão: R$ ${item.precoImpressao.toLocaleString('pt-BR', {minimumFractionDigits: 2})}\n`;
-                mensagem += `   Encadernação: R$ 7,00\n`;
-                mensagem += `   Preço unitário: R$ ${item.precoUnitario.toLocaleString('pt-BR', {minimumFractionDigits: 2})}\n`;
-                mensagem += `   Subtotal: R$ ${precoTotalItem.toLocaleString('pt-BR', {minimumFractionDigits: 2})}\n\n`;
+                mensagem += `%0A${index + 1}. *${item.tipoNome}* - ${item.folhas} folhas%0A`;
+                mensagem += `   Quantidade: ${item.quantidade}%0A`;
+                mensagem += `   Preço unitário: R$ ${item.precoUnitario.toLocaleString('pt-BR', {minimumFractionDigits: 2})}%0A`;
+                mensagem += `   Subtotal: R$ ${precoTotalItem.toLocaleString('pt-BR', {minimumFractionDigits: 2})}%0A`;
             });
             
-            // Adicionar observação sobre frete se for entrega
-            if (metodoEntrega === 'entrega') {
-                mensagem += `*🚚 INFORMAÇÕES DE ENTREGA:*\n`;
-                mensagem += `• Entrega via motoboy local ou serviço de entrega (Uber/99/etc.)\n`;
-                mensagem += `• O valor do frete será calculado após análise do endereço\n`;
-                mensagem += `• Entraremos em contato para combinar o valor\n\n`;
-            }
-            
-            mensagem += `*💰 RESUMO DO PEDIDO:*\n`;
-            mensagem += `Subtotal (Impressão + Encadernação): R$ ${totalGeral.toLocaleString('pt-BR', {minimumFractionDigits: 2})}\n`;
-            if (metodoEntrega === 'entrega') {
-                mensagem += `Frete: A combinar (motoboy/Uber)\n`;
-            }
-            mensagem += `*TOTAL PARCIAL: R$ ${totalGeral.toLocaleString('pt-BR', {minimumFractionDigits: 2})}*\n`;
-            if (metodoEntrega === 'entrega') {
-                mensagem += `(Sem incluir o frete)\n`;
-            }
-            mensagem += `\n`;
-            
-            mensagem += `*📦 INFORMAÇÕES ADICIONAIS:*\n`;
-            if (metodoEntrega === 'retirada') {
-                mensagem += `📍 Retirada: Av. Brasil, 284 - Casqueiro, Cubatão - SP\n`;
-                mensagem += `⏰ Horário: Segunda a Sexta, 09:00 às 16:00\n`;
-            }
-            
-            mensagem += `\n`;
-            mensagem += `*🔧 Encadernação padrão inclusa:*\n`;
-            mensagem += `• Capa Preta no Final\n`;
-            mensagem += `• Capa Transparente\n`;
-            mensagem += `• Encadernação na Esquerda\n`;
-            mensagem += `• Espiral Preto\n`;
-            
-            // Codificar mensagem para URL
-            const mensagemCodificada = encodeURIComponent(mensagem);
+            mensagem += `%0A*💰 TOTAL: R$ ${totalGeral.toLocaleString('pt-BR', {minimumFractionDigits: 2})}*%0A%0A`;
+            mensagem += `*📞 INFORMAÇÕES PARA CONTATO:*%0A`;
+            mensagem += `Por favor, informe seu nome, endereço para entrega (se necessário) e forma de pagamento preferida.`;
             
             // Número do WhatsApp
             const numeroWhatsApp = '5513988089754';
             
             // Criar URL do WhatsApp
-            const urlWhatsApp = `https://wa.me/${numeroWhatsApp}?text=${mensagemCodificada}`;
+            const urlWhatsApp = `https://wa.me/${numeroWhatsApp}?text=${mensagem}`;
             
             // Abrir WhatsApp em nova aba
             window.open(urlWhatsApp, '_blank');
             
-            // Limpar carrinho e formulário após envio
+            // Limpar carrinho após envio
             carrinho = [];
             atualizarCarrinho();
-            
-            // Limpar formulário
-            document.getElementById('customer-name').value = '';
-            document.getElementById('customer-phone').value = '';
-            document.getElementById('customer-email').value = '';
-            document.getElementById('customer-cep').value = '';
-            document.getElementById('customer-number').value = '';
-            document.getElementById('customer-street').value = '';
-            document.getElementById('customer-neighborhood').value = '';
-            document.getElementById('customer-city').value = '';
-            document.getElementById('customer-state').value = '';
-            document.getElementById('customer-complement').value = '';
-            document.getElementById('delivery-method').value = '';
-            document.getElementById('customer-notes').value = '';
-            
-            // Fechar modal do carrinho
             document.getElementById('cart-modal').style.display = 'none';
-            
-            // Mostrar mensagem de sucesso
-            mostrarFeedback('Pedido enviado com sucesso! Você será redirecionado para o WhatsApp.');
-        }
-        
-        // Função para buscar CEP
-        async function buscarCEP() {
-            const cepInput = document.getElementById('customer-cep');
-            const cep = cepInput.value.replace(/\D/g, '');
-            
-            if (cep.length !== 8) {
-                return;
-            }
-            
-            // Mostrar loading
-            document.getElementById('cep-loading').style.display = 'block';
-            document.getElementById('cep-success').style.display = 'none';
-            document.getElementById('cep-error').style.display = 'none';
-            
-            try {
-                const endereco = await buscarEnderecoPorCEP(cep);
-                
-                if (endereco) {
-                    // Preencher campos automaticamente
-                    document.getElementById('customer-street').value = endereco.logradouro;
-                    document.getElementById('customer-neighborhood').value = endereco.bairro;
-                    document.getElementById('customer-city').value = endereco.cidade;
-                    document.getElementById('customer-state').value = endereco.estado;
-                    
-                    // Adicionar classe para indicar que foi preenchido automaticamente
-                    ['customer-street', 'customer-neighborhood', 'customer-city', 'customer-state'].forEach(id => {
-                        const campo = document.getElementById(id);
-                        campo.classList.add('address-autofilled');
-                        setTimeout(() => campo.classList.remove('address-autofilled'), 2000);
-                    });
-                    
-                    // Mostrar sucesso
-                    document.getElementById('cep-success').style.display = 'block';
-                    
-                    // Focar no campo número
-                    document.getElementById('customer-number').focus();
-                } else {
-                    document.getElementById('cep-error').style.display = 'block';
-                }
-            } catch (error) {
-                console.error('Erro ao buscar CEP:', error);
-                document.getElementById('cep-error').style.display = 'block';
-            } finally {
-                document.getElementById('cep-loading').style.display = 'none';
-            }
-        }
-        
-        // Validar telefone
-        function formatarTelefone(input) {
-            let value = input.value.replace(/\D/g, '');
-            
-            if (value.length > 11) {
-                value = value.substring(0, 11);
-            }
-            
-            if (value.length > 10) {
-                value = value.replace(/^(\d{2})(\d{5})(\d{4})/, '($1) $2-$3');
-            } else if (value.length > 6) {
-                value = value.replace(/^(\d{2})(\d{4})(\d{0,4})/, '($1) $2-$3');
-            } else if (value.length > 2) {
-                value = value.replace(/^(\d{2})(\d{0,5})/, '($1) $2');
-            } else if (value.length > 0) {
-                value = value.replace(/^(\d*)/, '($1');
-            }
-            
-            input.value = value;
-        }
-        
-        // Validar CEP
-        function formatarCEP(input) {
-            let value = input.value.replace(/\D/g, '');
-            
-            if (value.length > 8) {
-                value = value.substring(0, 8);
-            }
-            
-            if (value.length > 5) {
-                value = value.replace(/^(\d{5})(\d{0,3})/, '$1-$2');
-            }
-            
-            input.value = value;
         }
         
         // Inicializar
@@ -1990,12 +1753,32 @@
             document.getElementById('folhas').addEventListener('change', filtrarApostilas);
             
             // Configurar eventos da calculadora
-            document.getElementById('calc-tipo').addEventListener('change', calcularPreco);
-            document.getElementById('calc-folhas').addEventListener('change', calcularPreco);
-            document.getElementById('calc-quantidade').addEventListener('input', calcularPreco);
+            const rangeFolhas = document.getElementById('calc-folhas-range');
+            const inputFolhas = document.getElementById('calc-folhas-input');
+            const tipoSelect = document.getElementById('calc-tipo');
+            const quantidadeInput = document.getElementById('calc-quantidade');
+            const btnAdicionarCalculadora = document.getElementById('btn-adicionar-calculadora');
+            
+            rangeFolhas.addEventListener('input', () => {
+                inputFolhas.value = rangeFolhas.value;
+                atualizarCalculadora();
+            });
+            
+            inputFolhas.addEventListener('input', () => {
+                let valor = parseInt(inputFolhas.value);
+                if (valor < 10) valor = 10;
+                if (valor > 400) valor = 400;
+                inputFolhas.value = valor;
+                rangeFolhas.value = valor;
+                atualizarCalculadora();
+            });
+            
+            tipoSelect.addEventListener('change', atualizarCalculadora);
+            quantidadeInput.addEventListener('input', atualizarCalculadora);
+            btnAdicionarCalculadora.addEventListener('click', adicionarCalculadoraAoCarrinho);
             
             // Calcular preço inicial
-            calcularPreco();
+            atualizarCalculadora();
             
             // Configurar eventos do carrinho
             document.getElementById('cart-icon').addEventListener('click', () => {
@@ -2013,35 +1796,8 @@
                 }
             });
             
-            // Configurar eventos do formulário
-            document.getElementById('customer-phone').addEventListener('input', function() {
-                formatarTelefone(this);
-            });
-            
-            document.getElementById('customer-cep').addEventListener('input', function() {
-                formatarCEP(this);
-            });
-            
-            // Evento para buscar CEP quando o usuário sai do campo
-            document.getElementById('customer-cep').addEventListener('blur', buscarCEP);
-            
-            // Evento para validação em tempo real do formulário
-            const camposFormulario = [
-                'customer-name', 'customer-phone', 'customer-email', 'customer-cep',
-                'customer-number', 'customer-street', 'customer-neighborhood',
-                'customer-city', 'customer-state', 'delivery-method'
-            ];
-            
-            camposFormulario.forEach(id => {
-                document.getElementById(id).addEventListener('input', () => {
-                    const formValido = validarFormularioCliente();
-                    const whatsappButton = document.getElementById('whatsapp-checkout');
-                    whatsappButton.disabled = !(carrinho.length > 0 && formValido);
-                });
-            });
-            
-            // Configurar envio por WhatsApp
-            document.getElementById('whatsapp-checkout').addEventListener('click', enviarPedidoWhatsApp);
+            // Configurar finalização do pedido
+            document.getElementById('btn-finalizar-pedido').addEventListener('click', finalizarPedidoWhatsApp);
             
             // Adicionar evento de rolagem suave para links internos
             document.querySelectorAll('a[href^="#"]').forEach(anchor => {
@@ -2054,30 +1810,30 @@
                     const targetElement = document.querySelector(targetId);
                     if (targetElement) {
                         window.scrollTo({
-                            top: targetElement.offsetTop - 80,
+                            top: targetElement.offsetTop - 100,
                             behavior: 'smooth'
                         });
                     }
                 });
             });
-        });
-        
-        // Adicionar animação CSS para feedback
-        const style = document.createElement('style');
-        style.textContent = `
-            @keyframes slideUp {
-                from { transform: translateY(100px); opacity: 0; }
-                to { transform: translateY(0); opacity: 1; }
-            }
             
-            @keyframes slideDown {
-                from { transform: translateY(0); opacity: 1; }
-                to { transform: translateY(100px); opacity: 0; }
-            }
-        `;
-        document.head.appendChild(style);
+            // Adicionar animação CSS para feedback
+            const style = document.createElement('style');
+            style.textContent = `
+                @keyframes slideUp {
+                    from { transform: translateY(100px); opacity: 0; }
+                    to { transform: translateY(0); opacity: 1; }
+                }
+                
+                @keyframes slideDown {
+                    from { transform: translateY(0); opacity: 1; }
+                    to { transform: translateY(100px); opacity: 0; }
+                }
+            `;
+            document.head.appendChild(style);
+        });
     </script>
-https://ecs-impressoes.github.io/PB-Croma/
+
+
 </body>
 </html>
-

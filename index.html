@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -416,6 +415,16 @@
             font-size: 0.8rem;
             font-weight: 600;
             margin-bottom: 0.5rem;
+        }
+        
+        .observacao-capa {
+            background-color: #fff3e0;
+            padding: 0.8rem;
+            border-radius: 8px;
+            margin-top: 0.8rem;
+            font-size: 0.8rem;
+            border-left: 4px solid var(--secondary);
+            color: var(--dark);
         }
         
         .apostila-actions {
@@ -1025,6 +1034,10 @@
                         <div class="result-price" id="preco-calculado">R$ 30,00</div>
                         <p class="result-details" id="detalhes-calculadora">30 folhas coloridas só frente + encadernação já inclusa</p>
                         
+                        <div id="observacao-capa-calculadora" class="observacao-capa" style="margin-bottom: 1.5rem; display: none;">
+                            <strong><i class="fas fa-info-circle"></i> Observação:</strong> Para apostilas preto e branco, se sua capa estiver colorida, faremos ela colorida e demais páginas na cor preta.
+                        </div>
+                        
                         <div class="result-breakdown">
                             <div class="breakdown-item">
                                 <span>Impressão (R$ <span id="preco-por-folha">0.95</span>/folha)</span>
@@ -1319,6 +1332,12 @@
                 card.className = 'apostila-card';
                 card.dataset.id = apostila.id;
                 
+                // Verificar se é apostila preta para adicionar a observação
+                const observacaoHtml = apostila.classe === 'preta' ? 
+                    `<div class="observacao-capa">
+                        <strong><i class="fas fa-info-circle"></i> Observação:</strong> Se sua capa estiver colorida, faremos ela colorida e demais páginas na cor preta.
+                    </div>` : '';
+                
                 card.innerHTML = `
                     <div class="apostila-header ${apostila.classe}">
                         <h3>${apostila.tipoNome}</h3>
@@ -1352,6 +1371,7 @@
                                 </div>
                                 <p>Capa Preta no Final, Capa Transparente, Encadernação na Esquerda, Espiral Preto</p>
                             </div>
+                            ${observacaoHtml}
                         </div>
                         <div class="apostila-actions">
                             <button class="btn btn-buy btn-add-cart" data-id="${apostila.id}">
@@ -1564,6 +1584,14 @@
             
             const detalhes = `${quantidade} × ${folhas} folhas (${tipoTexto})`;
             
+            // Mostrar ou esconder observação para apostilas preto e branco
+            const observacaoElement = document.getElementById('observacao-capa-calculadora');
+            if (tipo.includes('preta')) {
+                observacaoElement.style.display = 'block';
+            } else {
+                observacaoElement.style.display = 'none';
+            }
+            
             // Atualizar a interface
             document.getElementById('preco-calculado').textContent = `R$ ${precoInfo.precoTotal.toLocaleString('pt-BR', {minimumFractionDigits: 2, maximumFractionDigits: 2})}`;
             document.getElementById('detalhes-calculadora').textContent = detalhes;
@@ -1579,6 +1607,12 @@
         
         // Mostrar detalhes da apostila
         function mostrarDetalhes(apostila) {
+            // Adicionar observação se for apostila preta
+            const observacaoHtml = apostila.classe === 'preta' ? 
+                `<div class="observacao-capa" style="margin-top: 1rem;">
+                    <strong><i class="fas fa-info-circle"></i> Observação:</strong> Se sua capa estiver colorida, faremos ela colorida e demais páginas na cor preta.
+                </div>` : '';
+            
             const detalhes = `
                 <strong>Tipo:</strong> ${apostila.tipoNome}<br>
                 <strong>Folhas:</strong> ${apostila.folhas}<br>
@@ -1592,6 +1626,7 @@
                 - Encadernação na Esquerda<br>
                 - Espiral Preto<br><br>
                 <strong><i class="fas fa-check-circle"></i> Encadernação já está incluída no preço total.</strong>
+                ${observacaoHtml}
             `;
             
             // Criar modal de detalhes
@@ -1837,4 +1872,3 @@
 
 </body>
 </html>
-

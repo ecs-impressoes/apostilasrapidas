@@ -4,8 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pibbaweb Impressões de Apostilas - Apostilas de Qualidade com Encadernação</title>
-    <!-- SDK do Mercado Pago -->
-    <script src="https://sdk.mercadopago.com/js/v2"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
     <style>
@@ -473,7 +471,7 @@
             transform: translateY(-2px);
         }
         
-        /* Calculator */
+        /* Calculator - NOVO DESIGN */
         .calculator-section {
             background-color: white;
             padding: 3rem;
@@ -763,265 +761,6 @@
         .close-cart:hover {
             color: var(--accent);
         }
-        
-        /* Checkout Modal */
-        .checkout-modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.7);
-            z-index: 2001;
-            justify-content: center;
-            align-items: center;
-            padding: 20px;
-        }
-        
-        .checkout-content {
-            background-color: white;
-            width: 100%;
-            max-width: 600px;
-            border-radius: var(--border-radius);
-            padding: 2.5rem;
-            position: relative;
-            animation: fadeIn 0.3s ease;
-            max-height: 90vh;
-            overflow-y: auto;
-        }
-        
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(-20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        
-        .close-checkout {
-            position: absolute;
-            top: 1rem;
-            right: 1rem;
-            font-size: 1.8rem;
-            cursor: pointer;
-            color: var(--gray);
-            transition: var(--transition);
-        }
-        
-        .close-checkout:hover {
-            color: var(--accent);
-        }
-        
-        .checkout-title {
-            color: var(--primary);
-            margin-bottom: 1.5rem;
-            text-align: center;
-        }
-        
-        .checkout-steps {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 2rem;
-            position: relative;
-        }
-        
-        .checkout-step {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            flex: 1;
-            position: relative;
-            z-index: 1;
-        }
-        
-        .step-number {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            background-color: var(--gray-light);
-            color: var(--gray);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: bold;
-            margin-bottom: 0.5rem;
-            transition: var(--transition);
-        }
-        
-        .step-active .step-number {
-            background-color: var(--primary);
-            color: white;
-        }
-        
-        .step-complete .step-number {
-            background-color: var(--success);
-            color: white;
-        }
-        
-        .step-name {
-            font-size: 0.85rem;
-            color: var(--gray);
-            text-align: center;
-        }
-        
-        .step-active .step-name {
-            color: var(--primary);
-            font-weight: 600;
-        }
-        
-        .step-line {
-            position: absolute;
-            top: 20px;
-            left: 20px;
-            right: 20px;
-            height: 2px;
-            background-color: var(--gray-light);
-            z-index: 0;
-        }
-        
-        .mercado-pago-info {
-            background-color: #f0f7ff;
-            padding: 1.5rem;
-            border-radius: 8px;
-            margin-bottom: 1.5rem;
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-        }
-        
-        .mercado-pago-logo {
-            width: 40px;
-            height: 40px;
-            background-color: #009ee3;
-            border-radius: 8px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-weight: bold;
-            font-size: 1.2rem;
-        }
-        
-        .payment-methods {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 1rem;
-            margin-bottom: 2rem;
-        }
-        
-        .payment-method {
-            border: 2px solid var(--gray-light);
-            border-radius: 8px;
-            padding: 1.5rem;
-            text-align: center;
-            cursor: pointer;
-            transition: var(--transition);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 0.8rem;
-        }
-        
-        .payment-method:hover {
-            border-color: var(--primary);
-            transform: translateY(-3px);
-        }
-        
-        .payment-method.active {
-            border-color: var(--primary);
-            background-color: rgba(26, 35, 126, 0.05);
-        }
-        
-        .payment-icon {
-            font-size: 2rem;
-            color: var(--primary);
-        }
-        
-        .payment-icon.pix {
-            color: #32BCAD;
-        }
-        
-        .payment-icon.card {
-            color: #FF6B00;
-        }
-        
-        .payment-icon.boleto {
-            color: #00A650;
-        }
-        
-        /* Mercado Pago Container */
-        #mercadopago-checkout {
-            margin-top: 1.5rem;
-        }
-        
-        #cardPaymentBrick_container {
-            margin-top: 1rem;
-        }
-        
-        .customer-info-form {
-            margin-top: 2rem;
-        }
-        
-        .form-group {
-            margin-bottom: 1.5rem;
-        }
-        
-        .form-group label {
-            display: block;
-            margin-bottom: 0.5rem;
-            font-weight: 600;
-            color: var(--primary);
-        }
-        
-        .form-group input {
-            width: 100%;
-            padding: 0.8rem 1rem;
-            border: 2px solid var(--gray-light);
-            border-radius: 8px;
-            font-size: 1rem;
-            transition: var(--transition);
-        }
-        
-        .form-group input:focus {
-            outline: none;
-            border-color: var(--primary);
-            box-shadow: 0 0 0 3px rgba(26, 35, 126, 0.1);
-        }
-        
-        .form-row {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 1rem;
-        }
-        
-        /* Order Summary */
-        .order-summary {
-            background-color: #f9f9f9;
-            padding: 1.5rem;
-            border-radius: 8px;
-            margin-top: 2rem;
-        }
-        
-        .order-summary h4 {
-            color: var(--primary);
-            margin-bottom: 1rem;
-        }
-        
-        .summary-item {
-            display: flex;
-            justify-content: space-between;
-            padding: 0.5rem 0;
-            border-bottom: 1px solid #eee;
-        }
-        
-        .summary-total {
-            display: flex;
-            justify-content: space-between;
-            padding-top: 1rem;
-            margin-top: 1rem;
-            border-top: 2px solid #ddd;
-            font-weight: bold;
-            font-size: 1.2rem;
-            color: var(--primary);
-        }
        
         /* Footer */
         footer {
@@ -1181,10 +920,6 @@
                 gap: 2rem;
             }
             
-            .payment-methods {
-                grid-template-columns: 1fr;
-            }
-            
             .hero-content h2 {
                 font-size: 2.3rem;
             }
@@ -1220,14 +955,6 @@
             .footer-content {
                 grid-template-columns: 1fr;
                 gap: 2.5rem;
-            }
-            
-            .checkout-content {
-                padding: 1.5rem;
-            }
-            
-            .form-row {
-                grid-template-columns: 1fr;
             }
         }
         
@@ -1351,7 +1078,7 @@
         </div>
     </section>
 
-    <!-- Calculadora de Preços -->
+    <!-- Calculadora de Preços - NOVO DESIGN -->
     <section id="calculadora" class="container">
         <div class="calculator-section">
             <div class="section-title">
@@ -1537,6 +1264,7 @@
                         </div>
                     </div>
                     
+                    <!-- Link para o PDF - você precisará fazer upload do PDF e colocar o link correto aqui -->
                     <a href="ESPECIFICAÇÕES.pdf" class="pdf-download" download="Pibbaweb_Especificacoes_Produto.pdf">
                         <i class="fas fa-download"></i> Baixar PDF Completo
                     </a>
@@ -1616,179 +1344,8 @@
                     </div>
                 </div>
                 
-                <button class="btn btn-buy" id="btn-checkout" style="width: 100%; margin-top: 1.5rem;">
-                    <i class="fas fa-credit-card"></i> Finalizar Compra
-                </button>
-                
-                <button class="btn" id="btn-whatsapp" style="width: 100%; margin-top: 1rem; background-color: #25D366; color: white;">
-                    <i class="fab fa-whatsapp"></i> Orçamento via WhatsApp
-                </button>
-            </div>
-        </div>
-    </div>
-
-    <!-- Checkout Modal -->
-    <div class="checkout-modal" id="checkout-modal">
-        <div class="checkout-content">
-            <span class="close-checkout" id="close-checkout">&times;</span>
-            
-            <h3 class="checkout-title">Finalizar Compra</h3>
-            
-            <!-- Passos do checkout -->
-            <div class="checkout-steps">
-                <div class="step-line"></div>
-                <div class="checkout-step step-active" id="step-1">
-                    <div class="step-number">1</div>
-                    <div class="step-name">Informações</div>
-                </div>
-                <div class="checkout-step" id="step-2">
-                    <div class="step-number">2</div>
-                    <div class="step-name">Pagamento</div>
-                </div>
-                <div class="checkout-step" id="step-3">
-                    <div class="step-number">3</div>
-                    <div class="step-name">Confirmação</div>
-                </div>
-            </div>
-            
-            <!-- Informações do Cliente -->
-            <div id="checkout-step-1">
-                <div class="mercado-pago-info">
-                    <div class="mercado-pago-logo">MP</div>
-                    <div>
-                        <h4>Pagamento Seguro com Mercado Pago</h4>
-                        <p style="font-size: 0.9rem; color: var(--gray); margin-top: 0.3rem;">
-                            Seus dados estão protegidos. Aceitamos cartão, PIX e boleto.
-                        </p>
-                    </div>
-                </div>
-                
-                <div class="customer-info-form">
-                    <div class="form-group">
-                        <label for="customer-name"><i class="fas fa-user"></i> Nome Completo</label>
-                        <input type="text" id="customer-name" placeholder="Digite seu nome completo" required>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="customer-email"><i class="fas fa-envelope"></i> E-mail</label>
-                        <input type="email" id="customer-email" placeholder="seuemail@exemplo.com" required>
-                    </div>
-                    
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label for="customer-phone"><i class="fas fa-phone"></i> Telefone</label>
-                            <input type="tel" id="customer-phone" placeholder="(11) 99999-9999" required>
-                        </div>
-                        
-                        <div class="form-group">
-                            <label for="customer-cpf"><i class="fas fa-id-card"></i> CPF</label>
-                            <input type="text" id="customer-cpf" placeholder="000.000.000-00" required>
-                        </div>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="customer-notes"><i class="fas fa-sticky-note"></i> Observações (opcional)</label>
-                        <input type="text" id="customer-notes" placeholder="Informações adicionais sobre o pedido">
-                    </div>
-                </div>
-                
-                <div class="order-summary">
-                    <h4>Resumo do Pedido</h4>
-                    <div id="checkout-summary">
-                        <!-- Resumo será preenchido pelo JavaScript -->
-                    </div>
-                    <div class="summary-total">
-                        <span>TOTAL</span>
-                        <span id="checkout-total">R$ 0,00</span>
-                    </div>
-                </div>
-                
-                <button class="btn btn-buy" id="btn-proximo-pagamento" style="width: 100%; margin-top: 2rem;">
-                    <i class="fas fa-arrow-right"></i> Continuar para Pagamento
-                </button>
-            </div>
-            
-            <!-- Seleção de Método de Pagamento -->
-            <div id="checkout-step-2" style="display: none;">
-                <h4 style="color: var(--primary); margin-bottom: 1.5rem;">Escolha sua forma de pagamento</h4>
-                
-                <div class="payment-methods">
-                    <div class="payment-method active" data-method="card">
-                        <div class="payment-icon card">
-                            <i class="fas fa-credit-card"></i>
-                        </div>
-                        <div>
-                            <h5>Cartão de Crédito</h5>
-                            <p style="font-size: 0.85rem; color: var(--gray); margin-top: 0.3rem;">Parcelado</p>
-                        </div>
-                    </div>
-                    
-                    <div class="payment-method" data-method="pix">
-                        <div class="payment-icon pix">
-                            <i class="fas fa-qrcode"></i>
-                        </div>
-                        <div>
-                            <h5>PIX</h5>
-                            <p style="font-size: 0.85rem; color: var(--gray); margin-top: 0.3rem;">Pagamento instantâneo</p>
-                        </div>
-                    </div>
-                    
-                    <div class="payment-method" data-method="boleto">
-                        <div class="payment-icon boleto">
-                            <i class="fas fa-barcode"></i>
-                        </div>
-                        <div>
-                            <h5>Boleto</h5>
-                            <p style="font-size: 0.85rem; color: var(--gray); margin-top: 0.3rem;">Pagamento à vista</p>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Container do Mercado Pago -->
-                <div id="mercadopago-checkout">
-                    <!-- O formulário de pagamento será inserido aqui pelo Mercado Pago -->
-                </div>
-                
-                <div style="margin-top: 2rem; display: flex; gap: 1rem;">
-                    <button class="btn" id="btn-voltar-info" style="flex: 1;">
-                        <i class="fas fa-arrow-left"></i> Voltar
-                    </button>
-                    <button class="btn btn-buy" id="btn-confirmar-pagamento" style="flex: 2; display: none;">
-                        <i class="fas fa-lock"></i> Confirmar Pagamento
-                    </button>
-                </div>
-            </div>
-            
-            <!-- Confirmação -->
-            <div id="checkout-step-3" style="display: none; text-align: center;">
-                <div style="font-size: 5rem; color: var(--success); margin-bottom: 1.5rem;">
-                    <i class="fas fa-check-circle"></i>
-                </div>
-                
-                <h3 style="color: var(--primary); margin-bottom: 1rem;">Pedido Confirmado!</h3>
-                
-                <p style="color: var(--gray); margin-bottom: 1.5rem;">
-                    Seu pedido foi recebido com sucesso. Em instantes você receberá um e-mail com os detalhes da compra.
-                </p>
-                
-                <div id="payment-details" style="background-color: #f9f9f9; padding: 1.5rem; border-radius: 8px; margin-bottom: 2rem; text-align: left;">
-                    <!-- Detalhes do pagamento serão preenchidos aqui -->
-                </div>
-                
-                <div style="margin-top: 2rem;">
-                    <p style="color: var(--gray); margin-bottom: 1rem;">
-                        <strong>Próximos passos:</strong>
-                    </p>
-                    <ol style="text-align: left; color: var(--gray); margin-bottom: 2rem; padding-left: 1.5rem;">
-                        <li style="margin-bottom: 0.5rem;">Aguarde a confirmação do pagamento</li>
-                        <li style="margin-bottom: 0.5rem;">Envie seus arquivos para <strong>avenidabrail284@gmail.com</strong></li>
-                        <li style="margin-bottom: 0.5rem;">Sua apostila será produzida e enviada</li>
-                        <li>Você receberá atualizações por e-mail</li>
-                    </ol>
-                </div>
-                
-                <button class="btn btn-buy" id="btn-fechar-checkout" style="width: 100%;">
-                    <i class="fas fa-home"></i> Voltar ao Site
+                <button class="btn btn-buy" id="btn-finalizar-pedido" style="width: 100%; margin-top: 1.5rem;">
+                    <i class="fab fa-whatsapp"></i> Finalizar Pedido via WhatsApp
                 </button>
             </div>
         </div>
@@ -1935,26 +1492,6 @@
     </footer>
 
     <script>
-        // ============================
-        // CONFIGURAÇÕES DO MERCADO PAGO
-        // ============================
-        
-        // SUAS CREDENCIAIS DO MERCADO PAGO - IMPORTANTE!
-        const MERCADO_PAGO_PUBLIC_KEY = 'TEST-APP_USR-889ae3db-9137-4a8e-9d44-15323b6c3569'; // Substitua pela sua PUBLIC_KEY
-        // Para produção, você precisará também do ACCESS_TOKEN
-        // const MERCADO_PAGO_ACCESS_TOKEN = 'SEU_ACCESS_TOKEN_AQUI';
-        
-        // ============================
-        // CONFIGURAÇÃO DO SITE
-        // ============================
-        
-        // Configurações do site
-        const SITE_CONFIG = {
-            emailVendedor: 'avenidabrail284@gmail.com',
-            whatsappVendedor: '5513988089754',
-            nomeEmpresa: 'Pibbaweb Impressões'
-        };
-        
         // Função para calcular preço por folha baseado nas faixas especificadas
         function calcularPrecoPorFolha(tipo, folhas) {
             // Preços por folha baseados nas faixas especificadas
@@ -2047,23 +1584,6 @@
         
         // Carrinho de compras
         let carrinho = [];
-        
-        // Informações do cliente
-        let clienteInfo = {
-            nome: '',
-            email: '',
-            telefone: '',
-            cpf: '',
-            observacoes: ''
-        };
-        
-        // Variável para armazenar a preferência do Mercado Pago
-        let mercadopagoCheckout = null;
-        let selectedPaymentMethod = 'card';
-        
-        // ============================
-        // FUNÇÕES DO CARRINHO
-        // ============================
         
         // Renderizar apostilas
         function renderApostilas(apostilasParaRenderizar) {
@@ -2269,9 +1789,8 @@
             });
             
             // Atualizar totais
-            const totalFormatado = subtotal.toLocaleString('pt-BR', {minimumFractionDigits: 2, maximumFractionDigits: 2});
-            cartSubtotal.textContent = `R$ ${totalFormatado}`;
-            cartTotal.textContent = `R$ ${totalFormatado}`;
+            cartSubtotal.textContent = `R$ ${subtotal.toLocaleString('pt-BR', {minimumFractionDigits: 2, maximumFractionDigits: 2})}`;
+            cartTotal.textContent = `R$ ${subtotal.toLocaleString('pt-BR', {minimumFractionDigits: 2, maximumFractionDigits: 2})}`;
             
             // Adicionar eventos aos botões do carrinho
             document.querySelectorAll('.btn-decrease').forEach(btn => {
@@ -2498,289 +2017,80 @@
             mostrarFeedback(`${quantidade} × ${tipoTexto} (${folhas} folhas) adicionada ao carrinho!`);
         }
         
-        // ============================
-        // FUNÇÕES DO CHECKOUT
-        // ============================
-        
-        // Atualizar resumo do checkout
-        function atualizarResumoCheckout() {
-            const checkoutSummary = document.getElementById('checkout-summary');
-            const checkoutTotal = document.getElementById('checkout-total');
+        // Finalizar pedido via WhatsApp
+        function finalizarPedidoWhatsApp() {
+            // Verificar se há itens no carrinho
+            if (carrinho.length === 0) {
+                mostrarFeedback('Seu carrinho está vazio. Adicione apostilas antes de finalizar o pedido.');
+                return;
+            }
             
-            let total = 0;
-            let html = '';
+            // Verificar se os termos foram aceitos
+            const termosCheckbox = document.getElementById('aceito-termos-resumo');
+            if (!termosCheckbox || !termosCheckbox.checked) {
+                mostrarFeedback('Por favor, leia e aceite os termos e condições antes de finalizar o pedido.');
+                
+                // Destacar a seção de termos
+                const termosSection = document.querySelector('.termos-resumo');
+                if (termosSection) {
+                    termosSection.style.animation = 'pulse 1s 3';
+                    termosSection.style.boxShadow = '0 0 0 3px rgba(255, 0, 0, 0.3)';
+                    
+                    setTimeout(() => {
+                        termosSection.style.animation = '';
+                        termosSection.style.boxShadow = '';
+                    }, 3000);
+                }
+                return;
+            }
+            
+            // Criar mensagem para WhatsApp
+            let mensagem = `*🛒 PEDIDO - PIBBAWEB IMPRESSÕES DE APOSTILAS*%0A%0A`;
+            mensagem += `*📋 RESUMO DO PEDIDO:*%0A`;
+            
+            let totalGeral = 0;
             
             carrinho.forEach((item, index) => {
                 const precoTotalItem = item.precoUnitario * item.quantidade;
-                total += precoTotalItem;
+                totalGeral += precoTotalItem;
                 
-                html += `
-                    <div class="summary-item">
-                        <span>${item.quantidade}x ${item.tipoNome} - ${item.folhas} folhas</span>
-                        <span>R$ ${precoTotalItem.toLocaleString('pt-BR', {minimumFractionDigits: 2})}</span>
-                    </div>
-                `;
+                mensagem += `%0A${index + 1}. *${item.tipoNome}* - ${item.folhas} folhas%0A`;
+                mensagem += `   Quantidade: ${item.quantidade}%0A`;
+                mensagem += `   Preço unitário: R$ ${item.precoUnitario.toLocaleString('pt-BR', {minimumFractionDigits: 2})}%0A`;
+                mensagem += `   Subtotal: R$ ${precoTotalItem.toLocaleString('pt-BR', {minimumFractionDigits: 2})}%0A`;
             });
             
-            checkoutSummary.innerHTML = html;
-            checkoutTotal.textContent = `R$ ${total.toLocaleString('pt-BR', {minimumFractionDigits: 2})}`;
-        }
-        
-        // Validar informações do cliente
-        function validarInformacoesCliente() {
-            const nome = document.getElementById('customer-name').value.trim();
-            const email = document.getElementById('customer-email').value.trim();
-            const telefone = document.getElementById('customer-phone').value.trim();
-            const cpf = document.getElementById('customer-cpf').value.trim();
+            mensagem += `%0A*💰 TOTAL: R$ ${totalGeral.toLocaleString('pt-BR', {minimumFractionDigits: 2})}*%0A%0A`;
             
-            if (!nome) {
-                mostrarFeedback('Por favor, digite seu nome completo.');
-                return false;
-            }
+            // Adicionar confirmação dos termos na mensagem
+            mensagem += `*✅ CONFIRMAÇÃO:*%0A`;
+            mensagem += `- Li e aceito os Termos e Condições da Pibbaweb Impressões%0A`;
+            mensagem += `- Entendo que não serão feitas correções no material enviado%0A`;
+            mensagem += `- Confirmo que revisei todo o conteúdo antes do envio%0A`;
+            mensagem += `- Estou ciente dos prazos e condições de cancelamento%0A%0A`;
             
-            if (!email || !email.includes('@') || !email.includes('.')) {
-                mostrarFeedback('Por favor, digite um e-mail válido.');
-                return false;
-            }
+            mensagem += `*📞 INFORMAÇÕES PARA CONTATO:*%0A`;
+            mensagem += `Por favor, informe seu nome, endereço para entrega (se necessário) e forma de pagamento preferida.`;
             
-            if (!telefone || telefone.length < 10) {
-                mostrarFeedback('Por favor, digite um telefone válido.');
-                return false;
-            }
+            // Número do WhatsApp
+            const numeroWhatsApp = '5513988089754';
             
-            if (!cpf || cpf.length < 11) {
-                mostrarFeedback('Por favor, digite um CPF válido.');
-                return false;
-            }
+            // Criar URL do WhatsApp
+            const urlWhatsApp = `https://wa.me/${numeroWhatsApp}?text=${mensagem}`;
             
-            // Salvar informações do cliente
-            clienteInfo = {
-                nome: nome,
-                email: email,
-                telefone: telefone,
-                cpf: cpf.replace(/\D/g, ''),
-                observacoes: document.getElementById('customer-notes').value.trim()
-            };
+            // Abrir WhatsApp em nova aba
+            window.open(urlWhatsApp, '_blank');
             
-            return true;
-        }
-        
-        // Criar preferência do Mercado Pago
-        async function criarPreferenciaMercadoPago() {
-            // Calcular total
-            const total = carrinho.reduce((total, item) => total + (item.precoUnitario * item.quantidade), 0);
-            
-            // Criar itens para o Mercado Pago
-            const items = carrinho.map(item => ({
-                id: item.id,
-                title: `${item.tipoNome} - ${item.folhas} folhas`,
-                description: `Apostila ${item.tipoNome} com ${item.folhas} folhas e encadernação inclusa`,
-                quantity: item.quantidade,
-                unit_price: parseFloat(item.precoUnitario),
-                currency_id: 'BRL'
-            }));
-            
-            // EM PRODUÇÃO, você faria uma requisição para seu backend
-            // que criaria a preferência usando o ACCESS_TOKEN
-            
-            // Para demonstração, vamos criar uma preferência simulada
-            const preferencia = {
-                id: 'simulacao-' + Date.now(),
-                init_point: 'https://www.mercadopago.com.br/checkout/v1/redirect?pref_id=simulacao',
-                items: items,
-                total: total,
-                payer: {
-                    name: clienteInfo.nome,
-                    email: clienteInfo.email
-                }
-            };
-            
-            return preferencia;
-        }
-        
-        // Inicializar checkout do Mercado Pago
-        async function inicializarCheckoutMercadoPago() {
-            try {
-                // EM PRODUÇÃO: Substitua TEST-APP_USR-889ae3db-9137-4a8e-9d44-15323b6c3569 pela sua public key
-                const mp = new MercadoPago(MERCADO_PAGO_PUBLIC_KEY, {
-                    locale: 'pt-BR'
-                });
-                
-                // Criar preferência (em produção, isso seria no backend)
-                const preferencia = await criarPreferenciaMercadoPago();
-                
-                // Configurar método de pagamento selecionado
-                let settings = {
-                    initialization: {
-                        amount: preferencia.total
-                    },
-                    customization: {
-                        visual: {
-                            style: {
-                                theme: 'default'
-                            }
-                        }
-                    },
-                    callbacks: {
-                        onReady: () => {
-                            console.log('Checkout pronto');
-                            document.getElementById('btn-confirmar-pagamento').style.display = 'block';
-                        },
-                        onError: (error) => {
-                            console.error('Erro no checkout:', error);
-                            mostrarFeedback('Erro ao processar pagamento. Tente novamente.');
-                        },
-                        onSubmit: (cardFormData) => {
-                            // EM PRODUÇÃO: Aqui você enviaria os dados para seu backend
-                            console.log('Dados do formulário:', cardFormData);
-                            return new Promise((resolve, reject) => {
-                                // Simular processamento
-                                setTimeout(() => {
-                                    // Simular sucesso
-                                    finalizarPedidoComSucesso(preferencia);
-                                    resolve();
-                                }, 1500);
-                            });
-                        }
-                    }
-                };
-                
-                // Criar brick baseado no método selecionado
-                const bricksBuilder = mp.bricks();
-                
-                if (selectedPaymentMethod === 'card') {
-                    // Renderizar brick de cartão
-                    mercadopagoCheckout = await bricksBuilder.create('cardPayment', 'mercadopago-checkout', settings);
-                } else if (selectedPaymentMethod === 'pix') {
-                    // Renderizar brick de PIX
-                    mercadopagoCheckout = await bricksBuilder.create('payment', 'mercadopago-checkout', {
-                        initialization: {
-                            amount: preferencia.total,
-                            paymentMethods: {
-                                bankTransfer: ['pix']
-                            }
-                        },
-                        customization: {
-                            visual: {
-                                style: {
-                                    theme: 'default'
-                                }
-                            }
-                        },
-                        callbacks: {
-                            onReady: () => {
-                                console.log('PIX pronto');
-                                document.getElementById('btn-confirmar-pagamento').style.display = 'block';
-                            },
-                            onError: (error) => {
-                                console.error('Erro no PIX:', error);
-                                mostrarFeedback('Erro ao gerar PIX. Tente novamente.');
-                            }
-                        }
-                    });
-                } else if (selectedPaymentMethod === 'boleto') {
-                    // Renderizar brick de boleto
-                    mercadopagoCheckout = await bricksBuilder.create('payment', 'mercadopago-checkout', {
-                        initialization: {
-                            amount: preferencia.total,
-                            paymentMethods: {
-                                ticket: ['bolbradesco']
-                            }
-                        },
-                        customization: {
-                            visual: {
-                                style: {
-                                    theme: 'default'
-                                }
-                            }
-                        },
-                        callbacks: {
-                            onReady: () => {
-                                console.log('Boleto pronto');
-                                document.getElementById('btn-confirmar-pagamento').style.display = 'block';
-                            },
-                            onError: (error) => {
-                                console.error('Erro no boleto:', error);
-                                mostrarFeedback('Erro ao gerar boleto. Tente novamente.');
-                            }
-                        }
-                    });
-                }
-                
-            } catch (error) {
-                console.error('Erro ao inicializar Mercado Pago:', error);
-                mostrarFeedback('Erro ao inicializar sistema de pagamento.');
-            }
-        }
-        
-        // Finalizar pedido com sucesso
-        function finalizarPedidoComSucesso(preferencia) {
-            // Atualizar passos do checkout
-            document.getElementById('step-2').classList.remove('step-active');
-            document.getElementById('step-2').classList.add('step-complete');
-            document.getElementById('step-3').classList.add('step-active');
-            
-            // Mostrar etapa de confirmação
-            document.getElementById('checkout-step-2').style.display = 'none';
-            document.getElementById('checkout-step-3').style.display = 'block';
-            
-            // Preencher detalhes do pagamento
-            const paymentDetails = document.getElementById('payment-details');
-            let detalhes = `
-                <h4 style="color: var(--primary); margin-bottom: 1rem;">Detalhes do Pedido</h4>
-                <div style="margin-bottom: 0.8rem;">
-                    <strong>Número do pedido:</strong> ${preferencia.id}
-                </div>
-                <div style="margin-bottom: 0.8rem;">
-                    <strong>Cliente:</strong> ${clienteInfo.nome}
-                </div>
-                <div style="margin-bottom: 0.8rem;">
-                    <strong>E-mail:</strong> ${clienteInfo.email}
-                </div>
-                <div style="margin-bottom: 0.8rem;">
-                    <strong>Total pago:</strong> R$ ${preferencia.total.toLocaleString('pt-BR', {minimumFractionDigits: 2})}
-                </div>
-            `;
-            
-            if (selectedPaymentMethod === 'pix') {
-                detalhes += `
-                    <div style="margin-top: 1rem; padding: 1rem; background-color: #e8f5e9; border-radius: 8px; border-left: 4px solid #32BCAD;">
-                        <strong><i class="fas fa-qrcode"></i> Pagamento via PIX</strong>
-                        <p style="margin-top: 0.5rem; font-size: 0.9rem;">
-                            O QR Code foi gerado. Faça o pagamento para confirmar seu pedido.
-                        </p>
-                    </div>
-                `;
-            } else if (selectedPaymentMethod === 'boleto') {
-                detalhes += `
-                    <div style="margin-top: 1rem; padding: 1rem; background-color: #e8f5e9; border-radius: 8px; border-left: 4px solid #00A650;">
-                        <strong><i class="fas fa-barcode"></i> Pagamento via Boleto</strong>
-                        <p style="margin-top: 0.5rem; font-size: 0.9rem;">
-                            O boleto foi gerado. Faça o pagamento para confirmar seu pedido.
-                        </p>
-                    </div>
-                `;
-            }
-            
-            paymentDetails.innerHTML = detalhes;
-            
-            // Enviar e-mail de confirmação (simulado)
-            enviarEmailConfirmacao(preferencia);
-            
-            // Limpar carrinho
+            // Limpar carrinho após envio
             carrinho = [];
             atualizarCarrinho();
+            document.getElementById('cart-modal').style.display = 'none';
+            
+            // Resetar checkbox de termos
+            if (termosCheckbox) {
+                termosCheckbox.checked = false;
+            }
         }
-        
-        // Enviar e-mail de confirmação (simulado)
-        function enviarEmailConfirmacao(preferencia) {
-            console.log('E-mail de confirmação enviado para:', clienteInfo.email);
-            // EM PRODUÇÃO: Aqui você enviaria um e-mail real para o cliente
-        }
-        
-        // ============================
-        // EVENT LISTENERS
-        // ============================
         
         // Inicializar
         document.addEventListener('DOMContentLoaded', () => {
@@ -2836,180 +2146,32 @@
                 }
             });
             
+            // Configurar finalização do pedido
+            document.getElementById('btn-finalizar-pedido').addEventListener('click', finalizarPedidoWhatsApp);
+            
             // Configurar evento para o checkbox de termos
             const termosCheckbox = document.getElementById('aceito-termos-resumo');
             if (termosCheckbox) {
                 termosCheckbox.addEventListener('change', function() {
-                    const btnCheckout = document.getElementById('btn-checkout');
-                    const btnWhatsapp = document.getElementById('btn-whatsapp');
-                    
-                    if (this.checked) {
-                        btnCheckout.disabled = false;
-                        btnWhatsapp.disabled = false;
-                    } else {
-                        btnCheckout.disabled = true;
-                        btnWhatsapp.disabled = true;
+                    const btnFinalizar = document.getElementById('btn-finalizar-pedido');
+                    if (btnFinalizar) {
+                        if (this.checked) {
+                            btnFinalizar.disabled = false;
+                            btnFinalizar.style.opacity = "1";
+                        } else {
+                            btnFinalizar.disabled = true;
+                            btnFinalizar.style.opacity = "0.6";
+                        }
                     }
                 });
                 
-                // Inicialmente desabilitar botões
-                document.getElementById('btn-checkout').disabled = true;
-                document.getElementById('btn-whatsapp').disabled = true;
+                // Inicialmente desabilitar o botão de finalizar
+                const btnFinalizar = document.getElementById('btn-finalizar-pedido');
+                if (btnFinalizar) {
+                    btnFinalizar.disabled = true;
+                    btnFinalizar.style.opacity = "0.6";
+                }
             }
-            
-            // Botão de checkout no carrinho
-            document.getElementById('btn-checkout').addEventListener('click', () => {
-                // Verificar se há itens no carrinho
-                if (carrinho.length === 0) {
-                    mostrarFeedback('Seu carrinho está vazio. Adicione apostilas antes de finalizar.');
-                    return;
-                }
-                
-                // Verificar se os termos foram aceitos
-                const termosCheckbox = document.getElementById('aceito-termos-resumo');
-                if (!termosCheckbox || !termosCheckbox.checked) {
-                    mostrarFeedback('Por favor, aceite os termos e condições.');
-                    return;
-                }
-                
-                // Fechar carrinho e abrir checkout
-                document.getElementById('cart-modal').style.display = 'none';
-                document.getElementById('checkout-modal').style.display = 'flex';
-                
-                // Atualizar resumo
-                atualizarResumoCheckout();
-                
-                // Resetar checkout para etapa 1
-                document.getElementById('checkout-step-1').style.display = 'block';
-                document.getElementById('checkout-step-2').style.display = 'none';
-                document.getElementById('checkout-step-3').style.display = 'none';
-                
-                document.getElementById('step-1').classList.add('step-active');
-                document.getElementById('step-2').classList.remove('step-active', 'step-complete');
-                document.getElementById('step-3').classList.remove('step-active', 'step-complete');
-            });
-            
-            // Botão de WhatsApp no carrinho
-            document.getElementById('btn-whatsapp').addEventListener('click', () => {
-                // Verificar se há itens no carrinho
-                if (carrinho.length === 0) {
-                    mostrarFeedback('Seu carrinho está vazio. Adicione apostilas antes de enviar.');
-                    return;
-                }
-                
-                // Verificar se os termos foram aceitos
-                const termosCheckbox = document.getElementById('aceito-termos-resumo');
-                if (!termosCheckbox || !termosCheckbox.checked) {
-                    mostrarFeedback('Por favor, aceite os termos e condições.');
-                    return;
-                }
-                
-                // Criar mensagem para WhatsApp
-                let mensagem = `*🛒 ORÇAMENTO - PIBBAWEB IMPRESSÕES*%0A%0A`;
-                mensagem += `*📋 RESUMO DO ORÇAMENTO:*%0A`;
-                
-                let totalGeral = 0;
-                
-                carrinho.forEach((item, index) => {
-                    const precoTotalItem = item.precoUnitario * item.quantidade;
-                    totalGeral += precoTotalItem;
-                    
-                    mensagem += `%0A${index + 1}. *${item.tipoNome}* - ${item.folhas} folhas%0A`;
-                    mensagem += `   Quantidade: ${item.quantidade}%0A`;
-                    mensagem += `   Preço unitário: R$ ${item.precoUnitario.toLocaleString('pt-BR', {minimumFractionDigits: 2})}%0A`;
-                    mensagem += `   Subtotal: R$ ${precoTotalItem.toLocaleString('pt-BR', {minimumFractionDigits: 2})}%0A`;
-                });
-                
-                mensagem += `%0A*💰 TOTAL: R$ ${totalGeral.toLocaleString('pt-BR', {minimumFractionDigits: 2})}*%0A%0A`;
-                
-                mensagem += `*✅ CONFIRMAÇÃO:*%0A`;
-                mensagem += `- Li e aceito os Termos e Condições%0A`;
-                mensagem += `- Entendo que não serão feitas correções%0A%0A`;
-                
-                mensagem += `Gostaria de prosseguir com este orçamento.`;
-                
-                // Criar URL do WhatsApp
-                const urlWhatsApp = `https://wa.me/${SITE_CONFIG.whatsappVendedor}?text=${mensagem}`;
-                
-                // Abrir WhatsApp em nova aba
-                window.open(urlWhatsApp, '_blank');
-                
-                // Fechar carrinho
-                document.getElementById('cart-modal').style.display = 'none';
-            });
-            
-            // Eventos do checkout modal
-            document.getElementById('close-checkout').addEventListener('click', () => {
-                document.getElementById('checkout-modal').style.display = 'none';
-            });
-            
-            // Fechar checkout ao clicar fora
-            document.getElementById('checkout-modal').addEventListener('click', (e) => {
-                if (e.target.id === 'checkout-modal') {
-                    document.getElementById('checkout-modal').style.display = 'none';
-                }
-            });
-            
-            // Botão próximo (informações -> pagamento)
-            document.getElementById('btn-proximo-pagamento').addEventListener('click', () => {
-                if (!validarInformacoesCliente()) return;
-                
-                // Atualizar passos do checkout
-                document.getElementById('step-1').classList.remove('step-active');
-                document.getElementById('step-1').classList.add('step-complete');
-                document.getElementById('step-2').classList.add('step-active');
-                
-                // Mostrar etapa de pagamento
-                document.getElementById('checkout-step-1').style.display = 'none';
-                document.getElementById('checkout-step-2').style.display = 'block';
-                
-                // Limpar container do Mercado Pago
-                document.getElementById('mercadopago-checkout').innerHTML = '';
-                document.getElementById('btn-confirmar-pagamento').style.display = 'none';
-                
-                // Inicializar checkout do Mercado Pago
-                inicializarCheckoutMercadoPago();
-            });
-            
-            // Botão voltar (pagamento -> informações)
-            document.getElementById('btn-voltar-info').addEventListener('click', () => {
-                // Atualizar passos do checkout
-                document.getElementById('step-1').classList.add('step-active');
-                document.getElementById('step-1').classList.remove('step-complete');
-                document.getElementById('step-2').classList.remove('step-active');
-                
-                // Mostrar etapa de informações
-                document.getElementById('checkout-step-1').style.display = 'block';
-                document.getElementById('checkout-step-2').style.display = 'none';
-            });
-            
-            // Seleção de método de pagamento
-            document.querySelectorAll('.payment-method').forEach(method => {
-                method.addEventListener('click', function() {
-                    // Remover classe active de todos
-                    document.querySelectorAll('.payment-method').forEach(m => {
-                        m.classList.remove('active');
-                    });
-                    
-                    // Adicionar classe active ao selecionado
-                    this.classList.add('active');
-                    
-                    // Atualizar método selecionado
-                    selectedPaymentMethod = this.dataset.method;
-                    
-                    // Reinicializar checkout com novo método
-                    if (document.getElementById('checkout-step-2').style.display === 'block') {
-                        document.getElementById('mercadopago-checkout').innerHTML = '';
-                        document.getElementById('btn-confirmar-pagamento').style.display = 'none';
-                        inicializarCheckoutMercadoPago();
-                    }
-                });
-            });
-            
-            // Botão fechar checkout
-            document.getElementById('btn-fechar-checkout').addEventListener('click', () => {
-                document.getElementById('checkout-modal').style.display = 'none';
-            });
             
             // Adicionar evento de rolagem suave para links internos
             document.querySelectorAll('a[href^="#"]').forEach(anchor => {

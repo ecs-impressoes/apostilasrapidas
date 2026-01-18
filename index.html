@@ -1044,7 +1044,7 @@
                                 <span id="custo-impressao">R$ 28,50</span>
                             </div>
                             <div class="breakdown-item">
-                                <span>Encadernção (cada)</span>
+                                <span>Encadernação (cada)</span>
                                 <span>R$ 7,00</span>
                             </div>
                             <div class="breakdown-item">
@@ -1076,6 +1076,49 @@
             
             <div class="cart-items" id="cart-items">
                 <!-- Itens do carrinho serão adicionados aqui -->
+            </div>
+            
+            <!-- TERMOS E CONDIÇÕES NO CARRINHO -->
+            <div class="termos-resumo" style="margin: 1.5rem 0; padding: 1.5rem; background-color: #fff8e1; border-radius: 8px; border-left: 4px solid #ff9800;">
+                <h4 style="color: #e65100; margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem;">
+                    <i class="fas fa-exclamation-triangle"></i> TERMOS E CONDIÇÕES
+                </h4>
+                
+                <div style="font-size: 0.85rem; line-height: 1.6;">
+                    <p style="margin-bottom: 0.8rem;"><strong>Ao finalizar seu pedido, você concorda que:</strong></p>
+                    
+                    <div style="display: flex; align-items: flex-start; gap: 0.5rem; margin-bottom: 0.5rem;">
+                        <i class="fas fa-times-circle" style="color: #d32f2f; font-size: 0.9rem; margin-top: 0.2rem; flex-shrink: 0;"></i>
+                        <span><strong>Não fazemos correções</strong> - Seu arquivo será impresso exatamente como enviado</span>
+                    </div>
+                    
+                    <div style="display: flex; align-items: flex-start; gap: 0.5rem; margin-bottom: 0.5rem;">
+                        <i class="fas fa-file-upload" style="color: var(--primary); font-size: 0.9rem; margin-top: 0.2rem; flex-shrink: 0;"></i>
+                        <span><strong>Aceitamos apenas PDF e DOC</strong> por e-mail ou WhatsApp</span>
+                    </div>
+                    
+                    <div style="display: flex; align-items: flex-start; gap: 0.5rem; margin-bottom: 0.5rem;">
+                        <i class="fas fa-clock" style="color: #1976d2; font-size: 0.9rem; margin-top: 0.2rem; flex-shrink: 0;"></i>
+                        <span><strong>Prazo começa após pagamento total</strong> - Pode variar conforme quantidade</span>
+                    </div>
+                    
+                    <div style="display: flex; align-items: flex-start; gap: 0.5rem; margin-bottom: 0.5rem;">
+                        <i class="fas fa-ban" style="color: #d32f2f; font-size: 0.9rem; margin-top: 0.2rem; flex-shrink: 0;"></i>
+                        <span><strong>Sem devolução por cancelamento</strong> após início da produção ou compra de insumos</span>
+                    </div>
+                    
+                    <div style="display: flex; align-items: flex-start; gap: 0.5rem;">
+                        <i class="fas fa-edit" style="color: #d32f2f; font-size: 0.9rem; margin-top: 0.2rem; flex-shrink: 0;"></i>
+                        <span><strong>Sem devolução por erro de escrita</strong> - Revisão é responsabilidade do cliente</span>
+                    </div>
+                </div>
+                
+                <div style="margin-top: 1rem; display: flex; align-items: center; gap: 0.5rem;">
+                    <input type="checkbox" id="aceito-termos-resumo" style="width: 16px; height: 16px;">
+                    <label for="aceito-termos-resumo" style="font-size: 0.85rem; font-weight: 600;">
+                        Li e concordo com os termos acima
+                    </label>
+                </div>
             </div>
             
             <div class="cart-total" style="margin-top: 2rem;">
@@ -1178,29 +1221,31 @@
                         </div>
                         
                         <div class="contact-item">
-    <div class="contact-icon">
-        <i class="fas fa-envelope"></i>
-    </div>
-    <div>
-        <h4>Email</h4>
-        <p>avenidabrail284@gmail.com</p>
-    </div>
-</div>
+                            <div class="contact-icon">
+                                <i class="fas fa-envelope"></i>
+                            </div>
+                            <div>
+                                <h4>Email</h4>
+                                <p>avenidabrail284@gmail.com</p>
+                            </div>
+                        </div>
 
-<div class="contact-item">
-    <div class="contact-icon">
-        <i class="fas fa-info-circle"></i>
-    </div>
-    <div>
-        <h4>Informações Importantes</h4>
-        <p style="color: rgba(255, 255, 255, 0.9); font-size: 0.95rem; line-height: 1.5;">
-            <strong>Atenção:</strong> O prazo de produção é apenas uma previsão. 
-            A falta de pagamento dentre outros fatores podem ocasionar atraso na produção.
-        </p>
-    </div>
-</div>
-</div>
-            <div class="footer-section">
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <i class="fas fa-info-circle"></i>
+                            </div>
+                            <div>
+                                <h4>Informações Importantes</h4>
+                                <p style="color: rgba(255, 255, 255, 0.9); font-size: 0.95rem; line-height: 1.5;">
+                                    <strong>Atenção:</strong> O prazo de produção é apenas uma previsão. 
+                                    A falta de pagamento dentre outros fatores podem ocasionar atraso na produção.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="footer-section">
                     <h4 class="footer-title">Acesso Rápido</h4>
                     <div class="footer-links">
                         <a href="https://github.com/ecs-impressoes/Tabela-de-Pre-os-2026" target="_blank">
@@ -1226,9 +1271,13 @@
                     </div>
                 </div>
             </div>
+            
             <div class="footer-bottom">
                 <div class="copyright">
                     &copy; 2026 Pibbaweb Impressões de Apostilas. Todos os direitos reservados.
+                    <a href="#termos" style="color: rgba(255, 255, 255, 0.7); text-decoration: none; margin-left: 1rem;">
+                        <i class="fas fa-file-contract"></i> Termos de Uso
+                    </a>
                 </div>
             </div>
         </div>
@@ -1472,7 +1521,20 @@
                 cartItems.innerHTML = '<p style="text-align: center; padding: 2rem; color: var(--gray);">Seu carrinho está vazio. Adicione apostilas para continuar.</p>';
                 cartSubtotal.textContent = 'R$ 0,00';
                 cartTotal.textContent = 'R$ 0,00';
+                
+                // Desabilitar checkbox de termos quando carrinho está vazio
+                const termosCheckbox = document.getElementById('aceito-termos-resumo');
+                if (termosCheckbox) {
+                    termosCheckbox.checked = false;
+                    termosCheckbox.disabled = true;
+                }
                 return;
+            }
+            
+            // Habilitar checkbox de termos quando há itens no carrinho
+            const termosCheckbox = document.getElementById('aceito-termos-resumo');
+            if (termosCheckbox) {
+                termosCheckbox.disabled = false;
             }
             
             // Calcular subtotais
@@ -1749,8 +1811,28 @@
         
         // Finalizar pedido via WhatsApp
         function finalizarPedidoWhatsApp() {
+            // Verificar se há itens no carrinho
             if (carrinho.length === 0) {
                 mostrarFeedback('Seu carrinho está vazio. Adicione apostilas antes de finalizar o pedido.');
+                return;
+            }
+            
+            // Verificar se os termos foram aceitos
+            const termosCheckbox = document.getElementById('aceito-termos-resumo');
+            if (!termosCheckbox || !termosCheckbox.checked) {
+                mostrarFeedback('Por favor, leia e aceite os termos e condições antes de finalizar o pedido.');
+                
+                // Destacar a seção de termos
+                const termosSection = document.querySelector('.termos-resumo');
+                if (termosSection) {
+                    termosSection.style.animation = 'pulse 1s 3';
+                    termosSection.style.boxShadow = '0 0 0 3px rgba(255, 0, 0, 0.3)';
+                    
+                    setTimeout(() => {
+                        termosSection.style.animation = '';
+                        termosSection.style.boxShadow = '';
+                    }, 3000);
+                }
                 return;
             }
             
@@ -1771,6 +1853,14 @@
             });
             
             mensagem += `%0A*💰 TOTAL: R$ ${totalGeral.toLocaleString('pt-BR', {minimumFractionDigits: 2})}*%0A%0A`;
+            
+            // Adicionar confirmação dos termos na mensagem
+            mensagem += `*✅ CONFIRMAÇÃO:*%0A`;
+            mensagem += `- Li e aceito os Termos e Condições da Pibbaweb Impressões%0A`;
+            mensagem += `- Entendo que não serão feitas correções no material enviado%0A`;
+            mensagem += `- Confirmo que revisei todo o conteúdo antes do envio%0A`;
+            mensagem += `- Estou ciente dos prazos e condições de cancelamento%0A%0A`;
+            
             mensagem += `*📞 INFORMAÇÕES PARA CONTATO:*%0A`;
             mensagem += `Por favor, informe seu nome, endereço para entrega (se necessário) e forma de pagamento preferida.`;
             
@@ -1787,6 +1877,11 @@
             carrinho = [];
             atualizarCarrinho();
             document.getElementById('cart-modal').style.display = 'none';
+            
+            // Resetar checkbox de termos
+            if (termosCheckbox) {
+                termosCheckbox.checked = false;
+            }
         }
         
         // Inicializar
@@ -1829,6 +1924,7 @@
             // Configurar eventos do carrinho
             document.getElementById('cart-icon').addEventListener('click', () => {
                 document.getElementById('cart-modal').style.display = 'flex';
+                atualizarCarrinho();
             });
             
             document.getElementById('close-cart').addEventListener('click', () => {
@@ -1844,6 +1940,30 @@
             
             // Configurar finalização do pedido
             document.getElementById('btn-finalizar-pedido').addEventListener('click', finalizarPedidoWhatsApp);
+            
+            // Configurar evento para o checkbox de termos
+            const termosCheckbox = document.getElementById('aceito-termos-resumo');
+            if (termosCheckbox) {
+                termosCheckbox.addEventListener('change', function() {
+                    const btnFinalizar = document.getElementById('btn-finalizar-pedido');
+                    if (btnFinalizar) {
+                        if (this.checked) {
+                            btnFinalizar.disabled = false;
+                            btnFinalizar.style.opacity = "1";
+                        } else {
+                            btnFinalizar.disabled = true;
+                            btnFinalizar.style.opacity = "0.6";
+                        }
+                    }
+                });
+                
+                // Inicialmente desabilitar o botão de finalizar
+                const btnFinalizar = document.getElementById('btn-finalizar-pedido');
+                if (btnFinalizar) {
+                    btnFinalizar.disabled = true;
+                    btnFinalizar.style.opacity = "0.6";
+                }
+            }
             
             // Adicionar evento de rolagem suave para links internos
             document.querySelectorAll('a[href^="#"]').forEach(anchor => {
@@ -1863,7 +1983,7 @@
                 });
             });
             
-            // Adicionar animação CSS para feedback
+            // Adicionar animação CSS para feedback e pulse
             const style = document.createElement('style');
             style.textContent = `
                 @keyframes slideUp {
@@ -1875,13 +1995,15 @@
                     from { transform: translateY(0); opacity: 1; }
                     to { transform: translateY(100px); opacity: 0; }
                 }
+                
+                @keyframes pulse {
+                    0% { transform: scale(1); }
+                    50% { transform: scale(1.02); }
+                    100% { transform: scale(1); }
+                }
             `;
             document.head.appendChild(style);
         });
     </script>
-
-
 </body>
 </html>
-
-

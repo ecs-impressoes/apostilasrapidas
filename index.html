@@ -1,5 +1,42 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+  <!-- Script de validação de SEO -->
+<script>
+// Função para verificar se todas as palavras-chave estão no site
+function verificarPalavrasChave() {
+  const palavrasChave = [
+    "impressões", "xerox", "conta gov", "plastificação", 
+    "encadernação", "apostilas", "fotos 3x4", "topo de bolo", 
+    "foto a4", "impressão a3"
+  ];
+  
+  const cnpj = "13.419.451/0001-00";
+  const conteudoPagina = document.body.innerText.toLowerCase();
+  const cnpjPresente = conteudoPagina.includes(cnpj) || 
+                       conteudoPagina.includes(cnpj.replace(/[.\/-]/g, ''));
+  
+  console.log("=== Verificação de SEO ===");
+  console.log(`CNPJ ${cnpj} presente: ${cnpjPresente ? '✅' : '❌'}`);
+  
+  let palavrasEncontradas = 0;
+  palavrasChave.forEach(palavra => {
+    const encontrou = conteudoPagina.includes(palavra.toLowerCase());
+    console.log(`"${palavra}": ${encontrou ? '✅' : '❌'}`);
+    if (encontrou) palavrasEncontradas++;
+  });
+  
+  console.log(`Total: ${palavrasEncontradas}/${palavrasChave.length} palavras-chave encontradas`);
+  
+  if (palavrasEncontradas === palavrasChave.length && cnpjPresente) {
+    console.log("✅ PERFEITO! Todas as palavras e CNPJ estão no site!");
+  } else {
+    console.log("⚠️ Ainda faltam alguns termos. Adicione-os ao conteúdo da página.");
+  }
+}
+
+// Executar após a página carregar
+window.addEventListener('load', verificarPalavrasChave);
+</script>
 <head>
     <!-- Meta Tags para SEO Local -->
 <meta name="description" content="Gráfica rápida no litoral de SP: impressões, xerox, plastificação, encadernação, apostilas, fotos 3x4, topo de bolo, foto A4, impressão A3 e serviços conta gov. CNPJ 13.419.451/0001-00">

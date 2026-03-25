@@ -729,25 +729,8 @@
             window.calculadoraAtual.numOpcoes = numOpcoes;
         }
         
-        function adicionarCalculadoraAoCarrinho() {
-            if (!window.calculadoraAtual) return;
-            const { folhas, tipo, tipoTexto, precoUnitario, quantidade, precoPorFolha, precoImpressao, numOpcoes } = window.calculadoraAtual;
-            const itemId = `custom-${tipo}-${folhas}-op${numOpcoes}`;
-            const existente = carrinho.find(i => i.id === itemId);
-            if (existente) existente.quantidade += quantidade;
-            else carrinho.push({
-                id: itemId,
-                tipoNome: tipoTexto + (numOpcoes > 0 ? ` (${numOpcoes} opções)` : ''),
-                folhas: folhas,
-                precoComEncadernacao: precoUnitario,
-                quantidade: quantidade,
-                precoPorFolha: precoPorFolha,
-                precoImpressao: precoImpressao
-            });
-            atualizarCarrinho();
-            mostrarFeedback(`${quantidade} × ${tipoTexto} (${folhas} folhas) adicionada ao carrinho!`);
-        }
-        function finalizarPedidoWhatsApp() {
+       // Substitui a função finalizarPedidoWhatsApp
+function finalizarPedidoWhatsApp() {
   if (carrinho.length === 0) {
     mostrarFeedback('Carrinho vazio.');
     return;
@@ -769,7 +752,7 @@
 
   const total = carrinho.reduce((acc, item) => acc + (item.precoComEncadernacao * item.quantidade), 0);
 
-  // Envia para o backend (substitua pela URL do seu servidor)
+  // Envia para o backend
   fetch('http://164.68.124.72:3000/create-preference', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },

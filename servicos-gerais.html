@@ -1,10 +1,12 @@
-
-<!DOCTYPE html> 
+<!DOCTYPE html>
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-    <title>Termo de Serviços - Gráfica Rápida</title>
+    <title>Termo de Serviços - ECS Impressões de Documentos e Apotilas - Gráfica Rápida | Comprovante PDF</title>
+    <!-- Bibliotecas para gerar PDF -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <style>
         * {
             margin: 0;
@@ -78,6 +80,10 @@
             border-color: #f4a261;
             box-shadow: 0 0 0 2px rgba(244,162,97,0.2);
         }
+        input[readonly] {
+            background-color: #eef2f5;
+            cursor: default;
+        }
         .clausulas {
             margin: 30px 0;
             max-height: 400px;
@@ -141,100 +147,289 @@
         hr {
             margin: 20px 0;
         }
+        .mensagem-erro {
+            color: #c0392b;
+            background: #fadbd8;
+            padding: 8px 12px;
+            border-radius: 8px;
+            margin-top: 10px;
+            display: none;
+            font-size: 0.85rem;
+            text-align: center;
+        }
+        .carregando {
+            display: none;
+            text-align: center;
+            margin: 15px 0;
+            font-weight: bold;
+            color: #2c6e9e;
+        }
     </style>
 </head>
 <body>
-<div class="container">
+<div class="container" id="conteudo-termo">
     <h1>TERMO DE RESPONSABILIDADE E CONDIÇÕES<br>PARA SERVIÇOS DE GRÁFICA RÁPIDA</h1>
 
     <div class="campos">
         <h2>DADOS DO PEDIDO (preencha todos)</h2>
 
         <div class="linha">
-            <div class="campo"><label>Número do pedido</label><input type="text"></div>
-            <div class="campo"><label>Data do pedido</label><input type="date"></div>
+            <div class="campo"><label>Número do pedido</label><input type="text" id="numPedido" placeholder="Ex: 2025-00123"></div>
+            <div class="campo"><label>Data do pedido</label><input type="date" id="dataPedido"></div>
         </div>
 
         <div class="linha">
-            <div class="campo"><label>Nome completo do cliente</label><input type="text"></div>
-            <div class="campo"><label>CPF ou CNPJ</label><input type="text"></div>
+            <div class="campo"><label>Nome completo do cliente</label><input type="text" id="nomeCliente" placeholder="Nome completo"></div>
+            <div class="campo"><label>CPF ou CNPJ</label><input type="text" id="docCliente" placeholder="000.000.000-00"></div>
         </div>
 
         <div class="linha">
-            <div class="campo"><label>Telefone</label><input type="tel"></div>
-            <div class="campo"><label>E-mail</label><input type="email"></div>
+            <div class="campo"><label>Telefone</label><input type="tel" id="telefone" placeholder="(00) 00000-0000"></div>
+            <div class="campo"><label>E-mail</label><input type="email" id="email" placeholder="cliente@email.com"></div>
         </div>
 
         <div class="linha">
-            <div class="campo"><label>Descrição do produto/serviço</label><input type="text"></div>
-            <div class="campo"><label>Quantidade solicitada</label><input type="text"></div>
+            <div class="campo"><label>Descrição do produto/serviço</label><input type="text" id="descricao" placeholder="Ex: apostilas, encadernação, impressão..."></div>
+            <div class="campo"><label>Quantidade solicitada</label><input type="text" id="quantidade" placeholder="Ex: 50 unidades"></div>
         </div>
 
         <div class="linha">
-            <div class="campo"><label>Valor total (R$)</label><input type="number"></div>
-            <div class="campo"><label>Valor do frete (R$)</label><input type="number"></div>
+            <div class="campo"><label>Valor total (R$)</label><input type="number" id="valorTotal" step="0.01" placeholder="0,00"></div>
+            <div class="campo"><label>Valor do frete (R$)</label><input type="number" id="valorFrete" step="0.01" placeholder="0,00" value="0"></div>
         </div>
 
         <div class="linha">
-            <div class="campo"><label>Valor da entrada (50% - R$)</label><input type="number" readonly></div>
+            <div class="campo"><label>Valor da entrada (50% - R$)</label><input type="text" id="entrada" readonly></div>
             <div class="campo"><label>Forma de pagamento</label>
-                <select>
+                <select id="formaPagamento">
                     <option>Cartão</option>
                     <option>PIX</option>
                     <option>Dinheiro</option>
+                    <option>Transferência bancária</option>
                 </select>
             </div>
         </div>
 
         <div class="linha">
-            <div class="campo"><label>Prazo de entrega estimado (dias úteis)</label><input type="number"></div>
-            <div class="campo"><label>Foro de eleição (cidade/estado)</label><input type="text"></div>
+            <div class="campo"><label>Prazo de entrega estimado (dias úteis)</label><input type="number" id="prazo" placeholder="dias"></div>
+            <div class="campo"><label>Foro de eleição (cidade/estado)</label><input type="text" id="foro" placeholder="Ex: Santos/SP"></div>
         </div>
     </div>
 
     <h2>CLÁUSULAS CONTRATUAIS</h2>
 
-    <div class="clausulas">
+    <div class="clausulas" id="clausulasTexto">
         <p><strong>1. DA RESPONSABILIDADE SOBRE O CONTEÚDO DA ARTE</strong><br>
-        Todas as informações, textos, imagens, logotipos, dados ou qualquer outro elemento contido na(s) arte(s) fornecida(s) pelo cliente são de sua inteira e exclusiva responsabilidade.</p>
+        Todas as informações, textos, imagens, logotipos, dados ou qualquer outro elemento contido na(s) arte(s) fornecida(s) pelo cliente são de sua inteira e exclusiva responsabilidade. A gráfica não se responsabiliza por erros de ortografia, direitos autorais ou qualquer outro vício de conteúdo.</p>
 
         <p><strong>2. DOS VALORES E ORÇAMENTOS</strong><br>
-        Orçamentos têm validade de 7 (sete) dias corridos.</p>
+        Orçamentos têm validade de 7 (sete) dias corridos. Após esse prazo, novos preços poderão ser praticados. O valor final somente será garantido mediante pagamento da entrada de 50%.</p>
 
         <p><strong>3. DA CRIAÇÃO DE ARTE</strong><br>
-        Serviço opcional com valor adicional.</p>
+        Serviço opcional com valor adicional, mediante orçamento separado. Caso o cliente forneça arte pronta, assume total responsabilidade sobre dimensões, sangrias e resolução (mínimo 300 DPI).</p>
 
         <p><strong>4. DA QUALIDADE DOS ARQUIVOS</strong><br>
-        Arquivos devem ter resolução mínima de 300 DPI.</p>
+        Arquivos devem ter resolução mínima de 300 DPI e estar em formato PDF, CDR, EPS ou TIFF. Arquivos em baixa resolução poderão sofrer perda de qualidade, isentando a gráfica de qualquer responsabilidade.</p>
 
         <p><strong>5. DAS VARIAÇÕES DE COR</strong><br>
-        Podem ocorrer variações naturais na impressão.</p>
+        Podem ocorrer variações naturais de até 10% entre a arte digital e o material impresso, devido às diferenças entre monitores e processos gráficos (sistema CMYK). Não realizamos reimpressão por variações leves de tonalidade.</p>
 
         <p><strong>6. DA APROVAÇÃO</strong><br>
-        O cliente deve aprovar a arte antes da impressão.</p>
+        O cliente deve aprovar a arte por escrito (e-mail, WhatsApp ou assinatura) antes do início da impressão. Após a aprovação, não serão aceitas alterações ou cancelamentos.</p>
 
         <p><strong>7. DO PRAZO</strong><br>
-        O prazo inicia após aprovação e pagamento.</p>
+        O prazo de entrega começa a contar a partir da confirmação do pagamento da entrada E da aprovação final da arte. Dias úteis, exceto sábados, domingos e feriados.</p>
 
         <p><strong>8. DO PAGAMENTO</strong><br>
-        Entrada de 50% obrigatória.</p>
+        Entrada de 50% obrigatória para início da produção. Os 50% restantes devem ser quitados antes da retirada ou envio do material. Em caso de atraso no pagamento do saldo, a entrega fica suspensa.</p>
 
         <p><strong>9. DO FORO</strong><br>
-        Fica eleito o foro da comarca indicada.</p>
+        Fica eleito o foro da comarca indicada no campo "Foro de eleição" para dirimir quaisquer dúvidas oriundas deste contrato.</p>
+        
+        <p><strong>10. CANCELAMENTO E DEVOLUÇÃO</strong><br>
+        Cancelamentos solicitados após a aprovação da arte ou início da impressão implicam perda total do valor pago (entrada). Não aceitamos devolução de produtos personalizados, salvo defeito de fabricação comprovado.</p>
     </div>
 
     <div class="aceite">
-        <input type="checkbox">
-        <label><strong>Declaro que li e aceito todos os termos acima.</strong></label>
+        <input type="checkbox" id="aceiteCheckbox">
+        <label><strong>Declaro que li e aceito todos os termos acima, estou ciente das condições de pagamento, prazos e responsabilidades.</strong></label>
     </div>
 
-    <button class="btn">GERAR COMPROVANTE DIGITAL</button>
+    <button class="btn" id="gerarPDFBtn">📄 GERAR COMPROVANTE DIGITAL (PDF)</button>
+    <div id="mensagemErro" class="mensagem-erro"></div>
+    <div id="carregando" class="carregando"><i class="fas fa-spinner fa-spin"></i> Gerando PDF, aguarde...</div>
 
     <footer>
-        Documento digital - Gráfica Rápida<br>
-        Este termo possui validade legal.
+        Documento digital - Gráfica Rápida ECS Impressões<br>
+        Este termo possui validade legal mediante aceite eletrônico.
     </footer>
-
 </div>
+
+<script>
+    // Elementos do DOM
+    const valorTotalInput = document.getElementById('valorTotal');
+    const valorFreteInput = document.getElementById('valorFrete');
+    const entradaInput = document.getElementById('entrada');
+    const aceiteCheck = document.getElementById('aceiteCheckbox');
+    const gerarBtn = document.getElementById('gerarPDFBtn');
+    const mensagemErro = document.getElementById('mensagemErro');
+    const carregandoDiv = document.getElementById('carregando');
+
+    // Função para calcular entrada (50% do valor total + frete? Conforme termo: entrada 50% do valor total? O valor total já pode incluir frete ou não.
+    // De acordo com boas práticas: a entrada é 50% do valor total (produto + frete). Vamos calcular sobre a soma dos dois campos.
+    function calcularEntrada() {
+        let total = parseFloat(valorTotalInput.value) || 0;
+        let frete = parseFloat(valorFreteInput.value) || 0;
+        let soma = total + frete;
+        let entrada = soma * 0.5;
+        entradaInput.value = entrada.toFixed(2);
+    }
+
+    // Atualizar entrada sempre que valor total ou frete mudar
+    valorTotalInput.addEventListener('input', calcularEntrada);
+    valorFreteInput.addEventListener('input', calcularEntrada);
+
+    // Definir data atual automaticamente no campo data
+    const hoje = new Date().toISOString().split('T')[0];
+    document.getElementById('dataPedido').value = hoje;
+
+    // Validação dos campos obrigatórios
+    function validarCampos() {
+        const camposIds = ['numPedido', 'nomeCliente', 'docCliente', 'telefone', 'email', 'descricao', 'quantidade', 'prazo', 'foro'];
+        for (let id of camposIds) {
+            let campo = document.getElementById(id);
+            if (!campo.value.trim()) {
+                return false;
+            }
+        }
+        if (!valorTotalInput.value || parseFloat(valorTotalInput.value) <= 0) return false;
+        if (!aceiteCheck.checked) return false;
+        return true;
+    }
+
+    // Função para gerar PDF usando html2canvas + jsPDF (qualidade boa)
+    async function gerarPDF() {
+        // Limpar mensagem de erro
+        mensagemErro.style.display = 'none';
+        mensagemErro.innerText = '';
+
+        if (!validarCampos()) {
+            mensagemErro.style.display = 'block';
+            mensagemErro.innerText = '❌ Preencha todos os campos obrigatórios e aceite os termos antes de gerar o comprovante.';
+            return;
+        }
+
+        carregandoDiv.style.display = 'block';
+        gerarBtn.disabled = true;
+
+        try {
+            // Criar um elemento temporário clonando o conteúdo para o PDF (para não interferir na tela)
+            const elementoOriginal = document.getElementById('conteudo-termo');
+            const cloneContainer = elementoOriginal.cloneNode(true);
+            
+            // Remover botões e elementos interativos do clone, para não aparecer no PDF
+            const btnClone = cloneContainer.querySelector('#gerarPDFBtn');
+            if (btnClone) btnClone.remove();
+            const carregandoClone = cloneContainer.querySelector('#carregando');
+            if (carregandoClone) carregandoClone.remove();
+            const msgErroClone = cloneContainer.querySelector('#mensagemErro');
+            if (msgErroClone) msgErroClone.remove();
+            
+            // Ajustar estilos para impressão no PDF
+            cloneContainer.style.padding = '20px';
+            cloneContainer.style.backgroundColor = 'white';
+            cloneContainer.style.maxWidth = '100%';
+            cloneContainer.style.margin = '0';
+            cloneContainer.style.borderRadius = '0';
+            
+            // Adicionar um cabeçalho adicional informando que é comprovante
+            const cabecalho = document.createElement('div');
+            cabecalho.style.textAlign = 'center';
+            cabecalho.style.marginBottom = '20px';
+            cabecalho.style.fontSize = '12px';
+            cabecalho.style.color = '#555';
+            cabecalho.innerHTML = '<hr><p><strong>COMPROVANTE DE ACEITE E CONTRATO DE SERVIÇOS</strong><br>Documento gerado eletronicamente com base nos dados informados.</p><hr>';
+            cloneContainer.insertBefore(cabecalho, cloneContainer.firstChild);
+            
+            // Adicionar rodapé com data/hora da geração
+            const rodape = document.createElement('div');
+            rodape.style.textAlign = 'center';
+            rodape.style.fontSize = '10px';
+            rodape.style.marginTop = '25px';
+            rodape.style.color = '#777';
+            rodape.style.borderTop = '1px solid #ccc';
+            rodape.style.paddingTop = '10px';
+            const agora = new Date();
+            rodape.innerHTML = `Gerado em: ${agora.toLocaleString('pt-BR')} - Gráfica Rápida ECS Impressões - CNPJ 13.419.451/0001-00`;
+            cloneContainer.appendChild(rodape);
+            
+            // Adicionar de forma temporária ao body para capturar imagem
+            cloneContainer.style.position = 'absolute';
+            cloneContainer.style.top = '-9999px';
+            cloneContainer.style.left = '-9999px';
+            document.body.appendChild(cloneContainer);
+            
+            // Usar html2canvas para renderizar
+            const canvas = await html2canvas(cloneContainer, {
+                scale: 2,
+                backgroundColor: '#ffffff',
+                logging: false,
+                useCORS: false
+            });
+            
+            // Remover clone
+            document.body.removeChild(cloneContainer);
+            
+            // Criar PDF com jsPDF (modo paisagem ou retrato? melhor retrato com largura A4)
+            const { jsPDF } = window.jspdf;
+            const imgData = canvas.toDataURL('image/png');
+            const pdf = new jsPDF({
+                orientation: 'portrait',
+                unit: 'mm',
+                format: 'a4'
+            });
+            
+            const imgWidth = 210; // mm A4 largura
+            const pageHeight = 297;
+            const imgHeight = (canvas.height * imgWidth) / canvas.width;
+            let position = 0;
+            
+            pdf.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight);
+            
+            // Se a imagem ultrapassar uma página, adicionar nova página (caso necessário)
+            let heightLeft = imgHeight - pageHeight;
+            while (heightLeft > 0) {
+                position = heightLeft - imgHeight;
+                pdf.addPage();
+                pdf.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight);
+                heightLeft -= pageHeight;
+            }
+            
+            // Salvar PDF com nome personalizado
+            const nomeCliente = document.getElementById('nomeCliente').value.trim().replace(/\s+/g, '_');
+            const numPedido = document.getElementById('numPedido').value.trim() || 'pedido';
+            pdf.save(`Comprovante_${numPedido}_${nomeCliente}.pdf`);
+            
+            // Feedback visual
+            alert('✅ Comprovante gerado com sucesso! O arquivo PDF foi baixado.');
+        } catch (error) {
+            console.error('Erro ao gerar PDF:', error);
+            mensagemErro.style.display = 'block';
+            mensagemErro.innerText = '❌ Erro ao gerar o PDF. Tente novamente ou atualize a página.';
+        } finally {
+            carregandoDiv.style.display = 'none';
+            gerarBtn.disabled = false;
+        }
+    }
+
+    // Evento do botão
+    gerarBtn.addEventListener('click', gerarPDF);
+    
+    // Inicializar cálculo da entrada ao carregar a página
+    calcularEntrada();
+    
+    // Opcional: colocar um placeholder dinâmico no foro com base na localização (pode ser útil)
+    document.getElementById('foro').value = "Santos/SP";
+</script>
 </body>
 </html>

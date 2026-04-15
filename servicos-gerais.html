@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-    <title>Termo de Serviços - ECS Impressões de Documentos e Apotilas - Gráfica Rápida | Comprovante PDF</title>
-    <!-- Bibliotecas para gerar PDF -->
+    <title>Termo de Serviços - ECS Impressões | Comprovante Digital</title>
+    <!-- Bibliotecas para gerar PDF com qualidade profissional -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <style>
@@ -14,254 +14,336 @@
             box-sizing: border-box;
         }
         body {
-            background: #e6e9ef;
-            font-family: Arial, Helvetica, sans-serif;
-            padding: 20px;
+            background: #eef2f7;
+            font-family: 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+            padding: 30px 20px;
             color: #1e2a3e;
         }
         .container {
-            max-width: 1000px;
+            max-width: 1100px;
             margin: 0 auto;
             background: white;
-            border-radius: 16px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            border-radius: 24px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
             overflow: hidden;
-            padding: 25px 30px 40px;
+            padding: 30px 35px 45px;
+            transition: all 0.2s;
         }
         h1 {
-            font-size: 1.8rem;
+            font-size: 1.9rem;
             text-align: center;
             color: #0b3b5f;
-            border-bottom: 2px solid #ccc;
-            padding-bottom: 12px;
+            border-bottom: 3px solid #f4a261;
+            display: inline-block;
+            padding-bottom: 8px;
             margin-bottom: 25px;
+            width: auto;
+        }
+        .titulo-central {
+            text-align: center;
         }
         h2 {
-            font-size: 1.3rem;
-            margin: 20px 0 12px 0;
+            font-size: 1.35rem;
+            margin: 25px 0 15px 0;
             color: #1e4663;
-            border-left: 4px solid #f4a261;
-            padding-left: 12px;
+            border-left: 5px solid #f4a261;
+            padding-left: 14px;
+            background: linear-gradient(to right, #f9fafc, transparent);
         }
         .campos {
-            background: #f8fafc;
-            padding: 20px;
-            border-radius: 12px;
+            background: #fdfdfe;
+            padding: 20px 25px;
+            border-radius: 20px;
             margin-bottom: 25px;
-            border: 1px solid #cbd5e1;
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.02);
         }
         .linha {
             display: flex;
             flex-wrap: wrap;
-            gap: 15px;
-            margin-bottom: 15px;
+            gap: 18px;
+            margin-bottom: 18px;
         }
         .campo {
             flex: 1;
-            min-width: 180px;
+            min-width: 200px;
         }
         label {
-            font-weight: bold;
+            font-weight: 600;
             display: block;
-            margin-bottom: 5px;
-            font-size: 0.85rem;
-            color: #2c3e4e;
+            margin-bottom: 6px;
+            font-size: 0.8rem;
+            color: #2c5282;
+            letter-spacing: 0.3px;
         }
         input, select, textarea {
             width: 100%;
-            padding: 10px 12px;
-            border: 1px solid #b9c3cf;
-            border-radius: 8px;
+            padding: 10px 14px;
+            border: 1px solid #cbd5e0;
+            border-radius: 12px;
             font-size: 0.9rem;
             background: white;
+            transition: 0.2s;
+            font-family: inherit;
         }
         input:focus, select:focus {
             outline: none;
             border-color: #f4a261;
-            box-shadow: 0 0 0 2px rgba(244,162,97,0.2);
+            box-shadow: 0 0 0 3px rgba(244,162,97,0.2);
         }
         input[readonly] {
-            background-color: #eef2f5;
-            cursor: default;
+            background-color: #f1f5f9;
+            font-weight: 500;
+            color: #1e4663;
         }
         .clausulas {
             margin: 30px 0;
-            max-height: 400px;
+            max-height: 450px;
             overflow-y: auto;
-            border: 1px solid #ddd;
-            padding: 15px 20px;
-            background: #fffef7;
-            border-radius: 12px;
+            border: 1px solid #e2e8f0;
+            padding: 18px 25px;
+            background: #fffef8;
+            border-radius: 20px;
             font-size: 0.85rem;
-            line-height: 1.5;
+            line-height: 1.55;
+            box-shadow: inset 0 1px 3px rgba(0,0,0,0.02);
         }
         .clausulas p {
-            margin-bottom: 12px;
+            margin-bottom: 14px;
             text-align: justify;
         }
         .aceite {
-            background: #f1f5f9;
-            padding: 20px;
-            border-radius: 12px;
-            margin: 20px 0;
+            background: #f0f4fa;
+            padding: 18px 25px;
+            border-radius: 20px;
+            margin: 25px 0;
             display: flex;
             align-items: flex-start;
-            gap: 12px;
+            gap: 15px;
             flex-wrap: wrap;
+            border-left: 5px solid #2c6e9e;
         }
         .aceite input {
             width: 22px;
             height: 22px;
-            margin-top: 2px;
+            margin-top: 3px;
         }
         .btn {
-            background: #2c6e9e;
+            background: linear-gradient(135deg, #1e4663, #0f2c44);
             color: white;
             border: none;
             padding: 14px 28px;
-            font-size: 1rem;
+            font-size: 1.05rem;
             font-weight: bold;
-            border-radius: 40px;
+            border-radius: 60px;
             cursor: pointer;
             width: 100%;
-            transition: background 0.2s;
+            transition: 0.2s;
             margin-top: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            box-shadow: 0 5px 12px rgba(0,0,0,0.1);
         }
         .btn:hover {
-            background: #1e4a76;
-        }
-        .resumo {
-            background: #eef2f5;
-            padding: 15px;
-            border-radius: 10px;
-            margin-top: 25px;
-            font-size: 0.85rem;
-            display: none;
-        }
-        footer {
-            text-align: center;
-            margin-top: 30px;
-            font-size: 0.7rem;
-            color: #6c7a8a;
-        }
-        hr {
-            margin: 20px 0;
+            background: linear-gradient(135deg, #0f2c44, #091e30);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 18px rgba(0,0,0,0.15);
         }
         .mensagem-erro {
             color: #c0392b;
-            background: #fadbd8;
-            padding: 8px 12px;
-            border-radius: 8px;
-            margin-top: 10px;
+            background: #fee2e2;
+            padding: 10px 16px;
+            border-radius: 40px;
+            margin-top: 12px;
             display: none;
             font-size: 0.85rem;
             text-align: center;
+            font-weight: 500;
         }
         .carregando {
             display: none;
             text-align: center;
             margin: 15px 0;
-            font-weight: bold;
+            font-weight: 600;
             color: #2c6e9e;
+            background: #eef2ff;
+            padding: 8px;
+            border-radius: 40px;
+        }
+        footer {
+            text-align: center;
+            margin-top: 35px;
+            font-size: 0.7rem;
+            color: #6c7a8a;
+            border-top: 1px solid #e2e8f0;
+            padding-top: 20px;
+        }
+        /* Estilo para a área do PDF (layout profissional) */
+        .pdf-profissional {
+            background: white;
+            font-family: 'Segoe UI', Roboto, sans-serif;
+            padding: 30px;
+            max-width: 100%;
+        }
+        .pdf-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 3px solid #f4a261;
+            padding-bottom: 15px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+        .logo-area {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .logo-img {
+            max-height: 65px;
+            width: auto;
+        }
+        .empresa-nome {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: #0b3b5f;
+            letter-spacing: -0.5px;
+        }
+        .empresa-slogan {
+            font-size: 0.7rem;
+            color: #4a627a;
+        }
+        .titulo-doc {
+            text-align: right;
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: #f4a261;
+        }
+        .info-cliente {
+            background: #f8fafc;
+            padding: 18px;
+            border-radius: 16px;
+            margin: 20px 0;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+            border: 1px solid #e2edf7;
+        }
+        .campo-pdf {
+            font-size: 0.85rem;
+        }
+        .campo-pdf strong {
+            color: #1e4663;
+        }
+        .termos-texto {
+            margin-top: 25px;
+            font-size: 0.8rem;
+            line-height: 1.5;
+            text-align: justify;
+            background: #fefcf5;
+            padding: 15px;
+            border-radius: 12px;
+        }
+        .assinatura-digital {
+            margin-top: 35px;
+            border-top: 1px dashed #aaa;
+            padding-top: 20px;
+            font-size: 0.75rem;
+            text-align: center;
+            color: #3a546d;
+        }
+        @media (max-width: 700px) {
+            .container { padding: 20px; }
+            .info-cliente { grid-template-columns: 1fr; }
         }
     </style>
 </head>
 <body>
-<div class="container" id="conteudo-termo">
-    <h1>TERMO DE RESPONSABILIDADE E CONDIÇÕES<br>PARA SERVIÇOS DE GRÁFICA RÁPIDA</h1>
+<div class="container" id="formularioSite">
+    <div class="titulo-central">
+        <h1>📄 TERMO DE RESPONSABILIDADE E CONDIÇÕES</h1>
+        <p style="margin-bottom: 10px; color:#2c5282;">ECS Impressões - Gráfica Rápida e Profissional</p>
+    </div>
 
     <div class="campos">
-        <h2>DADOS DO PEDIDO (preencha todos)</h2>
-
+        <h2>🔖 DADOS DO PEDIDO</h2>
         <div class="linha">
-            <div class="campo"><label>Número do pedido</label><input type="text" id="numPedido" placeholder="Ex: 2025-00123"></div>
+            <div class="campo"><label>Número do pedido</label><input type="text" id="numPedido" placeholder="Ex: ECS-2404-01"></div>
             <div class="campo"><label>Data do pedido</label><input type="date" id="dataPedido"></div>
         </div>
-
         <div class="linha">
             <div class="campo"><label>Nome completo do cliente</label><input type="text" id="nomeCliente" placeholder="Nome completo"></div>
             <div class="campo"><label>CPF ou CNPJ</label><input type="text" id="docCliente" placeholder="000.000.000-00"></div>
         </div>
-
         <div class="linha">
-            <div class="campo"><label>Telefone</label><input type="tel" id="telefone" placeholder="(00) 00000-0000"></div>
+            <div class="campo"><label>Telefone / WhatsApp</label><input type="tel" id="telefone" placeholder="(13) 98808-9754"></div>
             <div class="campo"><label>E-mail</label><input type="email" id="email" placeholder="cliente@email.com"></div>
         </div>
-
         <div class="linha">
-            <div class="campo"><label>Descrição do produto/serviço</label><input type="text" id="descricao" placeholder="Ex: apostilas, encadernação, impressão..."></div>
-            <div class="campo"><label>Quantidade solicitada</label><input type="text" id="quantidade" placeholder="Ex: 50 unidades"></div>
+            <div class="campo"><label>Descrição do serviço</label><input type="text" id="descricao" placeholder="Ex: Apostilas coloridas, encadernação, etc"></div>
+            <div class="campo"><label>Quantidade</label><input type="text" id="quantidade" placeholder="Ex: 100 unidades"></div>
         </div>
-
         <div class="linha">
             <div class="campo"><label>Valor total (R$)</label><input type="number" id="valorTotal" step="0.01" placeholder="0,00"></div>
             <div class="campo"><label>Valor do frete (R$)</label><input type="number" id="valorFrete" step="0.01" placeholder="0,00" value="0"></div>
         </div>
-
         <div class="linha">
             <div class="campo"><label>Valor da entrada (50% - R$)</label><input type="text" id="entrada" readonly></div>
             <div class="campo"><label>Forma de pagamento</label>
                 <select id="formaPagamento">
-                    <option>Cartão</option>
                     <option>PIX</option>
+                    <option>Cartão de crédito</option>
                     <option>Dinheiro</option>
                     <option>Transferência bancária</option>
                 </select>
             </div>
         </div>
-
         <div class="linha">
-            <div class="campo"><label>Prazo de entrega estimado (dias úteis)</label><input type="number" id="prazo" placeholder="dias"></div>
-            <div class="campo"><label>Foro de eleição (cidade/estado)</label><input type="text" id="foro" placeholder="Ex: Santos/SP"></div>
+            <div class="campo"><label>Prazo de entrega (dias úteis)</label><input type="number" id="prazo" placeholder="dias"></div>
+            <div class="campo"><label>Foro de eleição (cidade/UF)</label><input type="text" id="foro" placeholder="Ex: Santos/SP"></div>
         </div>
     </div>
 
-    <h2>CLÁUSULAS CONTRATUAIS</h2>
-
+    <h2>📜 CLÁUSULAS CONTRATUAIS</h2>
     <div class="clausulas" id="clausulasTexto">
-        <p><strong>1. DA RESPONSABILIDADE SOBRE O CONTEÚDO DA ARTE</strong><br>
-        Todas as informações, textos, imagens, logotipos, dados ou qualquer outro elemento contido na(s) arte(s) fornecida(s) pelo cliente são de sua inteira e exclusiva responsabilidade. A gráfica não se responsabiliza por erros de ortografia, direitos autorais ou qualquer outro vício de conteúdo.</p>
-
-        <p><strong>2. DOS VALORES E ORÇAMENTOS</strong><br>
-        Orçamentos têm validade de 7 (sete) dias corridos. Após esse prazo, novos preços poderão ser praticados. O valor final somente será garantido mediante pagamento da entrada de 50%.</p>
-
-        <p><strong>3. DA CRIAÇÃO DE ARTE</strong><br>
-        Serviço opcional com valor adicional, mediante orçamento separado. Caso o cliente forneça arte pronta, assume total responsabilidade sobre dimensões, sangrias e resolução (mínimo 300 DPI).</p>
-
-        <p><strong>4. DA QUALIDADE DOS ARQUIVOS</strong><br>
-        Arquivos devem ter resolução mínima de 300 DPI e estar em formato PDF, CDR, EPS ou TIFF. Arquivos em baixa resolução poderão sofrer perda de qualidade, isentando a gráfica de qualquer responsabilidade.</p>
-
-        <p><strong>5. DAS VARIAÇÕES DE COR</strong><br>
-        Podem ocorrer variações naturais de até 10% entre a arte digital e o material impresso, devido às diferenças entre monitores e processos gráficos (sistema CMYK). Não realizamos reimpressão por variações leves de tonalidade.</p>
-
-        <p><strong>6. DA APROVAÇÃO</strong><br>
-        O cliente deve aprovar a arte por escrito (e-mail, WhatsApp ou assinatura) antes do início da impressão. Após a aprovação, não serão aceitas alterações ou cancelamentos.</p>
-
-        <p><strong>7. DO PRAZO</strong><br>
-        O prazo de entrega começa a contar a partir da confirmação do pagamento da entrada E da aprovação final da arte. Dias úteis, exceto sábados, domingos e feriados.</p>
-
-        <p><strong>8. DO PAGAMENTO</strong><br>
-        Entrada de 50% obrigatória para início da produção. Os 50% restantes devem ser quitados antes da retirada ou envio do material. Em caso de atraso no pagamento do saldo, a entrega fica suspensa.</p>
-
-        <p><strong>9. DO FORO</strong><br>
-        Fica eleito o foro da comarca indicada no campo "Foro de eleição" para dirimir quaisquer dúvidas oriundas deste contrato.</p>
-        
+        <p><strong>1. RESPONSABILIDADE SOBRE ARTE E CONTEÚDO</strong><br>
+        O cliente declara ser o legítimo titular dos direitos sobre textos, imagens e logotipos fornecidos, isentando a ECS Impressões de qualquer reclamação de terceiros. A gráfica não realiza revisão ortográfica ou de conteúdo.</p>
+        <p><strong>2. VALIDADE DO ORÇAMENTO</strong><br>
+        O orçamento é válido por 7 dias corridos. Após este prazo, novos preços poderão ser aplicados. O valor final é garantido somente com o pagamento da entrada de 50%.</p>
+        <p><strong>3. CRIAÇÃO DE ARTE</strong><br>
+        Serviço de criação de arte (design) é opcional e cobrado à parte. Caso o cliente forneça arte pronta, deve respeitar as especificações técnicas (300 DPI, sangrias de 3mm, cores CMYK).</p>
+        <p><strong>4. QUALIDADE DOS ARQUIVOS</strong><br>
+        Arquivos em baixa resolução podem resultar em impressão com falhas. A ECS Impressões não se responsabiliza por perda de qualidade devido a arquivos inadequados fornecidos pelo cliente.</p>
+        <p><strong>5. VARIAÇÕES DE COR</strong><br>
+        As cores podem variar em até 10% entre a arte digital e o material impresso, devido às diferenças entre monitores e o sistema CMYK. Não realizamos reimpressão por pequenas diferenças tonais.</p>
+        <p><strong>6. APROVAÇÃO DA ARTE</strong><br>
+        O cliente deve aprovar a prova de arte por escrito (e-mail, WhatsApp ou assinatura) antes da produção. Após aprovação, não serão aceitas alterações ou cancelamentos.</p>
+        <p><strong>7. INÍCIO DO PRAZO</strong><br>
+        O prazo de entrega começa a contar a partir da confirmação do pagamento da entrada E da aprovação final da arte. Dias úteis, excluindo sábados, domingos e feriados.</p>
+        <p><strong>8. PAGAMENTO</strong><br>
+        Entrada de 50% obrigatória para início da produção. O saldo de 50% deve ser quitado antes da retirada ou envio do material. Em caso de atraso, a entrega fica suspensa.</p>
+        <p><strong>9. FORO DE ELEIÇÃO</strong><br>
+        Fica eleito o foro da comarca indicada no campo "Foro de eleição" para resolver quaisquer controvérsias oriundas deste contrato.</p>
         <p><strong>10. CANCELAMENTO E DEVOLUÇÃO</strong><br>
-        Cancelamentos solicitados após a aprovação da arte ou início da impressão implicam perda total do valor pago (entrada). Não aceitamos devolução de produtos personalizados, salvo defeito de fabricação comprovado.</p>
+        Cancelamentos após aprovação da arte ou início da produção implicam perda total do valor pago. Não há devolução de produtos personalizados, salvo comprovado defeito de fabricação.</p>
     </div>
 
     <div class="aceite">
         <input type="checkbox" id="aceiteCheckbox">
-        <label><strong>Declaro que li e aceito todos os termos acima, estou ciente das condições de pagamento, prazos e responsabilidades.</strong></label>
+        <label><strong>✅ Declaro que li e aceito integralmente todas as cláusulas acima, estou ciente das condições de pagamento, prazos e responsabilidades.</strong></label>
     </div>
 
-    <button class="btn" id="gerarPDFBtn">📄 GERAR COMPROVANTE DIGITAL (PDF)</button>
+    <button class="btn" id="gerarPDFBtn">
+        🧾 GERAR COMPROVANTE PROFISSIONAL (PDF) 🧾
+    </button>
     <div id="mensagemErro" class="mensagem-erro"></div>
-    <div id="carregando" class="carregando"><i class="fas fa-spinner fa-spin"></i> Gerando PDF, aguarde...</div>
+    <div id="carregando" class="carregando">⏳ Processando PDF de alta qualidade, aguarde...</div>
 
     <footer>
-        Documento digital - Gráfica Rápida ECS Impressões<br>
-        Este termo possui validade legal mediante aceite eletrônico.
+        ECS Impressões - Gráfica Rápida | CNPJ 13.419.451/0001-00 | Av. Brasil, 284 - Casqueiro, Cubatão/SP<br>
+        Documento com validade jurídica mediante aceite eletrônico.
     </footer>
 </div>
 
@@ -275,8 +357,7 @@
     const mensagemErro = document.getElementById('mensagemErro');
     const carregandoDiv = document.getElementById('carregando');
 
-    // Função para calcular entrada (50% do valor total + frete? Conforme termo: entrada 50% do valor total? O valor total já pode incluir frete ou não.
-    // De acordo com boas práticas: a entrada é 50% do valor total (produto + frete). Vamos calcular sobre a soma dos dois campos.
+    // Calcular entrada automaticamente (50% sobre total + frete)
     function calcularEntrada() {
         let total = parseFloat(valorTotalInput.value) || 0;
         let frete = parseFloat(valorFreteInput.value) || 0;
@@ -284,35 +365,27 @@
         let entrada = soma * 0.5;
         entradaInput.value = entrada.toFixed(2);
     }
-
-    // Atualizar entrada sempre que valor total ou frete mudar
     valorTotalInput.addEventListener('input', calcularEntrada);
     valorFreteInput.addEventListener('input', calcularEntrada);
-
-    // Definir data atual automaticamente no campo data
-    const hoje = new Date().toISOString().split('T')[0];
-    document.getElementById('dataPedido').value = hoje;
-
-    // Validação dos campos obrigatórios
+    
+    // Data atual padrão
+    document.getElementById('dataPedido').value = new Date().toISOString().split('T')[0];
+    document.getElementById('foro').value = "Santos/SP";
+    
+    // Validar campos obrigatórios e aceite
     function validarCampos() {
-        const camposIds = ['numPedido', 'nomeCliente', 'docCliente', 'telefone', 'email', 'descricao', 'quantidade', 'prazo', 'foro'];
-        for (let id of camposIds) {
-            let campo = document.getElementById(id);
-            if (!campo.value.trim()) {
-                return false;
-            }
+        const obrigatorios = ['numPedido', 'nomeCliente', 'docCliente', 'telefone', 'email', 'descricao', 'quantidade', 'prazo'];
+        for (let id of obrigatorios) {
+            if (!document.getElementById(id).value.trim()) return false;
         }
         if (!valorTotalInput.value || parseFloat(valorTotalInput.value) <= 0) return false;
         if (!aceiteCheck.checked) return false;
         return true;
     }
 
-    // Função para gerar PDF usando html2canvas + jsPDF (qualidade boa)
-    async function gerarPDF() {
-        // Limpar mensagem de erro
+    // Criar layout profissional para o PDF com LOGO ECS
+    async function gerarPDFProfissional() {
         mensagemErro.style.display = 'none';
-        mensagemErro.innerText = '';
-
         if (!validarCampos()) {
             mensagemErro.style.display = 'block';
             mensagemErro.innerText = '❌ Preencha todos os campos obrigatórios e aceite os termos antes de gerar o comprovante.';
@@ -323,80 +396,108 @@
         gerarBtn.disabled = true;
 
         try {
-            // Criar um elemento temporário clonando o conteúdo para o PDF (para não interferir na tela)
-            const elementoOriginal = document.getElementById('conteudo-termo');
-            const cloneContainer = elementoOriginal.cloneNode(true);
+            // Coletar dados preenchidos
+            const numPedido = document.getElementById('numPedido').value;
+            const dataPedido = document.getElementById('dataPedido').value;
+            const nomeCliente = document.getElementById('nomeCliente').value;
+            const docCliente = document.getElementById('docCliente').value;
+            const telefone = document.getElementById('telefone').value;
+            const email = document.getElementById('email').value;
+            const descricao = document.getElementById('descricao').value;
+            const quantidade = document.getElementById('quantidade').value;
+            const valorTotal = parseFloat(valorTotalInput.value).toFixed(2);
+            const frete = parseFloat(valorFreteInput.value || 0).toFixed(2);
+            const entrada = entradaInput.value;
+            const formaPag = document.getElementById('formaPagamento').value;
+            const prazo = document.getElementById('prazo').value;
+            const foro = document.getElementById('foro').value;
+
+            // Criar elemento temporário para renderização do PDF
+            const divPDF = document.createElement('div');
+            divPDF.className = 'pdf-profissional';
+            divPDF.style.width = '800px';
+            divPDF.style.background = 'white';
+            divPDF.style.padding = '30px';
+            divPDF.style.fontFamily = 'Segoe UI, Roboto, sans-serif';
             
-            // Remover botões e elementos interativos do clone, para não aparecer no PDF
-            const btnClone = cloneContainer.querySelector('#gerarPDFBtn');
-            if (btnClone) btnClone.remove();
-            const carregandoClone = cloneContainer.querySelector('#carregando');
-            if (carregandoClone) carregandoClone.remove();
-            const msgErroClone = cloneContainer.querySelector('#mensagemErro');
-            if (msgErroClone) msgErroClone.remove();
+            // HTML estruturado com LOGO ECS (tentativa de carregar logo local, se não existir, exibe texto estilizado)
+            // Usaremos uma imagem base64 de exemplo? Melhor: criar uma div com nome ECS em destaque, mas também permitir logo real.
+            // Como não temos o arquivo real, vamos criar uma área de logo profissional com iniciais e nome da empresa.
+            // O usuário pode substituir a imagem depois.
+            const logoHtml = `
+                <div class="logo-area">
+                    <div style="background: #0b3b5f; width: 50px; height: 50px; display: flex; align-items: center; justify-content: center; border-radius: 12px; color: white; font-weight: bold; font-size: 24px;">ECS</div>
+                    <div>
+                        <div class="empresa-nome">ECS Impressões</div>
+                        <div class="empresa-slogan">Gráfica Rápida • Qualidade & Agilidade</div>
+                    </div>
+                </div>
+            `;
             
-            // Ajustar estilos para impressão no PDF
-            cloneContainer.style.padding = '20px';
-            cloneContainer.style.backgroundColor = 'white';
-            cloneContainer.style.maxWidth = '100%';
-            cloneContainer.style.margin = '0';
-            cloneContainer.style.borderRadius = '0';
+            // Se o usuário quiser usar imagem real, pode descomentar a linha abaixo e substituir pelo caminho correto.
+            // Por enquanto usamos o design moderno com texto estilizado (garantindo que mesmo sem imagem funcione).
             
-            // Adicionar um cabeçalho adicional informando que é comprovante
-            const cabecalho = document.createElement('div');
-            cabecalho.style.textAlign = 'center';
-            cabecalho.style.marginBottom = '20px';
-            cabecalho.style.fontSize = '12px';
-            cabecalho.style.color = '#555';
-            cabecalho.innerHTML = '<hr><p><strong>COMPROVANTE DE ACEITE E CONTRATO DE SERVIÇOS</strong><br>Documento gerado eletronicamente com base nos dados informados.</p><hr>';
-            cloneContainer.insertBefore(cabecalho, cloneContainer.firstChild);
+            const conteudoHTML = `
+                <div class="pdf-header">
+                    ${logoHtml}
+                    <div class="titulo-doc">COMPROVANTE DE CONTRATO<br>E ACEITE</div>
+                </div>
+                <div style="margin-bottom: 15px;">
+                    <p><strong>Documento emitido eletronicamente</strong> com base nas informações fornecidas pelo cliente, conforme Termo de Serviços da ECS Impressões.</p>
+                </div>
+                <div class="info-cliente">
+                    <div class="campo-pdf"><strong>📌 Nº Pedido:</strong> ${numPedido}</div>
+                    <div class="campo-pdf"><strong>📅 Data:</strong> ${dataPedido}</div>
+                    <div class="campo-pdf"><strong>👤 Cliente:</strong> ${nomeCliente}</div>
+                    <div class="campo-pdf"><strong>🆔 CPF/CNPJ:</strong> ${docCliente}</div>
+                    <div class="campo-pdf"><strong>📞 Telefone:</strong> ${telefone}</div>
+                    <div class="campo-pdf"><strong>✉️ E-mail:</strong> ${email}</div>
+                    <div class="campo-pdf"><strong>📦 Serviço:</strong> ${descricao}</div>
+                    <div class="campo-pdf"><strong>🔢 Quantidade:</strong> ${quantidade}</div>
+                    <div class="campo-pdf"><strong>💰 Valor total:</strong> R$ ${valorTotal}</div>
+                    <div class="campo-pdf"><strong>🚚 Frete:</strong> R$ ${frete}</div>
+                    <div class="campo-pdf"><strong>💵 Entrada (50%):</strong> R$ ${entrada}</div>
+                    <div class="campo-pdf"><strong>💳 Pagamento:</strong> ${formaPag}</div>
+                    <div class="campo-pdf"><strong>⏱️ Prazo entrega:</strong> ${prazo} dias úteis</div>
+                    <div class="campo-pdf"><strong>⚖️ Foro:</strong> ${foro}</div>
+                </div>
+                <div class="termos-texto">
+                    <h4 style="color:#1e4663;">📋 Resumo das Cláusulas Contratuais</h4>
+                    <p>O cliente declara ter lido e aceitado integralmente todas as cláusulas do Termo de Serviços da ECS Impressões, incluindo responsabilidade sobre arquivos, aprovação de arte, variações de cor, pagamento de 50% de entrada, prazo de entrega, cancelamento e foro de eleição. Este documento possui validade jurídica e será anexado ao pedido.</p>
+                    <p><strong>Condições essenciais:</strong> A produção somente será iniciada após o pagamento da entrada e aprovação da arte. O saldo restante deverá ser quitado antes da retirada/entrega. Em caso de atraso na aprovação, o prazo será ajustado.</p>
+                </div>
+                <div class="assinatura-digital">
+                    <p>ECS Impressões - CNPJ: 13.419.451/0001-00<br>
+                    Aceite eletrônico registrado pelo cliente via sistema em ${new Date().toLocaleString('pt-BR')}<br>
+                    <strong>Cliente: ${nomeCliente} (${docCliente})</strong> - Documento assinado digitalmente por aceite no site oficial.</p>
+                </div>
+            `;
+            divPDF.innerHTML = conteudoHTML;
+            document.body.appendChild(divPDF);
             
-            // Adicionar rodapé com data/hora da geração
-            const rodape = document.createElement('div');
-            rodape.style.textAlign = 'center';
-            rodape.style.fontSize = '10px';
-            rodape.style.marginTop = '25px';
-            rodape.style.color = '#777';
-            rodape.style.borderTop = '1px solid #ccc';
-            rodape.style.paddingTop = '10px';
-            const agora = new Date();
-            rodape.innerHTML = `Gerado em: ${agora.toLocaleString('pt-BR')} - Gráfica Rápida ECS Impressões - CNPJ 13.419.451/0001-00`;
-            cloneContainer.appendChild(rodape);
-            
-            // Adicionar de forma temporária ao body para capturar imagem
-            cloneContainer.style.position = 'absolute';
-            cloneContainer.style.top = '-9999px';
-            cloneContainer.style.left = '-9999px';
-            document.body.appendChild(cloneContainer);
-            
-            // Usar html2canvas para renderizar
-            const canvas = await html2canvas(cloneContainer, {
-                scale: 2,
+            // Usar html2canvas com escala alta para qualidade profissional
+            const canvas = await html2canvas(divPDF, {
+                scale: 3,
                 backgroundColor: '#ffffff',
                 logging: false,
-                useCORS: false
+                useCORS: false,
+                windowWidth: divPDF.scrollWidth,
+                windowHeight: divPDF.scrollHeight
             });
+            document.body.removeChild(divPDF);
             
-            // Remover clone
-            document.body.removeChild(cloneContainer);
-            
-            // Criar PDF com jsPDF (modo paisagem ou retrato? melhor retrato com largura A4)
-            const { jsPDF } = window.jspdf;
             const imgData = canvas.toDataURL('image/png');
+            const { jsPDF } = window.jspdf;
             const pdf = new jsPDF({
                 orientation: 'portrait',
                 unit: 'mm',
                 format: 'a4'
             });
-            
-            const imgWidth = 210; // mm A4 largura
+            const imgWidth = 210;
             const pageHeight = 297;
             const imgHeight = (canvas.height * imgWidth) / canvas.width;
             let position = 0;
-            
             pdf.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight);
-            
-            // Se a imagem ultrapassar uma página, adicionar nova página (caso necessário)
             let heightLeft = imgHeight - pageHeight;
             while (heightLeft > 0) {
                 position = heightLeft - imgHeight;
@@ -405,31 +506,21 @@
                 heightLeft -= pageHeight;
             }
             
-            // Salvar PDF com nome personalizado
-            const nomeCliente = document.getElementById('nomeCliente').value.trim().replace(/\s+/g, '_');
-            const numPedido = document.getElementById('numPedido').value.trim() || 'pedido';
-            pdf.save(`Comprovante_${numPedido}_${nomeCliente}.pdf`);
-            
-            // Feedback visual
-            alert('✅ Comprovante gerado com sucesso! O arquivo PDF foi baixado.');
+            // Nome do arquivo personalizado
+            pdf.save(`Termo_ECS_${numPedido}_${nomeCliente.replace(/\s/g, '_')}.pdf`);
+            alert('✅ Comprovante profissional gerado com sucesso! O PDF foi baixado automaticamente.');
         } catch (error) {
-            console.error('Erro ao gerar PDF:', error);
+            console.error(error);
             mensagemErro.style.display = 'block';
-            mensagemErro.innerText = '❌ Erro ao gerar o PDF. Tente novamente ou atualize a página.';
+            mensagemErro.innerText = '❌ Falha ao gerar PDF. Tente novamente ou atualize a página.';
         } finally {
             carregandoDiv.style.display = 'none';
             gerarBtn.disabled = false;
         }
     }
-
-    // Evento do botão
-    gerarBtn.addEventListener('click', gerarPDF);
     
-    // Inicializar cálculo da entrada ao carregar a página
+    gerarBtn.addEventListener('click', gerarPDFProfissional);
     calcularEntrada();
-    
-    // Opcional: colocar um placeholder dinâmico no foro com base na localização (pode ser útil)
-    document.getElementById('foro').value = "Santos/SP";
 </script>
 </body>
 </html>

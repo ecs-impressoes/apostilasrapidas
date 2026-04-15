@@ -1,0 +1,239 @@
+<!DOCTYPE html> 
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>Termo de Serviços - Gráfica Rápida</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            background: #e6e9ef;
+            font-family: Arial, Helvetica, sans-serif;
+            padding: 20px;
+            color: #1e2a3e;
+        }
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            overflow: hidden;
+            padding: 25px 30px 40px;
+        }
+        h1 {
+            font-size: 1.8rem;
+            text-align: center;
+            color: #0b3b5f;
+            border-bottom: 2px solid #ccc;
+            padding-bottom: 12px;
+            margin-bottom: 25px;
+        }
+        h2 {
+            font-size: 1.3rem;
+            margin: 20px 0 12px 0;
+            color: #1e4663;
+            border-left: 4px solid #f4a261;
+            padding-left: 12px;
+        }
+        .campos {
+            background: #f8fafc;
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 25px;
+            border: 1px solid #cbd5e1;
+        }
+        .linha {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+        .campo {
+            flex: 1;
+            min-width: 180px;
+        }
+        label {
+            font-weight: bold;
+            display: block;
+            margin-bottom: 5px;
+            font-size: 0.85rem;
+            color: #2c3e4e;
+        }
+        input, select, textarea {
+            width: 100%;
+            padding: 10px 12px;
+            border: 1px solid #b9c3cf;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            background: white;
+        }
+        input:focus, select:focus {
+            outline: none;
+            border-color: #f4a261;
+            box-shadow: 0 0 0 2px rgba(244,162,97,0.2);
+        }
+        .clausulas {
+            margin: 30px 0;
+            max-height: 400px;
+            overflow-y: auto;
+            border: 1px solid #ddd;
+            padding: 15px 20px;
+            background: #fffef7;
+            border-radius: 12px;
+            font-size: 0.85rem;
+            line-height: 1.5;
+        }
+        .clausulas p {
+            margin-bottom: 12px;
+            text-align: justify;
+        }
+        .aceite {
+            background: #f1f5f9;
+            padding: 20px;
+            border-radius: 12px;
+            margin: 20px 0;
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+        .aceite input {
+            width: 22px;
+            height: 22px;
+            margin-top: 2px;
+        }
+        .btn {
+            background: #2c6e9e;
+            color: white;
+            border: none;
+            padding: 14px 28px;
+            font-size: 1rem;
+            font-weight: bold;
+            border-radius: 40px;
+            cursor: pointer;
+            width: 100%;
+            transition: background 0.2s;
+            margin-top: 10px;
+        }
+        .btn:hover {
+            background: #1e4a76;
+        }
+        .resumo {
+            background: #eef2f5;
+            padding: 15px;
+            border-radius: 10px;
+            margin-top: 25px;
+            font-size: 0.85rem;
+            display: none;
+        }
+        footer {
+            text-align: center;
+            margin-top: 30px;
+            font-size: 0.7rem;
+            color: #6c7a8a;
+        }
+        hr {
+            margin: 20px 0;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>TERMO DE RESPONSABILIDADE E CONDIÇÕES<br>PARA SERVIÇOS DE GRÁFICA RÁPIDA</h1>
+
+    <div class="campos">
+        <h2>DADOS DO PEDIDO (preencha todos)</h2>
+
+        <div class="linha">
+            <div class="campo"><label>Número do pedido</label><input type="text"></div>
+            <div class="campo"><label>Data do pedido</label><input type="date"></div>
+        </div>
+
+        <div class="linha">
+            <div class="campo"><label>Nome completo do cliente</label><input type="text"></div>
+            <div class="campo"><label>CPF ou CNPJ</label><input type="text"></div>
+        </div>
+
+        <div class="linha">
+            <div class="campo"><label>Telefone</label><input type="tel"></div>
+            <div class="campo"><label>E-mail</label><input type="email"></div>
+        </div>
+
+        <div class="linha">
+            <div class="campo"><label>Descrição do produto/serviço</label><input type="text"></div>
+            <div class="campo"><label>Quantidade solicitada</label><input type="text"></div>
+        </div>
+
+        <div class="linha">
+            <div class="campo"><label>Valor total (R$)</label><input type="number"></div>
+            <div class="campo"><label>Valor do frete (R$)</label><input type="number"></div>
+        </div>
+
+        <div class="linha">
+            <div class="campo"><label>Valor da entrada (50% - R$)</label><input type="number" readonly></div>
+            <div class="campo"><label>Forma de pagamento</label>
+                <select>
+                    <option>Cartão</option>
+                    <option>PIX</option>
+                    <option>Dinheiro</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="linha">
+            <div class="campo"><label>Prazo de entrega estimado (dias úteis)</label><input type="number"></div>
+            <div class="campo"><label>Foro de eleição (cidade/estado)</label><input type="text"></div>
+        </div>
+    </div>
+
+    <h2>CLÁUSULAS CONTRATUAIS</h2>
+
+    <div class="clausulas">
+        <p><strong>1. DA RESPONSABILIDADE SOBRE O CONTEÚDO DA ARTE</strong><br>
+        Todas as informações, textos, imagens, logotipos, dados ou qualquer outro elemento contido na(s) arte(s) fornecida(s) pelo cliente são de sua inteira e exclusiva responsabilidade.</p>
+
+        <p><strong>2. DOS VALORES E ORÇAMENTOS</strong><br>
+        Orçamentos têm validade de 7 (sete) dias corridos.</p>
+
+        <p><strong>3. DA CRIAÇÃO DE ARTE</strong><br>
+        Serviço opcional com valor adicional.</p>
+
+        <p><strong>4. DA QUALIDADE DOS ARQUIVOS</strong><br>
+        Arquivos devem ter resolução mínima de 300 DPI.</p>
+
+        <p><strong>5. DAS VARIAÇÕES DE COR</strong><br>
+        Podem ocorrer variações naturais na impressão.</p>
+
+        <p><strong>6. DA APROVAÇÃO</strong><br>
+        O cliente deve aprovar a arte antes da impressão.</p>
+
+        <p><strong>7. DO PRAZO</strong><br>
+        O prazo inicia após aprovação e pagamento.</p>
+
+        <p><strong>8. DO PAGAMENTO</strong><br>
+        Entrada de 50% obrigatória.</p>
+
+        <p><strong>9. DO FORO</strong><br>
+        Fica eleito o foro da comarca indicada.</p>
+    </div>
+
+    <div class="aceite">
+        <input type="checkbox">
+        <label><strong>Declaro que li e aceito todos os termos acima.</strong></label>
+    </div>
+
+    <button class="btn">GERAR COMPROVANTE DIGITAL</button>
+
+    <footer>
+        Documento digital - Gráfica Rápida<br>
+        Este termo possui validade legal.
+    </footer>
+
+</div>
+</body>
+</html>

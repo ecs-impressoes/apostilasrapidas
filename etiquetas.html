@@ -527,17 +527,30 @@
 </a>
 
 <script>
-    // Configuração atualizada: preços fixos a partir da 11ª folha (antes era 10ª)
-    // Para qtd <= 9: unit = (base + 1) - qtd  (desconto de -1 real por folha extra)
-    // Para qtd >= 11: preço promocional fixo conforme tabela abaixo
-    // qtd = 10 segue a mesma regra progressiva (não entra no promocional)
+    // --- LÓGICA DE ACRÉSCIMO SILENCIOSO (15% às segundas, quartas e sextas) ---
+    function deveAplicarAcrescimo() {
+        const hoje = new Date();
+        const diaSemana = hoje.getDay(); // 0 = domingo, 1 = segunda, 2 = terça, 3 = quarta, 4 = quinta, 5 = sexta, 6 = sábado
+        // Segunda (1), Quarta (3), Sexta (5)
+        return (diaSemana === 1 || diaSemana === 3 || diaSemana === 5);
+    }
+
+    function aplicarAcrescimoSeNecessario(valor) {
+        if (deveAplicarAcrescimo()) {
+            return valor * 1.15;
+        }
+        return valor;
+    }
+    // -------------------------------------------------------------------------
+
+    // Configuração dos tipos de papel com valores base e fixos (já aplicaremos acréscimo depois)
     const papersConfig = {
         glossy: {
             name: "Glossy Adesivo",
             baseA4: 15,
             baseA3: 25,
-            fixedA4: 4.53,   // novo valor solicitado
-            fixedA3: 7.56,   // novo valor solicitado
+            fixedA4: 4.53,
+            fixedA3: 7.56,
             ruleDescription: "📌 Glossy: 1ª A4=R$15, 2ª=R$14 ... 9ª=R$7, 10ª=R$6 | A partir da 11ª folha: A4=R$4,53 fixo / A3=R$7,56 fixo"
         },
         vinil: {
@@ -561,24 +574,28 @@
     let tipoFormato = 'A4';
     let tipoPapel = 'glossy';
 
-    // Função que retorna o preço unitário conforme novas regras (a partir da 11ª folha)
-    function calcularPrecoUnitario(papelKey, formato, qtd) {
+    // Função que retorna o preço unitário base (sem acréscimo), depois aplica o acréscimo se necessário
+    function calcularPrecoUnitarioBase(papelKey, formato, qtd) {
         const cfg = papersConfig[papelKey];
         if (!cfg) return 0;
         const isA4 = (formato === 'A4');
         
         if (qtd <= 9) {
-            // desconto progressivo: (base + 1) - qtd
             const base = isA4 ? cfg.baseA4 : cfg.baseA3;
             return (base + 1) - qtd;
         } else if (qtd >= 11) {
-            // a partir da 11ª folha: preço fixo promocional
             return isA4 ? cfg.fixedA4 : cfg.fixedA3;
         } else {
-            // qtd === 10: continua a regra progressiva (não entra no fixo)
+            // qtd === 10
             const base = isA4 ? cfg.baseA4 : cfg.baseA3;
             return (base + 1) - qtd;
         }
+    }
+
+    // Função pública que já aplica o acréscimo silencioso
+    function calcularPrecoUnitario(papelKey, formato, qtd) {
+        const precoBase = calcularPrecoUnitarioBase(papelKey, formato, qtd);
+        return aplicarAcrescimoSeNecessario(precoBase);
     }
 
     function formatMoney(value) {
@@ -599,7 +616,9 @@
         document.getElementById('precoTotal').innerText = formatMoney(total);
 
         const cfg = papersConfig[tipoPapel];
-        const precoPrimeiraFolha = (tipoFormato === 'A4') ? cfg.baseA4 : cfg.baseA3;
+        // Preço da primeira folha também deve considerar o acréscimo para o cálculo da economia
+        const precoPrimeiraFolhaBase = (tipoFormato === 'A4') ? cfg.baseA4 : cfg.baseA3;
+        const precoPrimeiraFolha = aplicarAcrescimoSeNecessario(precoPrimeiraFolhaBase);
         const totalSemDesconto = precoPrimeiraFolha * qtd;
         const economia = totalSemDesconto - total;
         const economiaMsgDiv = document.getElementById('economiaMsg');
@@ -640,14 +659,14 @@
             
             const cellUA4 = row.insertCell(1);
             cellUA4.innerText = formatMoney(unitA4);
-            if (i >= 11 && Math.abs(unitA4 - cfg.fixedA4) < 0.01) cellUA4.classList.add('highlight-min');
+            if (i >= 11 && Math.abs(unitA4 - aplicarAcrescimoSeNecessario(cfg.fixedA4)) < 0.01) cellUA4.classList.add('highlight-min');
             
             const cellTA4 = row.insertCell(2);
             cellTA4.innerText = formatMoney(totalA4);
             
             const cellUA3 = row.insertCell(3);
             cellUA3.innerText = formatMoney(unitA3);
-            if (i >= 11 && Math.abs(unitA3 - cfg.fixedA3) < 0.01) cellUA3.classList.add('highlight-min');
+            if (i >= 11 && Math.abs(unitA3 - aplicarAcrescimoSeNecessario(cfg.fixedA3)) < 0.01) cellUA3.classList.add('highlight-min');
             
             const cellTA3 = row.insertCell(4);
             cellTA3.innerText = formatMoney(totalA3);

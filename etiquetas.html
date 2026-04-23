@@ -1,14 +1,9 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-     <div class="container header-content">
-                          <img src="ecs logo.png" alt="ECS-Impressões de Apostilas" class="logo-img">
-                <div class="logo-text">
-                <span>ECS Impressões | Etiquetas Adesivas Premium - Folha A4</span>
-                </div>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-    <title></title>
+    <title>ECS Impressões | Etiquetas Adesivas Premium</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
@@ -49,57 +44,50 @@
         .container {
             max-width: 1400px;
             margin: 0 auto;
-            padding: 2rem 2rem 3rem;
+            padding: 1.5rem 2rem 3rem;
             position: relative;
         }
 
-        .hero {
-            text-align: center;
-            margin-bottom: 3rem;
-            position: relative;
-        }
-
-        /* LOGO ECS - estilo premium */
-        .ecs-logo {
+        /* HEADER com logo à esquerda e tamanho reduzido */
+        .top-header {
             display: flex;
-            justify-content: center;
-            margin-bottom: 1.5rem;
-        }
-        .logo-wrapper {
-            background: linear-gradient(145deg, #1f2937, #0f1622);
-            border-radius: 60px;
-            padding: 0.5rem 1.8rem 0.5rem 1.5rem;
-            display: inline-flex;
             align-items: center;
-            gap: 14px;
-            backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 200, 100, 0.4);
-            box-shadow: 0 15px 30px -10px rgba(0,0,0,0.5);
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid rgba(255, 200, 100, 0.2);
         }
-        .logo-icon {
+        .logo-area {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .logo-icon-sm {
             background: linear-gradient(135deg, #FFD966, #FFB347);
-            width: 48px;
-            height: 48px;
+            width: 44px;
+            height: 44px;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.8rem;
+            font-size: 1.6rem;
             color: #1e1a0c;
             box-shadow: inset 0 1px 2px rgba(255,255,255,0.4), 0 5px 10px rgba(0,0,0,0.3);
         }
-        .logo-text {
+        .logo-text-sm {
             font-weight: 800;
-            font-size: 1.6rem;
+            font-size: 1.4rem;
             letter-spacing: -0.5px;
             background: linear-gradient(120deg, #FFF5E0, #FFD68A);
             background-clip: text;
             -webkit-background-clip: text;
             color: transparent;
         }
-        .logo-text span {
+        .logo-text-sm span {
             font-weight: 500;
-            font-size: 0.85rem;
+            font-size: 0.7rem;
             background: none;
             color: #c0b280;
             display: inline-block;
@@ -117,24 +105,25 @@
             font-size: 0.85rem;
             font-weight: 500;
             color: #ffdfa5;
-            margin-bottom: 1.5rem;
         }
-
+        .hero {
+            text-align: center;
+            margin-bottom: 2.5rem;
+        }
         .hero h1 {
-            font-size: 3.4rem;
+            font-size: 2.8rem;
             font-weight: 800;
             background: linear-gradient(135deg, #FFFFFF 0%, #FFD966 40%, #FFB347 100%);
             background-clip: text;
             -webkit-background-clip: text;
             color: transparent;
             letter-spacing: -0.02em;
-            margin-bottom: 1rem;
+            margin: 0.5rem 0 0.5rem;
         }
-
         .hero p {
-            font-size: 1.1rem;
+            font-size: 1rem;
             color: #9ca3af;
-            max-width: 650px;
+            max-width: 600px;
             margin: 0 auto;
         }
 
@@ -145,22 +134,21 @@
             border-radius: 2.5rem;
             box-shadow: 0 25px 45px -12px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255,255,255,0.05);
             padding: 2rem;
-            margin-bottom: 2.5rem;
+            margin-bottom: 2rem;
             transition: all 0.3s ease;
         }
 
-        /* formato único estático (apenas A4) */
         .formato-static {
             display: flex;
             justify-content: center;
-            margin-bottom: 2rem;
+            margin-bottom: 1.5rem;
         }
         .static-badge {
             background: linear-gradient(115deg, #2a353f, #1f2937);
             border: 1px solid rgba(255, 200, 100, 0.5);
             border-radius: 2rem;
-            padding: 0.7rem 2rem;
-            font-size: 1.2rem;
+            padding: 0.6rem 1.6rem;
+            font-size: 1.1rem;
             font-weight: 700;
             display: inline-flex;
             align-items: center;
@@ -168,10 +156,6 @@
             color: #ffeaC0;
             backdrop-filter: blur(4px);
             box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-        }
-        .static-badge i {
-            font-size: 1.4rem;
-            color: #ffcd7e;
         }
 
         .paper-selector {
@@ -447,14 +431,20 @@
 
         @media (max-width: 750px) {
             .container { padding: 1rem; }
-            .hero h1 { font-size: 2.2rem; }
-            .price-card .value { font-size: 1.8rem; }
+            .hero h1 { font-size: 2rem; }
+            .price-card .value { font-size: 1.6rem; }
             .glass-card { padding: 1rem; }
-            .paper-btn { padding: 0.4rem 1rem; font-size: 0.8rem; }
-            .static-badge { font-size: 1rem; padding: 0.5rem 1.2rem; }
-            .logo-wrapper { padding: 0.3rem 1.2rem 0.3rem 1rem; }
-            .logo-text { font-size: 1.2rem; }
-            .logo-icon { width: 36px; height: 36px; font-size: 1.3rem; }
+            .paper-btn { padding: 0.4rem 1rem; font-size: 0.75rem; }
+            .static-badge { font-size: 0.9rem; padding: 0.5rem 1rem; }
+            .top-header { flex-direction: column; align-items: flex-start; }
+            .logo-area { justify-content: flex-start; }
+            .logo-text-sm { font-size: 1.2rem; }
+            .logo-icon-sm { width: 38px; height: 38px; font-size: 1.3rem; }
+        }
+        @media (max-width: 480px) {
+            .price-card { padding: 0.7rem 1rem; min-width: 140px; }
+            .qty-btn { width: 44px; height: 44px; font-size: 1.4rem; }
+            #quantidade { width: 100px; font-size: 1.6rem; }
         }
     </style>
 </head>
@@ -463,26 +453,25 @@
 <div class="noise"></div>
 
 <div class="container">
-    <div class="hero">
-        <!-- LOGO ECS ADICIONADA -->
-        <div class="ecs-logo">
-            <div class="logo-wrapper">
-                <div class="logo-icon">
-                    <i class="fas fa-print"></i>
-                </div>
-                <div class="logo-text">ECS IMPRESSÕES <span>premium</span></div>
+    <!-- Header com logo à esquerda e tamanho reduzido -->
+    <div class="top-header">
+        <div class="logo-area">
+            <div class="logo-icon-sm">
+                <i class="fas fa-print"></i>
             </div>
+            <div class="logo-text-sm">ECS IMPRESSÕES <span>premium</span></div>
         </div>
-
         <div class="hero-badge">
             <i class="fas fa-tag"></i> Sem pedido mínimo • impressão sob demanda
         </div>
-        <h1>ECS Impressões<br><span style="font-size: 1.8rem; background: none; color:#f5bc70;">Etiquetas adesivas premium</span></h1>
-        <p>Alta qualidade, corte preciso e entrega ágil. Escolha o tipo de papel ideal para seu projeto.</p>
+    </div>
+
+    <div class="hero">
+        <h1>Etiquetas adesivas premium<br><span style="font-size: 1.5rem; background: none; color:#f5bc70;">alta definição • corte preciso</span></h1>
+        <p>Qualidade profissional com desconto progressivo. Escolha o acabamento ideal.</p>
     </div>
 
     <div class="glass-card">
-        <!-- Removido o seletor A4/A3, agora apenas formato A4 estático -->
         <div class="formato-static">
             <div class="static-badge">
                 <i class="fas fa-file-alt"></i> Folha A4 (formato exclusivo)
@@ -535,11 +524,7 @@
         <div class="table-wrapper">
             <table id="tabelaPrecos">
                 <thead>
-                    <tr>
-                        <th>Folhas (A4)</th>
-                        <th>Unitário (R$)</th>
-                        <th>Total (R$)</th>
-                    </tr>
+                    <tr><th>Folhas (A4)</th><th>Unitário (R$)</th><th>Total (R$)</th></tr>
                 </thead>
                 <tbody id="tabelaBody"></tbody>
             </table>
@@ -576,14 +561,14 @@
     // --- ACRÉSCIMO SILENCIOSO (15% às segundas, quartas e sextas) ---
     function deveAplicarAcrescimo() {
         const hoje = new Date();
-        const diaSemana = hoje.getDay(); // 0=domingo,1=segunda...
+        const diaSemana = hoje.getDay();
         return (diaSemana === 1 || diaSemana === 3 || diaSemana === 5);
     }
     function aplicarAcrescimoSeNecessario(valor) {
         return deveAplicarAcrescimo() ? valor * 1.15 : valor;
     }
 
-    // CONFIGURAÇÃO APENAS PARA A4 (TODAS AS REFERÊNCIAS A A3 FORAM REVOGADAS)
+    // APENAS FORMATO A4 - Configuração de papéis
     const papersConfig = {
         glossy: {
             name: "Glossy Adesivo",
@@ -605,9 +590,9 @@
         }
     };
 
-    let tipoPapel = 'glossy';   // apenas para gestão do papel ativo
+    let tipoPapel = 'glossy';
 
-    // Função que retorna preço unitário BASE (sem acréscimo) com regras A4
+    // Preço unitário base (sem acréscimo de dias)
     function calcularPrecoUnitarioBase(papelKey, quantidade) {
         const cfg = papersConfig[papelKey];
         if (!cfg) return 0;
@@ -669,7 +654,6 @@
         document.getElementById('papelTabelaNome').innerText = papersConfig[tipoPapel].name;
     }
 
-    // TABELA SOMENTE COM COLUNAS A4 (sem qualquer vestígio de A3)
     function atualizarTabela() {
         const tbody = document.getElementById('tabelaBody');
         if (!tbody) return;
@@ -732,7 +716,7 @@
         atualizarUI();
     }
 
-    // Eventos dos papéis
+    // event listeners dos papéis
     document.querySelectorAll('.paper-btn').forEach(btn => {
         btn.addEventListener('click', () => {
             const papel = btn.getAttribute('data-paper');
@@ -767,7 +751,7 @@
     });
     inputQtd.addEventListener('change', () => atualizarUI());
 
-    // Inicialização: apenas A4 ativo, remove qualquer resquício de A3
+    // Inicialização
     setPapel('glossy');
 </script>
 </body>

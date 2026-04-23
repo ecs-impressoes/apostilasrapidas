@@ -48,7 +48,7 @@
             position: relative;
         }
 
-        /* HEADER com logo à esquerda e tamanho reduzido */
+        /* HEADER com logo à esquerda usando imagem real */
         .top-header {
             display: flex;
             align-items: center;
@@ -64,34 +64,16 @@
             align-items: center;
             gap: 12px;
         }
-        .logo-icon-sm {
-            background: linear-gradient(135deg, #FFD966, #FFB347);
-            width: 44px;
-            height: 44px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.6rem;
-            color: #1e1a0c;
-            box-shadow: inset 0 1px 2px rgba(255,255,255,0.4), 0 5px 10px rgba(0,0,0,0.3);
+        .logo-img-header {
+            height: 52px;
+            width: auto;
+            max-width: 180px;
+            object-fit: contain;
+            filter: drop-shadow(0 2px 6px rgba(0,0,0,0.4));
+            transition: transform 0.2s ease;
         }
-        .logo-text-sm {
-            font-weight: 800;
-            font-size: 1.4rem;
-            letter-spacing: -0.5px;
-            background: linear-gradient(120deg, #FFF5E0, #FFD68A);
-            background-clip: text;
-            -webkit-background-clip: text;
-            color: transparent;
-        }
-        .logo-text-sm span {
-            font-weight: 500;
-            font-size: 0.7rem;
-            background: none;
-            color: #c0b280;
-            display: inline-block;
-            margin-left: 6px;
+        .logo-img-header:hover {
+            transform: scale(1.02);
         }
         .hero-badge {
             background: rgba(255, 215, 120, 0.15);
@@ -438,13 +420,13 @@
             .static-badge { font-size: 0.9rem; padding: 0.5rem 1rem; }
             .top-header { flex-direction: column; align-items: flex-start; }
             .logo-area { justify-content: flex-start; }
-            .logo-text-sm { font-size: 1.2rem; }
-            .logo-icon-sm { width: 38px; height: 38px; font-size: 1.3rem; }
+            .logo-img-header { height: 44px; max-width: 150px; }
         }
         @media (max-width: 480px) {
             .price-card { padding: 0.7rem 1rem; min-width: 140px; }
             .qty-btn { width: 44px; height: 44px; font-size: 1.4rem; }
             #quantidade { width: 100px; font-size: 1.6rem; }
+            .logo-img-header { height: 38px; }
         }
     </style>
 </head>
@@ -453,13 +435,10 @@
 <div class="noise"></div>
 
 <div class="container">
-    <!-- Header com logo à esquerda e tamanho reduzido -->
+    <!-- Header com logo.png à esquerda (texto removido) -->
     <div class="top-header">
         <div class="logo-area">
-            <div class="logo-icon-sm">
-                <i class="fas fa-print"></i>
-            </div>
-            <div class="logo-text-sm">ECS IMPRESSÕES <span>premium</span></div>
+            <img src="logo.png" alt="ECS Impressões" class="logo-img-header" onerror="this.onerror=null; this.src='https://placehold.co/160x60?text=ECS+Impress%C3%B5es';">
         </div>
         <div class="hero-badge">
             <i class="fas fa-tag"></i> Sem pedido mínimo • impressão sob demanda
@@ -592,22 +571,19 @@
 
     let tipoPapel = 'glossy';
 
-    // Preço unitário base (sem acréscimo de dias)
     function calcularPrecoUnitarioBase(papelKey, quantidade) {
         const cfg = papersConfig[papelKey];
         if (!cfg) return 0;
         const qtd = Math.max(1, quantidade);
         if (qtd <= 9) {
-            // desconto progressivo: a cada folha cai R$1 a partir do valor base (1ª folha = basePriceA4)
             return (cfg.basePriceA4 + 1) - qtd;
         } else if (qtd >= 11) {
             return cfg.fixedPriceA4;
-        } else { // qtd === 10
+        } else {
             return (cfg.basePriceA4 + 1) - qtd;
         }
     }
 
-    // Preço final com acréscimo (dias específicos)
     function calcularPrecoUnitario(papelKey, quantidade) {
         const precoBase = calcularPrecoUnitarioBase(papelKey, quantidade);
         return aplicarAcrescimoSeNecessario(precoBase);
@@ -716,7 +692,6 @@
         atualizarUI();
     }
 
-    // event listeners dos papéis
     document.querySelectorAll('.paper-btn').forEach(btn => {
         btn.addEventListener('click', () => {
             const papel = btn.getAttribute('data-paper');
@@ -726,7 +701,6 @@
         });
     });
 
-    // Controles de quantidade
     const menosBtn = document.getElementById('menosQtd');
     const maisBtn = document.getElementById('maisQtd');
     const inputQtd = document.getElementById('quantidade');
@@ -751,7 +725,6 @@
     });
     inputQtd.addEventListener('change', () => atualizarUI());
 
-    // Inicialização
     setPapel('glossy');
 </script>
 </body>

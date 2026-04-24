@@ -48,7 +48,7 @@
             position: relative;
         }
 
-        /* HEADER com logo à esquerda usando imagem real e link */
+        /* HEADER com logo à esquerda usando imagem real e link - TAMANHO ESPECÍFICO 4cm x 1.8cm */
         .top-header {
             display: flex;
             align-items: center;
@@ -75,10 +75,10 @@
             transform: scale(1.02);
             opacity: 0.95;
         }
+        /* TAMANHO DO LOGO: 4cm x 1.8cm (convertido para medidas responsivas) */
         .logo-img-header {
-            height: 52px;
-            width: auto;
-            max-width: 180px;
+            width: 4cm;
+            height: 1.8cm;
             object-fit: contain;
             filter: drop-shadow(0 2px 6px rgba(0,0,0,0.4));
             transition: all 0.2s ease;
@@ -419,6 +419,7 @@
             opacity: 0.6;
         }
 
+        /* Responsividade: em telas muito pequenas, o logo mantém a proporção mínima */
         @media (max-width: 750px) {
             .container { padding: 1rem; }
             .hero h1 { font-size: 2rem; }
@@ -428,13 +429,18 @@
             .static-badge { font-size: 0.9rem; padding: 0.5rem 1rem; }
             .top-header { flex-direction: column; align-items: flex-start; }
             .logo-area { justify-content: flex-start; }
-            .logo-img-header { height: 44px; max-width: 150px; }
+            /* Redução suave para mobile, mas ainda próximo de 4cm */
+            .logo-img-header { width: 3.5cm; height: 1.6cm; }
         }
         @media (max-width: 480px) {
             .price-card { padding: 0.7rem 1rem; min-width: 140px; }
             .qty-btn { width: 44px; height: 44px; font-size: 1.4rem; }
             #quantidade { width: 100px; font-size: 1.6rem; }
-            .logo-img-header { height: 38px; }
+            .logo-img-header { width: 3.2cm; height: 1.4cm; }
+        }
+        /* Suporte para impressão e telas muito grandes - mantém 4cm x 1.8cm */
+        @media print {
+            .logo-img-header { width: 4cm; height: 1.8cm; }
         }
     </style>
 </head>
@@ -443,11 +449,11 @@
 <div class="noise"></div>
 
 <div class="container">
-    <!-- Header com logo clicável (link para página inicial/home) -->
+    <!-- Header com logo clicável (tamanho exato: 4cm x 1.8cm) -->
     <div class="top-header">
         <div class="logo-area">
             <a href="#" id="logoHomeLink" class="logo-link" title="Página inicial - ECS Impressões">
-                <img src="ecs logo.png" alt="ECS Impressões - Logo" class="logo-img-header" onerror="this.onerror=null; this.src='https://placehold.co/160x60?text=ECS+Impress%C3%B5es';">
+                <img src="ecs logo.png" alt="ECS Impressões - Logo" class="logo-img-header" onerror="this.onerror=null; this.src='https://placehold.co/400x180?text=ECS+Impress%C3%B5es';">
             </a>
         </div>
         <div class="hero-badge">
@@ -577,8 +583,8 @@
         },
         vinilTransparente: {
             name: "Vinil Adesivo Transparente",
-            basePriceA4: 17.25,   // +0,25 em relação ao vinil comum
-            fixedPriceA4: 4.52,    // +0,25 em relação ao fixed (4.27+0.25 = 4.52)
+            basePriceA4: 17.25,
+            fixedPriceA4: 4.52,
             ruleDescription: "📌 Vinil Transparente A4: 1ª=R$17,25, 2ª=R$16,25, 3ª=R$15,25, 4ª=R$14,25, 5ª=R$13,25, 6ª=R$12,25, 7ª=R$11,25, 8ª=R$10,25, 9ª=R$9,25, 10ª=R$8,25 | A partir da 11ª folha: R$4,52 fixo por folha"
         },
         couche: {
@@ -751,12 +757,8 @@
     if (logoSite) {
         logoSite.addEventListener('click', function(event) {
             event.preventDefault();
-            // Altere para o link desejado (URL da loja, home, ou recarregar a página)
-            // Exemplo: window.location.href = 'https://www.sualoja.com.br';
-            // Ou apenas recarregar a página simulando um "home":
+            // Link para a home do site (Altere para o domínio desejado)
             window.location.href = '/';
-            // Caso queira apenas recarregar a página atual, use:
-            // window.location.reload();
         });
     }
 

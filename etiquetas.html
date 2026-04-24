@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-    <title>ECS Impressões | Etiquetas Adesivas </title>
+    <title>ECS Impressões | Etiquetas Adesivas Premium</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
@@ -435,10 +435,10 @@
 <div class="noise"></div>
 
 <div class="container">
-    <!-- Header com logo.png à esquerda (texto removido) -->
+    <!-- Header com logo.png à esquerda -->
     <div class="top-header">
         <div class="logo-area">
-            <img src="ecs logo.png" alt="ECS Impressões" class="logo-img-header" onerror="this.onerror=null; this.src='https://placehold.co/160x60?text=ECS+Impress%C3%B5es';">
+            <img src="logo.png" alt="ECS Impressões" class="logo-img-header" onerror="this.onerror=null; this.src='https://placehold.co/160x60?text=ECS+Impress%C3%B5es';">
         </div>
         <div class="hero-badge">
             <i class="fas fa-tag"></i> Sem pedido mínimo • impressão sob demanda
@@ -446,6 +446,7 @@
     </div>
 
     <div class="hero">
+        <h1>Etiquetas adesivas premium<br><span style="font-size: 1.5rem; background: none; color:#f5bc70;">alta definição • corte preciso</span></h1>
         <p>Qualidade profissional com desconto progressivo. Escolha o acabamento ideal.</p>
     </div>
 
@@ -462,6 +463,9 @@
             </div>
             <div class="paper-btn" data-paper="vinil">
                 <i class="fas fa-droplet"></i> Vinil Adesivo (Fosco/Brilho)
+            </div>
+            <div class="paper-btn" data-paper="vinilTransparente">
+                <i class="fas fa-eye"></i> Vinil Adesivo Transparente
             </div>
             <div class="paper-btn" data-paper="couche">
                 <i class="fas fa-scroll"></i> Papel Couche
@@ -547,6 +551,7 @@
     }
 
     // APENAS FORMATO A4 - Configuração de papéis
+    // Vinil Transparente: segue mesma lógica do Vinil comum + acréscimo de R$0,25 por folha
     const papersConfig = {
         glossy: {
             name: "Glossy Adesivo",
@@ -559,6 +564,12 @@
             basePriceA4: 17,
             fixedPriceA4: 4.27,
             ruleDescription: "📌 Vinil A4: 1ª=R$17, 2ª=R$16, 3ª=R$15, 4ª=R$14, 5ª=R$13, 6ª=R$12, 7ª=R$11, 8ª=R$10, 9ª=R$9, 10ª=R$8 | A partir da 11ª folha: R$4,27 fixo por folha"
+        },
+        vinilTransparente: {
+            name: "Vinil Adesivo Transparente",
+            basePriceA4: 17.25,   // +0,25 em relação ao vinil comum
+            fixedPriceA4: 4.52,    // +0,25 em relação ao fixed (4.27+0.25 = 4.52)
+            ruleDescription: "📌 Vinil Transparente A4: 1ª=R$17,25, 2ª=R$16,25, 3ª=R$15,25, 4ª=R$14,25, 5ª=R$13,25, 6ª=R$12,25, 7ª=R$11,25, 8ª=R$10,25, 9ª=R$9,25, 10ª=R$8,25 | A partir da 11ª folha: R$4,52 fixo por folha"
         },
         couche: {
             name: "Papel Couche",
@@ -575,11 +586,14 @@
         if (!cfg) return 0;
         const qtd = Math.max(1, quantidade);
         if (qtd <= 9) {
-            return (cfg.basePriceA4 + 1) - qtd;
+            // desconto progressivo: a cada folha cai R$1 a partir do valor base (1ª folha = basePriceA4)
+            // Para manter a consistência: preço = basePriceA4 - (qtd-1)
+            // Ex: base=17.25, qtd=1 => 17.25; qtd=2 => 16.25; qtd=3 => 15.25 ...
+            return cfg.basePriceA4 - (qtd - 1);
         } else if (qtd >= 11) {
             return cfg.fixedPriceA4;
-        } else {
-            return (cfg.basePriceA4 + 1) - qtd;
+        } else { // qtd === 10
+            return cfg.basePriceA4 - (10 - 1); // igual a basePriceA4 - 9
         }
     }
 
@@ -696,6 +710,7 @@
             const papel = btn.getAttribute('data-paper');
             if (papel === 'glossy') setPapel('glossy');
             else if (papel === 'vinil') setPapel('vinil');
+            else if (papel === 'vinilTransparente') setPapel('vinilTransparente');
             else if (papel === 'couche') setPapel('couche');
         });
     });
